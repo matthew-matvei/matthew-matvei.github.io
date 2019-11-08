@@ -1,0 +1,179 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>10 Best Practices and there are no Best Practices</title>
+    <meta name="description" content="matthew-matvei: 10 Best Practices and there are no Best Practices">
+    <meta name="author" content="Matthew James">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+</head>
+
+<body>
+    <header>
+        <div class="navbar-fixed">
+            <nav class="blue darken-2">
+                <div class="nav-wrapper">
+                    <div class="container">
+                        <a href="#" class="brand-logo">matthew-matvei</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>10 Best Practices in programming</h1>
+            <h2>... and how there are no Best Practices</h2>
+            <span class="grey-text text-darken-3">November 8 2019</span>
+            <section>
+                <p class="flow-text">
+                    We've all had that argument with another developer where we've reasonably laid out our position why
+                    it would be a good idea to do something, only to be met with 'Yes, but best practice...'
+                </p>
+
+                <img src="https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif" alt="boom-mic-drop" />
+
+                <p class="flow-text">
+                    and that's all they need to say. And how can you respond to that? 'Sure, then I want to do something
+                    less than best' hardly wins anyone over. They've said the relevant buzzword and we can now just
+                    switch off our brains and do what the main on the Internet told us to do. If you've never had this
+                    conversation before, congratulations.
+                </p>
+                <p class="flow-text">
+                    For me, however, experience in this conversation brings me to my first 😓 blargh post. I want to
+                    show you that there are no strictly <em>best</em> practices and remind you that everything really
+                    does depend on the situation.
+                </p>
+            </section>
+            <section>
+                <h3>1. Commenting</h3>
+                <h4>Everyone's favourite past-time</h4>
+                <p class="flow-text">
+                    My last workplace had a severely pro-commenting culture, with rules for commenting
+                    <code>private</code> methods and simple object properties. This led to wonders such as...
+                </p>
+
+                <pre><code>
+                    /// &lt;summary&gt;
+                    /// Returns the current value of this object.
+                    /// &lt;/summary&gt;
+                    /// &lt;returns&gt;The current value of this object&lt;/returns&gt;
+                    public int GetValue() =>
+                        this.Value;
+                </code></pre>
+
+                <p class="flow-text">
+                    with more text explaining than doing, regardless of whether the code is already completely
+                    unambiguous. Worse still, this can easily be...
+                </p>
+
+                <pre><code>
+                    /// &lt;summary&gt;
+                    /// Returns the current value of this object.
+                    /// &lt;/summary&gt;
+                    /// &lt;returns&gt;The current value of this object&lt;/returns&gt;
+                    public int GetValue() =>
+                        this.Value ?? throw new InvalidOperationException();
+                </code></pre>
+
+                <p class="flow-text">
+                    at which point, the comments don't even mention the most surprising <em>feature</em> about this
+                    method, which is that if it's called when <code>this.Value</code> is <code>null</code> then we're
+                    gonna explode!
+                </p>
+
+                <img src="https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif" alt="explosions" />
+
+                <p class="flow-text">
+                    On the other side of this spectrum is my current workplace, which strictly believes that all code
+                    should be self-descriptive enough to not warrant any comments, ever. And there are some good
+                    reasons:
+                </p>
+
+                <ul class="collection">
+                    <li class="collection-item">
+                        <p>Programmers will barely read your code, let alone the comments that go with it</p>
+                        <p>
+                            We deal with tight deadlines and a lot of words to process. I am human, and if there are
+                            reasonable shortcuts to take, I'll take them. First things first, you're well-versed yet
+                            untestable code comments.
+                        </p>
+                    </li>
+                    <li class="collection-item">
+                        <p>The compiler can never know whether your comments are correct anymore</p>
+                        <p>
+                            If you change what a JavaScript function returns without changing your JS Doc, then you're
+                            no better than those that use social engineering to convince old ladies you work at her
+                            bank.
+                        </p>
+                    </li>
+                    <li class="collection-item">
+                        <p>Maintenance costs</p>
+                        <p>
+                            There's no such thing as a free sandwich, and I have found myself wasting very real time
+                            in order to satisfy commenting <em>standards</em> that either my workplace or university
+                            had.
+                        </p>
+                    </li>
+                    <li class="collection-item">
+                        <p>There's no guarantee your code will be easier to understand</p>
+                        <p>
+                            Walls of description can distract coders from the nuts and bolts of the code, and if the
+                            comments become stale (where the code has moved on but the comment has not been updated)
+                            then they only cause confusion.
+                        </p>
+                    </li>
+                </ul>
+
+                <p class="flow-text">
+                    That said, there is a time and place for documentation. The more your actual code can inform this,
+                    the better. For example, think how your typed API is self-documenting when you have a method...
+                </p>
+
+                <pre><code>
+                    Task&lt;bool&gt; ItemExistsAsync(string itemId);
+                </code></pre>
+
+                <p class="flow-text">
+                    Immediately, I know that I need to give it a <code>string</code> identifier of an item, and I can
+                    <code>await</code> a <code>boolean</code> answer. Or even better, if you dabble a little more with
+                    <i>functional</i> patterns.
+                </p>
+
+                <pre><code>
+                    Either&lt;Error, Item&gt; GetItem(string itemId);
+                </code></pre>
+
+                <p class="flow-text">
+                    From this, I can see that I'll either get an <code>Error</code> (if something went wrong) or I'll
+                    get the <code>Item</code> I was looking for. This even means I don't need to dig into the bowels of
+                    the method to discover that it might actually <code>throw</code> an exception (or even rely on
+                    code comments to describe this to me).
+                </p>
+                <p class="grey-text text-darken-1"><em>Cool, so what do you suggest?</em></p>
+                <p class="flow-text">
+                    I'm glad you asked. I would consider the following when determining whether you should use comments
+                    or not.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="page-footer blue darken-4">
+        <div class="container row">
+            <a class="white-text" href="https://github.com/matthew-matvei">
+                https://github.com/matthew-matvei
+            </a>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                &copy; 2019 matthew-matvei
+            </div>
+        </div>
+    </footer>
+</body>
