@@ -27,46 +27,46 @@
     </div>
   </header>
 
-  <main>
-    <div class="container">
-      <h1>3 Best Practices in programming</h1>
-      <h2>... and how there are no Best Practices</h2>
-      <span class="grey-text text-darken-3">November 8 2019</span>
-      <section class="section">
-        <p class="flow-text">
-          We've all had that argument with another developer where we've reasonably laid out our position why
-          it would be a good idea to do something, only to be met with
-        </p>
+  <main class="container">
 
-        <blockquote class="flow-text">Yes, but best practice...</blockquote>
+    <h1>3 Best Practices in programming</h1>
+    <h2>... and how there are no Best Practices</h2>
+    <span class="grey-text text-darken-3">November 8 2019</span>
+    <section class="section">
+      <p class="flow-text">
+        We've all had that argument with another developer where we've reasonably laid out our position why
+        it would be a good idea to do something, only to be met with
+      </p>
 
-        <div class="d-flex justify-content-centre">
-          <img class="responsive-img" src="https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif" alt="boom-mic-drop" />
-        </div>
+      <blockquote class="flow-text">Yes, but best practice...</blockquote>
 
-        <p class="flow-text">
-          and that's all they need to say. And how can you respond to that? 'Sure, then I want to do something
-          less than best' hardly wins anyone over. They've said the relevant buzzword and we can now just
-          switch off our brains and do what the main on the Internet told us to do. If you've never had this
-          conversation before, congratulations.
-        </p>
-        <p class="flow-text">
-          For me, however, experience in this conversation brings me to my first 😓 blargh post. I want to
-          show you that there are no strictly <em>best</em> practices and remind you that everything really
-          does depend on the situation.
-        </p>
-      </section>
-      <div class="divider"></div>
-      <section class="section">
-        <h3>1. Commenting</h3>
-        <h4>Everyone's favourite past-time</h4>
-        <p class="flow-text">
-          My last workplace had a severely pro-commenting culture, with rules for commenting
-          <code class="language-markup">private</code> methods and simple object properties. This led to
-          wonders such as...
-        </p>
+      <div class="d-flex justify-content-centre">
+        <img class="responsive-img" src="https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif" alt="boom-mic-drop" />
+      </div>
 
-        <pre class="language-cs"><code>
+      <p class="flow-text">
+        and that's all they need to say. And how can you respond to that? 'Sure, then I want to do something
+        less than best' hardly wins anyone over. They've said the relevant buzzword and we can now just
+        switch off our brains and do what the main on the Internet told us to do. If you've never had this
+        conversation before, congratulations.
+      </p>
+      <p class="flow-text">
+        For me, however, experience in this conversation brings me to my first 😓 blargh post. I want to
+        show you that there are no strictly <em>best</em> practices and remind you that everything really
+        does depend on the situation.
+      </p>
+    </section>
+    <div class="divider"></div>
+    <section class="section">
+      <h3>1. Commenting</h3>
+      <h4>Everyone's favourite past-time</h4>
+      <p class="flow-text">
+        My last workplace had a severely pro-commenting culture, with rules for commenting
+        <code class="language-markup">private</code> methods and simple object properties. This led to
+        wonders such as...
+      </p>
+
+      <pre class="language-cs"><code>
 /// &lt;summary&gt;
 /// Returns the current value of this object.
 /// &lt;/summary&gt;
@@ -75,12 +75,12 @@ public int GetValue() =>
     this.Value;
         </code></pre>
 
-        <p class="flow-text">
-          with more text explaining than doing, regardless of whether the code is already completely
-          unambiguous. Worse still, this can easily be...
-        </p>
+      <p class="flow-text">
+        with more text explaining than doing, regardless of whether the code is already completely
+        unambiguous. Worse still, this can easily be...
+      </p>
 
-        <pre class="language-cs"><code>
+      <pre class="language-cs"><code>
 /// &lt;summary&gt;
 /// Returns the current value of this object.
 /// &lt;/summary&gt;
@@ -89,141 +89,141 @@ public int GetValue() =>
     this.Value ?? throw new InvalidOperationException();
         </code></pre>
 
-        <p class="flow-text">
-          at which point, the comments don't even mention the most surprising <em>feature</em> about this
-          method, which is that if it's called when <code class="language-markup">this.Value</code> is
-          <code class="language-markup">null</code> then we're gonna explode!
-        </p>
+      <p class="flow-text">
+        at which point, the comments don't even mention the most surprising <em>feature</em> about this
+        method, which is that if it's called when <code class="language-markup">this.Value</code> is
+        <code class="language-markup">null</code> then we're gonna explode!
+      </p>
 
-        <div class="d-flex justify-content-centre">
-          <img src="https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif" alt="explosions" />
-        </div>
+      <div class="d-flex justify-content-centre">
+        <img src="https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif" alt="explosions" />
+      </div>
 
-        <p class="flow-text">
-          On the other side of this spectrum is my current workplace, which strictly believes that all code
-          should be self-descriptive enough to not warrant any comments, ever. And there are some good
-          reasons:
-        </p>
+      <p class="flow-text">
+        On the other side of this spectrum is my current workplace, which strictly believes that all code
+        should be self-descriptive enough to not warrant any comments, ever. And there are some good
+        reasons:
+      </p>
 
-        <ul class="collection">
-          <li class="collection-item">
-            <h5>Programmers will barely read your code, let alone the comments that go with it</h5>
-            <p>
-              We deal with tight deadlines and a lot of words to process. I am human, and if there are
-              reasonable shortcuts to take, I'll take them. First things first, you're well-versed yet
-              untestable code comments.
-            </p>
-          </li>
-          <li class="collection-item">
-            <h5>The compiler can never know whether your comments are correct anymore</h5>
-            <p>
-              If you change what a JavaScript function returns without changing your JS Doc, then you're
-              no better than those that use social engineering to convince old ladies you work at her
-              bank.
-            </p>
-          </li>
-          <li class="collection-item">
-            <h5>Maintenance costs</h5>
-            <p>
-              There's no such thing as a free sandwich, and I have found myself wasting very real time
-              in order to satisfy commenting <em>standards</em> that either my workplace or university
-              had.
-            </p>
-          </li>
-          <li class="collection-item">
-            <h5>There's no guarantee your code will be easier to understand</h5>
-            <p>
-              Walls of description can distract coders from the nuts and bolts of the code, and if the
-              comments become stale (where the code has moved on but the comment has not been updated)
-              then they only cause confusion.
-            </p>
-          </li>
-        </ul>
+      <ul class="collection">
+        <li class="collection-item">
+          <h5>Programmers will barely read your code, let alone the comments that go with it</h5>
+          <p>
+            We deal with tight deadlines and a lot of words to process. I am human, and if there are
+            reasonable shortcuts to take, I'll take them. First things first, you're well-versed yet
+            untestable code comments.
+          </p>
+        </li>
+        <li class="collection-item">
+          <h5>The compiler can never know whether your comments are correct anymore</h5>
+          <p>
+            If you change what a JavaScript function returns without changing your JS Doc, then you're
+            no better than those that use social engineering to convince old ladies you work at her
+            bank.
+          </p>
+        </li>
+        <li class="collection-item">
+          <h5>Maintenance costs</h5>
+          <p>
+            There's no such thing as a free sandwich, and I have found myself wasting very real time
+            in order to satisfy commenting <em>standards</em> that either my workplace or university
+            had.
+          </p>
+        </li>
+        <li class="collection-item">
+          <h5>There's no guarantee your code will be easier to understand</h5>
+          <p>
+            Walls of description can distract coders from the nuts and bolts of the code, and if the
+            comments become stale (where the code has moved on but the comment has not been updated)
+            then they only cause confusion.
+          </p>
+        </li>
+      </ul>
 
-        <p class="flow-text">
-          That said, there is a time and place for documentation. The more your actual code can inform this,
-          the better. For example, think how your typed API is self-documenting when you have a method...
-        </p>
+      <p class="flow-text">
+        That said, there is a time and place for documentation. The more your actual code can inform this,
+        the better. For example, think how your typed API is self-documenting when you have a method...
+      </p>
 
-        <pre class="language-cs"><code>
+      <pre class="language-cs"><code>
 Task&lt;bool&gt; ItemExistsAsync(string itemId);
         </code></pre>
 
-        <p class="flow-text">
-          Immediately, I know that I need to give it a <code class="language-markup">string</code> identifier
-          of an item, and I can <code class="language-markup">await</code> a <code
-            class="language-markup">boolean</code> answer. Or even better, if you dabble a little more with
-          <i>functional</i> patterns.
-        </p>
+      <p class="flow-text">
+        Immediately, I know that I need to give it a <code class="language-markup">string</code> identifier
+        of an item, and I can <code class="language-markup">await</code> a <code class="language-markup">boolean</code>
+        answer. Or even better, if you dabble a little more with
+        <i>functional</i> patterns.
+      </p>
 
-        <pre class="language-cs"><code>
+      <pre class="language-cs"><code>
 Either&lt;Error, Item&gt; GetItem(string itemId);
         </code></pre>
 
-        <p class="flow-text">
-          From this, I can see that I'll either get an <code class="language-markup">Error</code> (if
-          something went wrong) or I'll get the <code class="language-markup">Item</code> I was looking for.
-          This even means I don't need to dig into the bowels of the method to discover that it might actually
-          <code class="language-markup">throw</code> an exception (or even rely on code comments to describe
-          this to me).
-        </p>
-        <blockquote class="flow-text">Cool, so what do you suggest?</blockquote>
-        <p class="flow-text">
-          I'm glad you asked. I would consider the following when determining whether you should use comments
-          or not.
-        </p>
+      <p class="flow-text">
+        From this, I can see that I'll either get an <code class="language-markup">Error</code> (if
+        something went wrong) or I'll get the <code class="language-markup">Item</code> I was looking for.
+        This even means I don't need to dig into the bowels of the method to discover that it might actually
+        <code class="language-markup">throw</code> an exception (or even rely on code comments to describe
+        this to me).
+      </p>
+      <blockquote class="flow-text">Cool, so what do you suggest?</blockquote>
+      <p class="flow-text">
+        I'm glad you asked. I would consider the following when determining whether you should use comments
+        or not.
+      </p>
 
-        <ul class="collection">
-          <li class="collection-item">
-            <h5>Is the code understandable without it?</h5>
-            <p>
-              This can be difficult, since it'll always be understandable to the author, which is why
-              a code review process can be very useful.
-            </p>
-          </li>
-          <li class="collection-item">
-            <h5>Can I make things clearer by refactoring?</h5>
-            <p>
-              If there's a certain <code class="language-markup">if</code> condition that makes people's
-              eyes bleed and scratch their heads, then perhaps you can assign that condition to a named
-              function.
-            </p>
-          </li>
-          <li class="collection-item">
-            <h5>How accessible is the code to the caller?</h5>
-            <p>
-              Consider whether the caller of some code is able to see it. For example, a
-              <code class="language-markup">private</code> method will be called from within the same
-              class, so if a developer is working on the caller, they will have full access to it. If
-              you're writing the outer API of some library code (or, using OpenAPI, documenting a HTTP
-              API) there'll likely be more value in commenting, since the consumer perhaps won't be able
-              to peer into the code as easily.
-            </p>
-          </li>
-        </ul>
-      </section>
-      <div class="divider"></div>
-      <section class="section">
-        <h3>2. Get defensive</h3>
-        <h4>Trust no one</h4>
+      <ul class="collection">
+        <li class="collection-item">
+          <h5>Is the code understandable without it?</h5>
+          <p>
+            This can be difficult, since it'll always be understandable to the author, which is why
+            a code review process can be very useful.
+          </p>
+        </li>
+        <li class="collection-item">
+          <h5>Can I make things clearer by refactoring?</h5>
+          <p>
+            If there's a certain <code class="language-markup">if</code> condition that makes people's
+            eyes bleed and scratch their heads, then perhaps you can assign that condition to a named
+            function.
+          </p>
+        </li>
+        <li class="collection-item">
+          <h5>How accessible is the code to the caller?</h5>
+          <p>
+            Consider whether the caller of some code is able to see it. For example, a
+            <code class="language-markup">private</code> method will be called from within the same
+            class, so if a developer is working on the caller, they will have full access to it. If
+            you're writing the outer API of some library code (or, using OpenAPI, documenting a HTTP
+            API) there'll likely be more value in commenting, since the consumer perhaps won't be able
+            to peer into the code as easily.
+          </p>
+        </li>
+      </ul>
+    </section>
+    <div class="divider"></div>
+    <section class="section">
+      <h3>2. Get defensive</h3>
+      <h4>Trust no one</h4>
 
-        <div class="d-flex justify-content-centre">
-          <img class="responsive-img" src="https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif" alt="shift-eyes" />
-        </div>
+      <div class="d-flex justify-content-centre">
+        <img class="responsive-img" src="https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif" alt="shift-eyes" />
+      </div>
 
-        <p class="flow-text">
-          It's generally considered best practice to not trust the calling code, and to always check your
-          arguments. But while you might not trust the guy down the street, do you trust your neighbours?
-          It isn't completely black and white, and some thought should be given to how defensive you need to
-          be.
-        </p>
+      <p class="flow-text">
+        It's generally considered best practice to not trust the calling code, and to always check your
+        arguments. But while you might not trust the guy down the street, do you trust your neighbours?
+        It isn't completely black and white, and some thought should be given to how defensive you need to
+        be.
+      </p>
 
-        <p class="flow-text">
-          I've seen, for example, code imitated by the following in a web application that uses Dependency
-          Injection to provide dependencies:
-        </p>
+      <p class="flow-text">
+        I've seen, for example, code imitated by the following in a web application that uses Dependency
+        Injection to provide dependencies:
+      </p>
 
-        <pre class="language-cs"><code>
+      <pre class="language-cs"><code>
 public MyService(
     object depA,
     object depB,
@@ -236,85 +236,85 @@ public MyService(
 }
         </code></pre>
 
-        <p class="flow-text">
-          Since it was expected behaviour of the <code class="language-markup">MyService</code> class to <code
-            class="language-markup">throw</code> if any of its dependencies were <code
-            class="language-markup">null</code>, this of course came with unit tests verifying this expected
-          behaviour.
-        </p>
+      <p class="flow-text">
+        Since it was expected behaviour of the <code class="language-markup">MyService</code> class to <code
+          class="language-markup">throw</code> if any of its dependencies were <code
+          class="language-markup">null</code>, this of course came with unit tests verifying this expected
+        behaviour.
+      </p>
 
-        <p class="flow-text">
-          Within the context of web-application code (where a consumer of your application typically
-          communicates via HTTP), this code isn't really library code and a developer designing this class is
-          likely going to be in a position to check the calling code. Also, keeping that same context in mind,
-          we know we're in a position where the dependencies are guaranteed by our DI framework to be resolved
-          and delivered; if a dependency cannot be resolved from the DI container, then with our setup an
-          exception will be thrown and the <code class="language-markup">MyService</code> class will not be
-          constructed.
-        </p>
+      <p class="flow-text">
+        Within the context of web-application code (where a consumer of your application typically
+        communicates via HTTP), this code isn't really library code and a developer designing this class is
+        likely going to be in a position to check the calling code. Also, keeping that same context in mind,
+        we know we're in a position where the dependencies are guaranteed by our DI framework to be resolved
+        and delivered; if a dependency cannot be resolved from the DI container, then with our setup an
+        exception will be thrown and the <code class="language-markup">MyService</code> class will not be
+        constructed.
+      </p>
 
-        <p class="flow-text">
-          So you <em>could</em> see these checks as redundant. And whilst C# (above) let's you tidy this up
-          with the null coalescing (<code class="language-markup">??</code>) operator, in some other languages
-          this can become more distracting. There are two main ends of the spectrum to be on with this.
-        </p>
+      <p class="flow-text">
+        So you <em>could</em> see these checks as redundant. And whilst C# (above) let's you tidy this up
+        with the null coalescing (<code class="language-markup">??</code>) operator, in some other languages
+        this can become more distracting. There are two main ends of the spectrum to be on with this.
+      </p>
 
-        <p class="flow-text">
-          You could say <b>I trust no one</b>, and I can't guarantee that this class will always be resolved
-          through Dependency Injection. Even then, we may switch DI frameworks, the standard behaviour may
-          be different and we might end up trying to construct this class with <code class="language-markup">null</code>
-          dependencies.
-        </p>
+      <p class="flow-text">
+        You could say <b>I trust no one</b>, and I can't guarantee that this class will always be resolved
+        through Dependency Injection. Even then, we may switch DI frameworks, the standard behaviour may
+        be different and we might end up trying to construct this class with <code class="language-markup">null</code>
+        dependencies.
+      </p>
 
-        <p class="flow-text">
-          You could also say <b>Take responsibility when calling me</b>, and decide that if a caller has
-          attempted to manually construct this class with a <code class="language-markup">null</code>
-          dependency, then they've violated the class' type contract (which asks in this example case for an
-          <code class="language-markup">object</code>, not an <code class="language-markup">object</code>
-          <em>or</em>
-          <code class="language-markup">null</code>) and can no longer have any expectations about its
-          behaviour.
-        </p>
+      <p class="flow-text">
+        You could also say <b>Take responsibility when calling me</b>, and decide that if a caller has
+        attempted to manually construct this class with a <code class="language-markup">null</code>
+        dependency, then they've violated the class' type contract (which asks in this example case for an
+        <code class="language-markup">object</code>, not an <code class="language-markup">object</code>
+        <em>or</em>
+        <code class="language-markup">null</code>) and can no longer have any expectations about its
+        behaviour.
+      </p>
 
-        <p class="flow-text">
-          There's truth in both positions. It may be better in your situation to put responsibility on the
-          caller in order to minimise the bloat and complexity of this class, allowing it to evolve faster
-          (I've given an example of a <code class="language-markup">class</code>' constructor, but this can
-          apply to any of its methods' arguments, including complex object arguments). Or it may be,
-          particularly if you're writing deeper-level library code, more appropriate to guard against every
-          inch of input you get from calling code.
-        </p>
-      </section>
-      <div class="divider"></div>
-      <section class="section">
-        <h3>3. Don't reinvent the wheel</h3>
-        <h4>But why not try square tyres?</h4>
+      <p class="flow-text">
+        There's truth to both positions. It may be better in your situation to put responsibility on the
+        caller in order to minimise the bloat and complexity of this class, allowing it to evolve faster
+        (I've given an example of a <code class="language-markup">class</code>' constructor, but this can
+        apply to any of its methods' arguments, including complex object arguments). Or it may be,
+        particularly if you're writing deeper-level library code, more appropriate to guard against every
+        inch of input you get from calling code.
+      </p>
+    </section>
+    <div class="divider"></div>
+    <section class="section">
+      <h3>3. Don't reinvent the wheel</h3>
+      <h4>But why not try square tyres?</h4>
 
-        <div class="d-flex justify-content-centre">
-          <img src="https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif" alt="square-wheels" />
-        </div>
+      <div class="d-flex justify-content-centre">
+        <img src="https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif" alt="square-wheels" />
+      </div>
 
-        <p class="flow-text">
-          Taken to the extreme, someone might want to import libraries (especially large utility libraries,
-          such as <code class="language-markup">lodash.js</code>) to get the job done for them. After all,
-          someone else has likely written this functionality before, and particularly if it's a popular,
-          open-source code base, it's likely undergone more scrutiny than my (given company policy) private
-          repository will ever receive.
-        </p>
+      <p class="flow-text">
+        Taken to the extreme, someone might want to import libraries (especially large utility libraries,
+        such as <code class="language-markup">lodash.js</code>) to get the job done for them. After all,
+        someone else has likely written this functionality before, and particularly if it's a popular,
+        open-source code base, it's likely undergone more scrutiny than my (given company policy) private
+        repository will ever receive.
+      </p>
 
-        <p class="flow-text">
-          There's nothing wrong with this line of thinking, in most cases. It's been some years since the
-          <a href="https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/">2016 chaos caused by pulling
-            a commonly-shared dependency</a>, the <code class="language-markup">npm</code> package <a
-            href="https://www.npmjs.com/package/left-pad">left-pad</a>. While it may be an extreme example,
-          it does point out that sometimes wheels can be reinvented. It's a cost / value ratio between the
-          time it would take you to rewrite this functionality, vs the 'costs' (which may be your JS bundle
-          size, or your coupling to a certain library / framework) involved in importing something pre-rolled.
-          For example, if you're in need of a function to recursively flatten an array, consider the following
-          code before importing half of <code class="language-markup">lodash.js</code> to do it for you:
-        </p>
+      <p class="flow-text">
+        There's nothing wrong with this line of thinking, in most cases. It's been some years since the
+        <a href="https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/">2016 chaos caused by pulling
+          a commonly-shared dependency</a>, the <code class="language-markup">npm</code> package <a
+          href="https://www.npmjs.com/package/left-pad">left-pad</a>. While it may be an extreme example,
+        it does point out that sometimes wheels <b>can</b> be reinvented. It's a cost / value ratio between the
+        time it would take you to rewrite this functionality, vs the 'costs' (which may be your JS bundle
+        size, or your coupling to a certain library / framework) involved in importing something pre-rolled.
+        For example, if you're in need of a function to recursively flatten an array, consider the following
+        code before importing half of <code class="language-markup">lodash.js</code> to do it for you:
+      </p>
 
-        <pre class="language-js"><code>
+      <pre class="language-js"><code>
 function flattenArray(array) {
     return array.reduce(
         (accumulator, current) => (Array.isArray(current)
@@ -324,85 +324,85 @@ function flattenArray(array) {
 }
         </code></pre>
 
-        <p class="flow-text">
-          Sure, certain aspects of it could be improved, the main one, depending on your project's policy on
-          defensiveness, would be checking the given <code class="language-markup">array</code>. The costs
-          would be the requirement of testing this function, and maintaining it in the inevitable circumstance
-          where you now need this function to flatten to a certain depth level. The benefits, however, is that
-          you would have negated the need for depending on a large library.
-        </p>
+      <p class="flow-text">
+        Sure, certain aspects of it could be improved, the main one, depending on your project's policy on
+        defensiveness, would be checking the given <code class="language-markup">array</code>. The costs
+        would be the requirement of testing this function, and maintaining it in the inevitable circumstance
+        where you now need this function to flatten to a certain depth level. The benefits, however, is that
+        you would have negated the need for depending on a large library.
+      </p>
 
-        <p class="flow-text">
-          Library code is complicated because it needs to incorporate a huge (and potentially growing) range
-          of callers, which might bring issues with environment, language version and unreasonable, unexpected
-          yet possible input. Even if you're not sure about your own abilities, you might find it a lot
-          simpler rolling your own in some cases, since you can keep your solution scoped to the needs of
-          your own project. Having actually written the functionality yourself, you'll also have <b>a)</b>
-          learnt how it works in detail and <b>b)</b> improved your abilities.
-        </p>
+      <p class="flow-text">
+        Library code is complicated because it needs to incorporate a huge (and potentially growing) range
+        of callers, which might bring issues with environment, language version and unreasonable, unexpected
+        yet possible input. Even if you're not sure about your own abilities, you might find it a lot
+        simpler rolling your own in some cases, since you can keep your solution scoped to the needs of
+        your own project. Having actually written the functionality yourself, you'll also have <b>a)</b>
+        learnt how it works in detail (making it easier to debug / reason about) and <b>b)</b> improved your
+        abilities.
+      </p>
 
-        <p class="flow-text">
-          I have been both on projects that import everything, usually landing us in some form of dependency
-          hell or another, and ones that attempt to start from scratch on everything. Before deciding,
-          consider:
-        </p>
+      <p class="flow-text">
+        I have been both on projects that import everything, usually landing us in some form of dependency
+        hell or another, and ones that attempt to start from scratch on everything. Before deciding,
+        consider:
+      </p>
 
-        <ul class="collection">
-          <li class="collection-item">
-            <h5>What's the size / complexity of this functionality I want?</h5>
-            <p>
-              You might not know up front. That's okay; if you've given it an hour of your time,
-              you'll
-              likely already understand whether this is looking like a reasonable function, or whether
-              you're starting to write the code that you will labour over for another month.
-            </p>
-          </li>
+      <ul class="collection">
+        <li class="collection-item">
+          <h5>What's the size / complexity of this functionality I want?</h5>
+          <p>
+            You might not know up front. That's okay; if you've given it an hour of your time,
+            you'll
+            likely already understand whether this is looking like a reasonable function, or whether
+            you're starting to write the code that you will labour over for another month.
+          </p>
+        </li>
 
-          <li class="collection-item">
-            <h5>What's available that's already done this?</h5>
-            <p>
-              If the only library you can find hasn't been updated (when it likely should have been) for
-              years, has no public support / interest, with unaddressed / ignored issues, or would lock
-              you into some tech stack you don't want a part of, I wouldn't touch it with a ten-foot pole.
-            </p>
-          </li>
+        <li class="collection-item">
+          <h5>What's available that's already done this?</h5>
+          <p>
+            If the only library you can find hasn't been updated (when it likely should have been) for
+            years, has no public support / interest, with unaddressed / ignored issues, or would lock
+            you into some tech stack you don't want a part of, I wouldn't touch it with a ten-foot pole.
+          </p>
+        </li>
 
-          <li class="collection-item">
-            <h5>Will we be able to get out of this?</h5>
-            <p>
-              If someone eagerly imported the whole of <code class="language-markup">lodash.js</code>
-              because it <em>seemed</em> like you'd need a lot of its functionality moving forward, then
-              it turned out you only needed a couple of functions (and the needed functionality was spread
-              out across modules so cherry-picking wasn't an option), there's nothing stopping you from
-              adapting the source code of the few functions you need and killing the import. There would
-              be a simple way to remove that dependency on that library.
-            </p>
-          </li>
-        </ul>
-      </section>
-      <section class="section">
-        <p class="flow-text">
-          There are countless other examples of 'best practices' that people follow dogmatically, even when
-          over time 'best practices' go through complete paradigm shifts (going from Object-Oriented
-          approaches to Functional-Oriented ones, de-duplicated data to allowing duplication where read
-          performance may be improved). You will likely, at first, just follow these and keep your head down.
-        </p>
+        <li class="collection-item">
+          <h5>Will we be able to get out of this?</h5>
+          <p>
+            If someone eagerly imported the whole of <code class="language-markup">lodash.js</code>
+            because it <em>seemed</em> like you'd need a lot of its functionality moving forward, then
+            it turned out you only needed a couple of functions (and the needed functionality was spread
+            out across modules so cherry-picking wasn't an option), there's nothing stopping you from
+            adapting the source code of the few functions you need and killing the import. There would
+            be a simple way to remove that dependency on that library.
+          </p>
+        </li>
+      </ul>
+    </section>
+    <section class="section">
+      <p class="flow-text">
+        There are countless other examples of 'best practices' that people follow dogmatically, even when
+        over time 'best practices' go through complete paradigm shifts (going from Object-Oriented
+        approaches to Functional-Oriented ones, de-duplicated data to allowing duplication where read
+        performance may be improved). You will likely, at first, just follow these and keep your head down.
+      </p>
 
-        <p class="flow-text">
-          As you improve your own understanding of what it is you're doing as a developer, however, start to
-          ask 'why?', even against well-established 'best practices' that no one else questions. In any case
-          you'll come to understand the root reason why you should follow this rule, and be able to stop
-          telling people 'We should do this because it's best practice'. You may even come to realise this
-          practice that is usually good isn't very appropriate for your given situation.
-        </p>
+      <p class="flow-text">
+        As you improve your own understanding of what it is you're doing as a developer, however, start to
+        ask 'why?', even against well-established 'best practices' that no one else questions. In any case
+        you'll come to understand the root reason why you should follow this rule, and be able to stop
+        telling people 'We should do this because it's best practice'. You may even come to realise this
+        practice that is usually good isn't very appropriate for your given situation.
+      </p>
 
-        <p class="flow-text">
-          Or at the very least, you can feel the rage burn through your veins next week when some other dev
-          rips out your lovingly crafted function that was working just fine to import a library, saying
-          'Haven't they even read about best practices here?'
-        </p>
-      </section>
-    </div>
+      <p class="flow-text">
+        Or at the very least, you can feel the rage burn through your veins next week when some other dev
+        rips out your lovingly crafted function that was working just fine to import a library, saying
+        'Haven't they even read about best practices here?'
+      </p>
+    </section>
   </main>
 
   <footer class="page-footer blue darken-4">
