@@ -283,7 +283,112 @@
                 <img src="https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif" alt="square-wheels" />
 
                 <p class="flow-text">
+                    Taken to the extreme, someone might want to import libraries (especially large utility libraries,
+                    such as <code class="language-markup">lodash.js</code>) to get the job done for them. After all,
+                    someone else has likely written this functionality before, and particularly if it's a popular,
+                    open-source code base, it's likely undergone more scrutiny than my (given company policy) private
+                    repository will ever receive.
+                </p>
 
+                <p class="flow-text">
+                    There's nothing wrong with this line of thinking, in most cases. It's been some years since the
+                    <a href="https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/">2016 chaos caused by pulling
+                        a commonly-shared dependency</a>, the <code class="language-markup">npm</code> package <a
+                        href="https://www.npmjs.com/package/left-pad">left-pad</a>. While it may be an extreme example,
+                    it does point out that sometimes wheels can be reinvented. It's a cost / value ratio between the
+                    time it would take you to rewrite this functionality, vs the 'costs' (which may be your JS bundle
+                    size, or your coupling to a certain library / framework) involved in importing something pre-rolled.
+                    For example, if you're in need of a function to recursively flatten an array, consider the following
+                    code before importing half of <code class="language-markup">lodash.js</code> to do it for you:
+                </p>
+
+                <pre class="language-js"><code>
+                    function flattenArray(array) {
+                        return array.reduce(
+                            (accumulator, current) => (Array.isArray(current)
+                                ? accumulator.concat(flattenArray(current))
+                                : accumulator.concat(current)),
+                            []);
+                    }
+                </code></pre>
+
+                <p class="flow-text">
+                    Sure, certain aspects of it could be improved, the main one, depending on your project's policy on
+                    defensiveness, would be checking the given <code class="language-markup">array</code>. The costs
+                    would be the requirement of testing this function, and maintaining it in the inevitable circumstance
+                    where you now need this function to flatten to a certain depth level. The benefits, however, is that
+                    you would have negated the need for depending on a large library.
+                </p>
+
+                <p class="flow-text">
+                    Library code is complicated because it needs to incorporate a huge (and potentially growing) range
+                    of callers, which might bring issues with environment, language version and unreasonable, unexpected
+                    yet possible input. Even if you're not sure about your own abilities, you might find it a lot
+                    simpler rolling your own in some cases, since you can keep your solution scoped to the needs of
+                    your own project. Having actually written the functionality yourself, you'll also have <b>a)</b>
+                    learnt how it works in detail and <b>b)</b> improved your abilities.
+                </p>
+
+                <p class="flow-text">
+                    I have been both on projects that import everything, usually landing us in some form of dependency
+                    hell or another, and ones that attempt to start from scratch on everything. Before deciding,
+                    consider:
+                </p>
+
+                <ul class="collection">
+                    <li class="collection-item">
+                        <p>What's the size / complexity of this functionality I want?</p>
+                        <p>
+                            You might not know up front. That's okay; if you've given it an hour of your time,
+                            you'll
+                            likely already understand whether this is looking like a reasonable function, or whether
+                            you're starting to write the code that you will labour over for another month.
+                        </p>
+                    </li>
+
+                    <li class="collection-item">
+                        <p>What's available that's already done this?</p>
+                        <p>
+                            If the only library you can find hasn't been updated (when it likely should have been) for
+                            years, has no public support / interest, with unaddressed / ignored issues, or would lock
+                            you into some tech stack you don't want a part of, I wouldn't touch it with a ten-foot pole.
+                        </p>
+                    </li>
+
+                    <li class="collection-item">
+                        <p>Will we be able to get out of this?</p>
+                        <p>
+                            If someone eagerly imported the whole of <code class="language-markup">lodash.js</code>
+                            because it <em>seemed</em> like you'd need a lot of its functionality moving forward, then
+                            it turned out you only needed a couple of functions (and the needed functionality was spread
+                            out across modules so cherry-picking wasn't an option), there's nothing stopping you from
+                            adapting the source code of the few functions you need and killing the import. There would
+                            be a simple way to remove that dependency on that library.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <p class="flow-text">
+                    There are countless other examples of 'best practices' that people follow dogmatically, even when
+                    over time 'best practices' go through complete paradigm shifts (going from Object-Oriented
+                    approaches to Functional-Oriented ones, de-duplicated data to allowing duplication where read
+                    performance may be improved). You will likely, at first, just follow these and keep your head down.
+                </p>
+
+                <p class="flow-text">
+                    As you improve your own understanding of what it is you're doing as a developer, however, start to
+                    ask 'why?', even against well-established 'best practices' that no one else questions. In any case
+                    you'll come to understand the root reason why you should follow this rule, and be able to stop
+                    telling people 'We should do this because it's best practice'. You may even come to realise this
+                    practice that is usually good isn't very appropriate for your given situation.
+                </p>
+
+                <p class="flow-text">
+                    Or at the very least, you can feel the rage burn through your veins next week when some other dev
+                    rips out your lovingly crafted function that was working just fine to import a library, saying
+                    'Haven't they even read about best practices here?'
                 </p>
             </section>
         </div>
