@@ -9,6 +9,8 @@
     <meta name="author" content="Matthew James">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
         integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.min.css"
+        integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="./index.css" />
 </head>
 
@@ -58,7 +60,7 @@
                     <code>private</code> methods and simple object properties. This led to wonders such as...
                 </p>
 
-                <pre><code>
+                <pre class="language-cs"><code>
                     /// &lt;summary&gt;
                     /// Returns the current value of this object.
                     /// &lt;/summary&gt;
@@ -72,7 +74,7 @@
                     unambiguous. Worse still, this can easily be...
                 </p>
 
-                <pre><code>
+                <pre class="language-cs"><code>
                     /// &lt;summary&gt;
                     /// Returns the current value of this object.
                     /// &lt;/summary&gt;
@@ -135,7 +137,7 @@
                     the better. For example, think how your typed API is self-documenting when you have a method...
                 </p>
 
-                <pre><code>
+                <pre class="language-cs"><code>
                     Task&lt;bool&gt; ItemExistsAsync(string itemId);
                 </code></pre>
 
@@ -145,7 +147,7 @@
                     <i>functional</i> patterns.
                 </p>
 
-                <pre><code>
+                <pre class="language-cs"><code>
                     Either&lt;Error, Item&gt; GetItem(string itemId);
                 </code></pre>
 
@@ -208,7 +210,7 @@
                     Injection to provide dependencies:
                 </p>
 
-                <pre><code>
+                <pre class="language-cs"><code>
                     public MyService(
                         object depA,
                         object depB,
@@ -280,4 +282,9 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"
+        integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"
+        integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
 </body>
