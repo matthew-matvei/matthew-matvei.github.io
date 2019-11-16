@@ -1,0 +1,32 @@
+How not to do microservices
+    Distributed death
+
+- Jump on the band-wagon
+    - Invalid reasons in the first place
+    - Likely not to commit to the harder parts of microservices
+
+- Don't worry about what the business needs
+    - We've got all these cool toys to play with, who cares about a solid, coherent business plan
+
+- Don't invest in your CI / CD strategy
+    - You're going to deploy often, so programmers will have plenty of practice manually kicking off / managing / configuring deployments
+    - Our strategy was rock solid when we had 2 services, so it should be fine with 20 right?
+
+- Deploy more individual services than you have teams available to work on them
+    - Outside specific scalability / performance reasons, do you need this new service to be independently deployed?
+    - If this new service doesn't find a suitable home, will it become a bastard microservice?
+    - A huge advantage of microservices is teams not having to work over each other; if that isn't an issue, why create this lone service?
+
+- Forget about Conway's Law and don't have people siloed into 'teams'
+    - Who cares if team autonomy is one of the major cornerstones / potential advantages of microservices? We need to shovel people around to maximise their usefulness
+    - We don't have enough people to support isolatable teams (so why the f**k are you doing microservices?)
+    - We wanted to improve communication, and having no clear team division, with everyone asking everyone else how not to break unrelated components of the system
+        certainly raises the volume in the office
+
+- Leave integration testing for now
+    - It's difficult to automate and much easier to do manually at first
+    - Lengthy integration / smoke tests will only slow down our progress
+
+- Don't worry about how users will see this application
+    - We're doing microservices with loose coupling, so it's fine if we have a UI that talks to 80% of our services
+    - A compositional UI is difficult and takes time, better to stick with a monolithic UI... monoliths are easier?
