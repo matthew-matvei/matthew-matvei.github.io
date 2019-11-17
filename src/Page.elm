@@ -28,7 +28,7 @@ view model =
             Page.Home.view ()
 
         Article slug ->
-            slug |> Article.getContent |> Page.Article.Model |> Page.Article.view
+            slug |> Article.getContent |> Page.Article.view
 
 
 fromRoute : Maybe Route -> Page

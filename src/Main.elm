@@ -1,12 +1,13 @@
-module Main exposing (main)
+port module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Navigation
 import Footer
 import Header
-import Html exposing (text)
 import Page
+import Process
 import Route
+import Task
 import Url
 
 
@@ -34,20 +35,14 @@ type Message
 
 init : () -> Url.Url -> Navigation.Key -> ( Model, Cmd Message )
 init _ url key =
-    ( Model key (Route.fromUrl url), Cmd.none )
+    ( Model key (Route.fromUrl url), updatePrism () )
 
 
 update : Message -> Model -> ( Model, Cmd Message )
 update message model =
-    let
-        _ =
-            Debug.log "HEYA" "Spying on the Main.update function"
-    in
     case message of
         UrlChanged url ->
-            ( { model | route = url |> Route.fromUrl }
-            , Cmd.none
-            )
+            ( { model | route = url |> Route.fromUrl }, updatePrism () )
 
         LinkClicked urlRequest ->
             case urlRequest of
@@ -67,9 +62,11 @@ view : Model -> Browser.Document Message
 view model =
     { title = "Bloody rewrites!"
     , body =
-        [ text "Testing"
-        , Header.view ()
+        [ Header.view ()
         , model.route |> Page.fromRoute |> Page.Model |> Page.view
         , Footer.view ()
         ]
     }
+
+
+port updatePrism : () -> Cmd msg
