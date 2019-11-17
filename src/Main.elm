@@ -23,7 +23,7 @@ main =
 
 type alias Model =
     { key : Navigation.Key
-    , url : Url.Url
+    , route : Maybe Route.Route
     }
 
 
@@ -34,14 +34,18 @@ type Message
 
 init : () -> Url.Url -> Navigation.Key -> ( Model, Cmd Message )
 init _ url key =
-    ( Model key url, Cmd.none )
+    ( Model key (Route.fromUrl url), Cmd.none )
 
 
 update : Message -> Model -> ( Model, Cmd Message )
 update message model =
+    let
+        _ =
+            Debug.log "HEYA" "Spying on the Main.update function"
+    in
     case message of
         UrlChanged url ->
-            ( { model | url = url }
+            ( { model | route = url |> Route.fromUrl }
             , Cmd.none
             )
 
@@ -60,12 +64,12 @@ subscriptions _ =
 
 
 view : Model -> Browser.Document Message
-view _ =
+view model =
     { title = "Bloody rewrites!"
     , body =
         [ text "Testing"
         , Header.view ()
-        , Page.view (Page.Model Route.Home)
+        , model.route |> Page.fromRoute |> Page.Model |> Page.view
         , Footer.view ()
         ]
     }

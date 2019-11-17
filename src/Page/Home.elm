@@ -16,7 +16,7 @@ view _ =
                         , p [] [ text "... and how there are no best practices" ]
                         ]
                     , div [ class "card-action" ]
-                        [ a [ href "./blog/no-best-practices" ] [ text "Read" ]
+                        [ a [ href "/blog/no-best-practices" ] [ text "Read" ]
                         ]
                     ]
                 ]

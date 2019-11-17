@@ -11,7 +11,7 @@ view _ =
             [ nav [ class "blue darken-2" ]
                 [ div [ class "nav-wrapper" ]
                     [ div [ class "container" ]
-                        [ a [ href "#", class "brand-logo" ]
+                        [ a [ href "/", class "brand-logo" ]
                             [ span [ class "hide-on-small-only" ] [ text "matthew-matvei" ]
                             , span [ class "hide-on-med-and-up" ] [ text "mat-mat" ]
                             ]
