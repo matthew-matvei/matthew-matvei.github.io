@@ -5112,14 +5112,14 @@ var $author$project$Main$Model = F2(
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = F3(
-	function (flags, url, key) {
+	function (_v0, url, key) {
 		return _Utils_Tuple2(
 			A2($author$project$Main$Model, key, url),
 			$elm$core$Platform$Cmd$none);
 	});
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Main$subscriptions = function (model) {
+var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
@@ -5195,6 +5195,10 @@ var $author$project$Main$update = F2(
 			}
 		}
 	});
+var $author$project$Route$Home = {$: 'Home'};
+var $author$project$Page$Model = function (route) {
+	return {route: route};
+};
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -5399,7 +5403,7 @@ var $author$project$Header$view = function (_v0) {
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$main_ = _VirtualDom_node('main');
 var $elm$html$Html$p = _VirtualDom_node('p');
-var $author$project$Page$view = function (_v0) {
+var $author$project$Page$Home$view = function (_v0) {
 	return A2(
 		$elm$html$Html$main_,
 		_List_fromArray(
@@ -5483,13 +5487,25 @@ var $author$project$Page$view = function (_v0) {
 					]))
 			]));
 };
-var $author$project$Main$view = function (model) {
+var $author$project$Page$NotFound$view = function (_v0) {
+	return $elm$html$Html$text('Not Found');
+};
+var $author$project$Page$view = function (model) {
+	var _v0 = model.route;
+	if (_v0.$ === 'NotFound') {
+		return $author$project$Page$NotFound$view(_Utils_Tuple0);
+	} else {
+		return $author$project$Page$Home$view(_Utils_Tuple0);
+	}
+};
+var $author$project$Main$view = function (_v0) {
 	return {
 		body: _List_fromArray(
 			[
 				$elm$html$Html$text('Testing'),
 				$author$project$Header$view(_Utils_Tuple0),
-				$author$project$Page$view(_Utils_Tuple0),
+				$author$project$Page$view(
+				$author$project$Page$Model($author$project$Route$Home)),
 				$author$project$Footer$view(_Utils_Tuple0)
 			]),
 		title: 'Bloody rewrites!'

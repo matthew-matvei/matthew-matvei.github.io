@@ -1,11 +1,12 @@
-module Main exposing (..)
+module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Navigation
 import Footer
 import Header
-import Html exposing (..)
+import Html exposing (text)
 import Page
+import Route
 import Url
 
 
@@ -32,7 +33,7 @@ type Message
 
 
 init : () -> Url.Url -> Navigation.Key -> ( Model, Cmd Message )
-init flags url key =
+init _ url key =
     ( Model key url, Cmd.none )
 
 
@@ -54,17 +55,17 @@ update message model =
 
 
 subscriptions : Model -> Sub Message
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 
 view : Model -> Browser.Document Message
-view model =
+view _ =
     { title = "Bloody rewrites!"
     , body =
         [ text "Testing"
         , Header.view ()
-        , Page.view ()
+        , Page.view (Page.Model Route.Home)
         , Footer.view ()
         ]
     }
