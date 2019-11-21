@@ -31,7 +31,6 @@
     var app = Elm.Main.init();
 
     app.ports.updatePrism.subscribe(function () {
-      console.log("About to highlight all");
       setTimeout(Prism.highlightAll, 15);
     })
   </script>
