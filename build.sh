@@ -1,1 +1,1 @@
-elm make ./src/Main.elm --output=app.js --debug
+elm make ./src/Main.elm --output=app.js --optimize

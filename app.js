@@ -6102,25 +6102,25 @@ var $author$project$Footer$view = function (_v0) {
 												A2($author$project$Footer$footerLink, 'https://prismjs.com/', 'PrismJS')
 											]))
 									]))
-							])),
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('footer-copyright')
+					]),
+				_List_fromArray(
+					[
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('footer-copyright')
+								$elm$html$Html$Attributes$class('container')
 							]),
 						_List_fromArray(
 							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('container')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('&copy; 2019 matthew-matvei')
-									]))
+								$elm$html$Html$text('© 2019 matthew-matvei')
 							]))
 					]))
 			]));

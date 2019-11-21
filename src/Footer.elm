@@ -25,10 +25,10 @@ view _ =
                         ]
                     ]
                 ]
-            , div [ class "footer-copyright" ]
-                [ div [ class "container" ]
-                    [ text "&copy; 2019 matthew-matvei"
-                    ]
+            ]
+        , div [ class "footer-copyright" ]
+            [ div [ class "container" ]
+                [ text "© 2019 matthew-matvei"
                 ]
             ]
         ]
