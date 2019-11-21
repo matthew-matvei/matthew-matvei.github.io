@@ -60,7 +60,7 @@ subscriptions _ =
 
 view : Model -> Browser.Document Message
 view model =
-    { title = "Bloody rewrites!"
+    { title = "matthew-matvei"
     , body =
         [ Header.view ()
         , model.route |> Page.fromRoute |> Page.Model |> Page.view
