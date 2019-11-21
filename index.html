@@ -10,64 +10,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     integrity="sha256-OweaP/Ic6rsV+lysfyS4h+LM6sRwuO3euTYfr6M124g=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-coy.min.css"
+    integrity="sha256-1VOeW3bLzHmS11IR0Cl73suNyhliqnse4BTuwGs4IUg=" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="./index.css" />
+  <script src="./app.js"></script>
 </head>
 
 <body>
-  <header>
-    <div class="navbar-fixed">
-      <nav class="blue darken-2">
-        <div class="nav-wrapper">
-          <div class="container">
-            <a href="#" class="brand-logo">
-              <span class="hide-on-small-only">matthew-matvei</span>
-              <span class="hide-on-med-and-up">mat-mat</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>
-  <main class="container">
-    <h2>Latest musings</h2>
-    <ul>
-      <li>
-        <div class="card blue">
-          <div class="card-content white-text">
-            <span class="card-title">3 Best Practices in programming</span>
-            <p>... and how there are no best practices</p>
-          </div>
-          <div class="card-action">
-            <a href="./blog/no-best-practices.html">Read</a>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </main>
-  <footer class="page-footer blue darken-4">
-    <div class="container row">
-      <div class="col s6">
-        <a class="blue-text text-lighten-3" href="https://github.com/matthew-matvei" target="_blank">
-          My GitHub
-        </a>
-      </div>
-      <div class="col s6 right-align">
-        Powered by:
-        <ul>
-          <li><a class="blue-text text-lighten-3" href="https://pages.github.com/" target="_blank">GitHub Pages</a></li>
-          <li>
-            <a class="blue-text text-lighten-3" href="https://materializecss.com/" target="_blank">Materialize CSS</a>
-          </li>
-          <li><a class="blue-text text-lighten-3" href="https://prismjs.com/" target="_blank">PrismJS</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-        &copy; 2019 matthew-matvei
-      </div>
-    </div>
-  </footer>
+  <script>
+    (function () {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect !== location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
+  <div id="app-container"></div>
+  <script>
+    var app = Elm.Main.init();
+
+    app.ports.updatePrism.subscribe(function () {
+      setTimeout(Prism.highlightAll, 15);
+    })
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"
+    integrity="sha256-Y+Budm2wBEjYjbH0qcJRmLuRBFpXd0VKxl6XhdS4hgA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"
+    integrity="sha256-ht8ay6ZTPZfuixYB99I5oRpCLsCq7Do2LjEYLwbe+X8=" crossorigin="anonymous"></script>
 </body>
 
 </html>
