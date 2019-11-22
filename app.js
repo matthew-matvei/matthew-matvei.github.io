@@ -10688,6 +10688,7 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 				parsers);
 		});
 };
+var $author$project$Article$HowToKillYourself = {$: 'HowToKillYourself'};
 var $author$project$Article$ThreeBestPractices = {$: 'ThreeBestPractices'};
 var $elm$url$Url$Parser$s = function (str) {
 	return $elm$url$Url$Parser$Parser(
@@ -10721,7 +10722,11 @@ var $author$project$Article$parser = $elm$url$Url$Parser$oneOf(
 			A2(
 			$elm$url$Url$Parser$map,
 			$author$project$Article$ThreeBestPractices,
-			$elm$url$Url$Parser$s('no-best-practices'))
+			$elm$url$Url$Parser$s('no-best-practices')),
+			A2(
+			$elm$url$Url$Parser$map,
+			$author$project$Article$HowToKillYourself,
+			$elm$url$Url$Parser$s('how-to-kill-yourself'))
 		]));
 var $elm$url$Url$Parser$slash = F2(
 	function (_v0, _v1) {
@@ -11054,16 +11059,6 @@ var $author$project$Header$view = function (_v0) {
 					]))
 			]));
 };
-var $author$project$Blog$Content$BlockQuote = function (a) {
-	return {$: 'BlockQuote', a: a};
-};
-var $author$project$Blog$Content$CodeBlock = function (a) {
-	return {$: 'CodeBlock', a: a};
-};
-var $author$project$Blog$Content$Collection = function (a) {
-	return {$: 'Collection', a: a};
-};
-var $author$project$Blog$Content$Divider = {$: 'Divider'};
 var $author$project$Blog$Content$Emphasis = function (a) {
 	return {$: 'Emphasis', a: a};
 };
@@ -11098,6 +11093,133 @@ var $author$project$Blog$Content$Title = function (a) {
 var $author$project$Blog$Content$WhenCreated = function (a) {
 	return {$: 'WhenCreated', a: a};
 };
+var $author$project$Blog$HowToKillYourself$getContent = function (_v0) {
+	return _List_fromArray(
+		[
+			$author$project$Blog$Content$Title('How to kill yourself'),
+			$author$project$Blog$Content$SubTitle('...with micro services'),
+			$author$project$Blog$Content$WhenCreated('November 15 2019'),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If suicide by cop doesn\'t take your fancy, perhaps you\'d like to hear about\n            microservices: Distribute Death.'),
+								$author$project$Blog$Content$Text('There are many possible advantages in splitting up the old monolith and adopting a micro\n            services-based architecture, but there are as many (if not more) pitfalls. Some are transparent, some are\n            opaque, some are '),
+								$author$project$Blog$Content$Emphasis('business-y'),
+								$author$project$Blog$Content$Text(', some are technical, but all can come back to put an end to you (and your cool new micro\n        services-based app).')
+							]))
+					]),
+				title: $elm$core$Maybe$Nothing
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('There have certainly been enough bandwagons already in tech; the Enterprise Service Bus, the\n                Cloud, the whole Object-Oriented Programming thing - so it\'s curious why we haven\'t gotten better at\n                realising that the next thing won\'t solve all our problems.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('So when you\'re planning your next to-do list app, you might be thinking ahead to how you\'ll\n                    scale this out to millions, no wait, '),
+								$author$project$Blog$Content$Emphasis('trillions'),
+								$author$project$Blog$Content$Text(' of users. You\'ll likely then choose micro services, knowing that they\'re\n        critical in being able to scale to stupid-large volumes of traffic, a la '),
+								A2($author$project$Blog$Content$Link, 'https://cloud.google.com/blog/products/gcp/bringing-pokemon-go-to-life-on-google-cloud', 'Pok' + ('é' + 'mon Go')),
+								$author$project$Blog$Content$Text('. And before you know it, you\'ve got a separate '),
+								$author$project$Blog$Content$InlineCode('ToDoService'),
+								$author$project$Blog$Content$Text(', '),
+								$author$project$Blog$Content$InlineCode('ReminderService'),
+								$author$project$Blog$Content$Text(' and '),
+								$author$project$Blog$Content$InlineCode('ToDoRecommendationService'),
+								$author$project$Blog$Content$Text('. About a year after you release your product you have earnt yourself a solid 1.5% of the\n                market share, with 1000\'s of people around the country using your app daily.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('And you come to realise you\'ve completely over-engineered your application, because you were\n                focused on a conclusion, that everyone and their dog will want to use this app, before you had any data\n                to indicate that.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If you\'re getting into micro services because you feel it\'s almost an expectation now then\n                you\'re already in it for the wrong reasons. It\'s likely you\'ll be excited about its potential to scale,\n                and be forgetting that there\'s more benefit in its ability to scale '),
+								$author$project$Blog$Content$Emphasis('teams'),
+								$author$project$Blog$Content$Text(', not just '),
+								$author$project$Blog$Content$Emphasis('software'),
+								$author$project$Blog$Content$Text('. If you\'re operating a company that doesn\'t have enough people to fill those teams, you\'re\n                going to waste all that actual potential.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('You\'re also less likely to really have your heart set on a micro services-based solution,\n                warts and all. More difficult aspects, such as deciding how to deal with cascading failures that can\n                negatively impact autonomous teams are likely to get shelved in favour of focusing on potential\n                throughput and other prettier things. There are a lot of negatives that you now need to deal with\n                because you decided to go micro services that you\'re only going to do if you '),
+								$author$project$Blog$Content$Emphasis('know'),
+								$author$project$Blog$Content$Text(' that you\'ve chosen it for a clear, demonstrable '),
+								$author$project$Blog$Content$Strong('need'),
+								$author$project$Blog$Content$Text('.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If you\'re not going to deal with that, then keep away.')
+							])),
+						$author$project$Blog$Content$Image(
+						{alt: 'danger', source: 'https://media.giphy.com/media/kmdSKqlSHQJMs/giphy.gif'})
+					]),
+				title: $elm$core$Maybe$Just(
+					{subTitle: 'Everyone else is doing it', title: 'Jump on the band wagon'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_Nil,
+				title: $elm$core$Maybe$Just(
+					{subTitle: 'They don\'t even know what an API is', title: 'Don\'t worry about what the business needs'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_Nil,
+				title: $elm$core$Maybe$Just(
+					{subTitle: 'Because Visual Studio comes with Right-Click Publish', title: 'Don\'t invest in your CI / CD strategy'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_Nil,
+				title: $elm$core$Maybe$Just(
+					{subTitle: 'The only thing better than a micro service is a nano service', title: 'Deploy more services than people'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_Nil,
+				title: $elm$core$Maybe$Just(
+					{subTitle: 'Everyone everywhere all the time', title: 'Don\'t \'silo\' people into teams'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_Nil,
+				title: $elm$core$Maybe$Just(
+					{subTitle: 'You can clearly see that it just works', title: 'Leave integration testing for now'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_Nil,
+				title: $elm$core$Maybe$Just(
+					{subTitle: 'Surely the final piece of the puzzle will just fall into place, right?', title: 'Forget about how users will see this application'})
+			})
+		]);
+};
+var $author$project$Blog$Content$BlockQuote = function (a) {
+	return {$: 'BlockQuote', a: a};
+};
+var $author$project$Blog$Content$CodeBlock = function (a) {
+	return {$: 'CodeBlock', a: a};
+};
+var $author$project$Blog$Content$Collection = function (a) {
+	return {$: 'Collection', a: a};
+};
+var $author$project$Blog$Content$Divider = {$: 'Divider'};
 var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 	return _List_fromArray(
 		[
@@ -11395,7 +11517,11 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 		]);
 };
 var $author$project$Article$getContent = function (slug) {
-	return $author$project$Blog$ThreeBestPractices$getContent(_Utils_Tuple0);
+	if (slug.$ === 'ThreeBestPractices') {
+		return $author$project$Blog$ThreeBestPractices$getContent(_Utils_Tuple0);
+	} else {
+		return $author$project$Blog$HowToKillYourself$getContent(_Utils_Tuple0);
+	}
 };
 var $elm$html$Html$main_ = _VirtualDom_node('main');
 var $elm$html$Html$blockquote = _VirtualDom_node('blockquote');
