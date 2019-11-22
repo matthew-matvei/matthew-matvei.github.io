@@ -6374,7 +6374,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 							]))
 					]),
 				aa: $elm$core$Maybe$Just(
-					{br: 'Everyone\'s favourite past-time', aa: '1. Commenting'})
+					{br: 'Everyone\'s favourite pastime', aa: '1. Commenting'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(

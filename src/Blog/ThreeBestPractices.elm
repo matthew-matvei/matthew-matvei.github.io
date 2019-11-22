@@ -34,7 +34,7 @@ getContent _ =
         }
     , Divider
     , Section
-        { title = Just { title = "1. Commenting", subTitle = "Everyone's favourite past-time" }
+        { title = Just { title = "1. Commenting", subTitle = "Everyone's favourite pastime" }
         , content =
             [ Paragraph
                 [ Text "My last workplace had a severely pro-commenting culture, with rules for commenting "
