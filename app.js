@@ -6849,7 +6849,7 @@ var $author$project$Page$Home$view = function (_v0) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('card blue')
+										$elm$html$Html$Attributes$class('card blue hoverable')
 									]),
 								_List_fromArray(
 									[
@@ -6904,7 +6904,35 @@ var $author$project$Page$Home$view = function (_v0) {
 			]));
 };
 var $author$project$Page$NotFound$view = function (_v0) {
-	return $elm$html$Html$text('Not Found');
+	return A2(
+		$elm$html$Html$main_,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('container d-flex flex-col align-items-centre justify-content-centre')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$h2,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('grey-text text-darken-1')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Couldn\'t find it ☹')
+					])),
+				A2(
+				$elm$html$Html$h3,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('grey-text text-darken-1')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('404')
+					]))
+			]));
 };
 var $author$project$Page$view = function (model) {
 	var _v0 = model.V;

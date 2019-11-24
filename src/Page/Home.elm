@@ -10,7 +10,7 @@ view _ =
         [ h2 [] [ text "Latest musings" ]
         , ul []
             [ li []
-                [ div [ class "card blue" ]
+                [ div [ class "card blue hoverable" ]
                     [ div [ class "card-content white-text" ]
                         [ span [ class "card-title" ] [ text "3 Best Practices in programming" ]
                         , p [] [ text "... and how there are no best practices" ]
