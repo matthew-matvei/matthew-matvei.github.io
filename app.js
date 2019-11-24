@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.Y.G === region.ah.G)
+	if (region.Z.G === region.ai.G)
 	{
-		return 'on line ' + region.Y.G;
+		return 'on line ' + region.Z.G;
 	}
-	return 'on lines ' + region.Y.G + ' through ' + region.ah.G;
+	return 'on lines ' + region.Z.G + ' through ' + region.ai.G;
 }
 
 
@@ -2660,8 +2660,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		v: func(record.v),
-		Z: record.Z,
-		V: record.V
+		_: record._,
+		W: record.W
 	}
 });
 
@@ -2930,10 +2930,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.v;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.Z;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value._;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.V) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.W) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3923,7 +3923,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 		impl.bw,
 		impl.bs,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.X && impl.X(sendToApp)
+			var divertHrefToApp = impl.Y && impl.Y(sendToApp)
 			var view = impl.bx;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
@@ -3937,7 +3937,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aa) && (_VirtualDom_doc.title = title = doc.aa);
+				(title !== doc.ab) && (_VirtualDom_doc.title = title = doc.ab);
 			});
 		}
 	);
@@ -3998,7 +3998,7 @@ function _Browser_application(impl)
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		X: function(sendToApp)
+		Y: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4015,7 +4015,7 @@ function _Browser_application(impl)
 					sendToApp(onUrlRequest(
 						(next
 							&& curr.aA === next.aA
-							&& curr.an === next.an
+							&& curr.ao === next.ao
 							&& curr.ax.a === next.ax.a
 						)
 							? $elm$browser$Browser$Internal(next)
@@ -4192,7 +4192,7 @@ function _Browser_getViewport()
 			aO: _Browser_window.pageXOffset,
 			aP: _Browser_window.pageYOffset,
 			aN: _Browser_doc.documentElement.clientWidth,
-			am: _Browser_doc.documentElement.clientHeight
+			an: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4203,7 +4203,7 @@ function _Browser_getScene()
 	var elem = _Browser_doc.documentElement;
 	return {
 		aN: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		am: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		an: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4228,13 +4228,13 @@ function _Browser_getViewportOf(id)
 		return {
 			aG: {
 				aN: node.scrollWidth,
-				am: node.scrollHeight
+				an: node.scrollHeight
 			},
 			aM: {
 				aO: node.scrollLeft,
 				aP: node.scrollTop,
 				aN: node.clientWidth,
-				am: node.clientHeight
+				an: node.clientHeight
 			}
 		};
 	});
@@ -4269,13 +4269,13 @@ function _Browser_getElement(id)
 				aO: x,
 				aP: y,
 				aN: _Browser_doc.documentElement.clientWidth,
-				am: _Browser_doc.documentElement.clientHeight
+				an: _Browser_doc.documentElement.clientHeight
 			},
 			a0: {
 				aO: x + rect.left,
 				aP: y + rect.top,
 				aN: rect.width,
-				am: rect.height
+				an: rect.height
 			}
 		};
 	});
@@ -4837,7 +4837,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {aj: fragment, an: host, av: path, ax: port_, aA: protocol, aB: query};
+		return {ak: fragment, ao: host, av: path, ax: port_, aA: protocol, aB: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5118,7 +5118,7 @@ var $elm$core$Task$perform = F2(
 var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$Model = F2(
 	function (key, route) {
-		return {ao: key, W: route};
+		return {ap: key, X: route};
 	});
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
@@ -5751,7 +5751,7 @@ var $elm$url$Url$Parser$parse = F2(
 					_List_Nil,
 					$elm$url$Url$Parser$preparePath(url.av),
 					$elm$url$Url$Parser$prepareQuery(url.aB),
-					url.aj,
+					url.ak,
 					$elm$core$Basics$identity)));
 	});
 var $author$project$Route$Article = function (a) {
@@ -5939,7 +5939,7 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.aj,
+		url.ak,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
@@ -5948,7 +5948,7 @@ var $elm$url$Url$toString = function (url) {
 				A2(
 					$elm$url$Url$addPort,
 					url.ax,
-					_Utils_ap(http, url.an)),
+					_Utils_ap(http, url.ao)),
 				url.av)));
 };
 var $author$project$Main$update = F2(
@@ -5959,7 +5959,7 @@ var $author$project$Main$update = F2(
 				_Utils_update(
 					model,
 					{
-						W: $author$project$Route$fromUrl(url)
+						X: $author$project$Route$fromUrl(url)
 					}),
 				$author$project$Main$updatePrism(0));
 		} else {
@@ -5970,7 +5970,7 @@ var $author$project$Main$update = F2(
 					model,
 					A2(
 						$elm$browser$Browser$Navigation$pushUrl,
-						model.ao,
+						model.ap,
 						$elm$url$Url$toString(url)));
 			} else {
 				var href = urlRequest.a;
@@ -5981,7 +5981,7 @@ var $author$project$Main$update = F2(
 		}
 	});
 var $author$project$Page$Model = function (page) {
-	return {au: page};
+	return {V: page};
 };
 var $author$project$Page$Article = function (a) {
 	return {$: 2, a: a};
@@ -5999,6 +5999,18 @@ var $author$project$Page$fromRoute = function (maybeRoute) {
 			var slug = maybeRoute.a.a;
 			return $author$project$Page$Article(slug);
 		}
+	}
+};
+var $author$project$Page$title = function (model) {
+	var _v0 = model.V;
+	switch (_v0.$) {
+		case 0:
+			return '404 | Page Not Found';
+		case 1:
+			return 'mat-mat | Home';
+		default:
+			var slug = _v0.a;
+			return 'mat-mat | Three best practices';
 	}
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -6277,7 +6289,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' practices and remind you that everything really does\n            depend on the situation.')
 							]))
 					]),
-				aa: $elm$core$Maybe$Nothing
+				ab: $elm$core$Maybe$Nothing
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
@@ -6321,10 +6333,10 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{bv: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', aa: 'Programmers will barely read your code, let alone the comments that go with it'},
-								{bv: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', aa: 'The compiler can never know whether your comments are correct anymore'},
-								{bv: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', aa: 'Maintenance costs'},
-								{bv: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', aa: 'There\'s no guarantee your code will be easier to understand'}
+								{bv: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', ab: 'Programmers will barely read your code, let alone the comments that go with it'},
+								{bv: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', ab: 'The compiler can never know whether your comments are correct anymore'},
+								{bv: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', ab: 'Maintenance costs'},
+								{bv: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', ab: 'There\'s no guarantee your code will be easier to understand'}
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6368,13 +6380,13 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{bv: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', aa: 'Is the code understandable without it?'},
-								{bv: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', aa: 'Can I make things clearer by refactoring?'},
-								{bv: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', aa: 'How accessible is the code to the caller?'}
+								{bv: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', ab: 'Is the code understandable without it?'},
+								{bv: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', ab: 'Can I make things clearer by refactoring?'},
+								{bv: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', ab: 'How accessible is the code to the caller?'}
 							]))
 					]),
-				aa: $elm$core$Maybe$Just(
-					{br: 'Everyone\'s favourite pastime', aa: '1. Commenting'})
+				ab: $elm$core$Maybe$Just(
+					{br: 'Everyone\'s favourite pastime', ab: '1. Commenting'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
@@ -6454,8 +6466,8 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('\' constructor, but this can apply to any of its methods\' arguments, including complex object\n                arguments). Or it may be, particularly if you\'re writing deeper-level library code, more appropriate to\n                guard against every inch of input you get from calling code.')
 							]))
 					]),
-				aa: $elm$core$Maybe$Just(
-					{br: 'Trust no one', aa: '2. Get defensive'})
+				ab: $elm$core$Maybe$Just(
+					{br: 'Trust no one', ab: '2. Get defensive'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
@@ -6510,13 +6522,13 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{bv: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', aa: 'What\'s the size / complexity of this functionality I want?'},
-								{bv: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', aa: 'What\'s available that\'s already done this?'},
-								{bv: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', aa: 'Will we be able to get out of this?'}
+								{bv: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', ab: 'What\'s the size / complexity of this functionality I want?'},
+								{bv: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', ab: 'What\'s available that\'s already done this?'},
+								{bv: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', ab: 'Will we be able to get out of this?'}
 							]))
 					]),
-				aa: $elm$core$Maybe$Just(
-					{br: 'But why not try square tyres?', aa: '3. Don\'t reinvent the wheel'})
+				ab: $elm$core$Maybe$Just(
+					{br: 'But why not try square tyres?', ab: '3. Don\'t reinvent the wheel'})
 			}),
 			$author$project$Blog$Content$Section(
 			{
@@ -6538,7 +6550,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('Or at the very least, you can feel the rage burn through your veins next week when\n            some other dev rips out your lovingly crafted function that was working just fine to import a library,\n            saying \'Haven\'t they even read about best practices here?\'')
 							]))
 					]),
-				aa: $elm$core$Maybe$Nothing
+				ab: $elm$core$Maybe$Nothing
 			})
 		]);
 };
@@ -6586,7 +6598,7 @@ var $author$project$Page$Article$viewCollectionItem = function (collectionItem) 
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(collectionItem.aa)
+						$elm$html$Html$text(collectionItem.ab)
 					])),
 				A2(
 				$elm$html$Html$p,
@@ -6694,7 +6706,7 @@ var $author$project$Page$Article$viewSectionTitle = function (maybeSectionTitle)
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(sectionTitle.aa)
+						$elm$html$Html$text(sectionTitle.ab)
 					])),
 				A2(
 				$elm$html$Html$h4,
@@ -6795,7 +6807,7 @@ var $author$project$Page$Article$viewSection = function (sectionInfo) {
 				$elm$html$Html$Attributes$class('section')
 			]),
 		_Utils_ap(
-			$author$project$Page$Article$viewSectionTitle(sectionInfo.aa),
+			$author$project$Page$Article$viewSectionTitle(sectionInfo.ab),
 			A2($elm$core$List$map, $author$project$Page$Article$viewContent, sectionInfo.aZ)));
 };
 var $author$project$Page$Article$view = function (model) {
@@ -6895,7 +6907,7 @@ var $author$project$Page$NotFound$view = function (_v0) {
 	return $elm$html$Html$text('Not Found');
 };
 var $author$project$Page$view = function (model) {
-	var _v0 = model.au;
+	var _v0 = model.V;
 	switch (_v0.$) {
 		case 0:
 			return $author$project$Page$NotFound$view(0);
@@ -6908,16 +6920,16 @@ var $author$project$Page$view = function (model) {
 	}
 };
 var $author$project$Main$view = function (model) {
+	var page = $author$project$Page$Model(
+		$author$project$Page$fromRoute(model.X));
 	return {
 		aU: _List_fromArray(
 			[
 				$author$project$Header$view(0),
-				$author$project$Page$view(
-				$author$project$Page$Model(
-					$author$project$Page$fromRoute(model.W))),
+				$author$project$Page$view(page),
 				$author$project$Footer$view(0)
 			]),
-		aa: 'matthew-matvei'
+		ab: $author$project$Page$title(page)
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(
