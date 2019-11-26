@@ -10880,6 +10880,22 @@ var $author$project$Page$fromRoute = function (maybeRoute) {
 		}
 	}
 };
+var $author$project$Page$title = function (model) {
+	var _v0 = model.page;
+	switch (_v0.$) {
+		case 'NotFound':
+			return '404 | Page Not Found';
+		case 'Home':
+			return 'mat-mat | Home';
+		default:
+			var slug = _v0.a;
+			if (slug.$ === 'ThreeBestPractices') {
+				return 'mat-mat | Three best practices';
+			} else {
+				return 'mat-mat | How to kill yourself (with microservices)';
+			}
+	}
+};
 var $elm$html$Html$footer = _VirtualDom_node('footer');
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Footer$footerLink = F2(
@@ -11194,7 +11210,7 @@ var $author$project$Blog$HowToKillYourself$getContent = function (_v0) {
 			{
 				content: _List_Nil,
 				title: $elm$core$Maybe$Just(
-					{subTitle: 'Everyone everywhere all the time', title: 'Don\'t \'silo\' people into teams'})
+					{subTitle: 'Everyone everywhere all the time', title: 'Don\'t silo people into teams'})
 			}),
 			$author$project$Blog$Content$Section(
 			{
@@ -11348,7 +11364,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 							]))
 					]),
 				title: $elm$core$Maybe$Just(
-					{subTitle: 'Everyone\'s favourite past-time', title: '1. Commenting'})
+					{subTitle: 'Everyone\'s favourite pastime', title: '1. Commenting'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
@@ -11800,7 +11816,7 @@ var $author$project$Component$Card$view = function (model) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('card purple')
+				$elm$html$Html$Attributes$class('card purple hoverable')
 			]),
 		_List_fromArray(
 			[
@@ -11903,7 +11919,35 @@ var $author$project$Page$Home$view = function (_v0) {
 			]));
 };
 var $author$project$Page$NotFound$view = function (_v0) {
-	return $elm$html$Html$text('Not Found');
+	return A2(
+		$elm$html$Html$main_,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('container d-flex flex-col align-items-centre justify-content-centre')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$h2,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('grey-text text-darken-1')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Couldn\'t find it ☹')
+					])),
+				A2(
+				$elm$html$Html$h3,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('grey-text text-darken-1')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('404')
+					]))
+			]));
 };
 var $author$project$Page$view = function (model) {
 	var _v0 = model.page;
@@ -11919,16 +11963,16 @@ var $author$project$Page$view = function (model) {
 	}
 };
 var $author$project$Main$view = function (model) {
+	var page = $author$project$Page$Model(
+		$author$project$Page$fromRoute(model.route));
 	return {
 		body: _List_fromArray(
 			[
 				$author$project$Header$view(_Utils_Tuple0),
-				$author$project$Page$view(
-				$author$project$Page$Model(
-					$author$project$Page$fromRoute(model.route))),
+				$author$project$Page$view(page),
 				$author$project$Footer$view(_Utils_Tuple0)
 			]),
-		title: 'matthew-matvei'
+		title: $author$project$Page$title(page)
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(

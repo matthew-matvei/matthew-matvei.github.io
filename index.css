@@ -15,3 +15,11 @@ main {
 .justify-content-centre {
     justify-content: center;
 }
+
+.align-items-centre {
+    align-items: center;
+}
+
+.flex-col {
+    flex-direction: column;
+}

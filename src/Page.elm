@@ -1,6 +1,6 @@
-module Page exposing (Model, Page(..), fromRoute, view)
+module Page exposing (Model, Page(..), fromRoute, title, view)
 
-import Article exposing (Slug)
+import Article exposing (Slug(..))
 import Html exposing (Html)
 import Page.Article
 import Page.Home
@@ -29,6 +29,24 @@ view model =
 
         Article slug ->
             slug |> Article.getContent |> Page.Article.view
+
+
+title : Model -> String
+title model =
+    case model.page of
+        NotFound ->
+            "404 | Page Not Found"
+
+        Home ->
+            "mat-mat | Home"
+
+        Article slug ->
+            case slug of
+                ThreeBestPractices ->
+                    "mat-mat | Three best practices"
+
+                HowToKillYourself ->
+                    "mat-mat | How to kill yourself (with microservices)"
 
 
 fromRoute : Maybe Route -> Page

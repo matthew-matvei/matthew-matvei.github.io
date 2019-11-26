@@ -14,7 +14,7 @@ type alias Model =
 
 view : Model -> Html msg
 view model =
-    div [ class "card purple" ]
+    div [ class "card purple hoverable" ]
         [ div [ class "card-content white-text" ]
             [ span [ class "card-title" ]
                 [ text model.title

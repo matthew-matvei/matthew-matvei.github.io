@@ -60,10 +60,14 @@ subscriptions _ =
 
 view : Model -> Browser.Document Message
 view model =
-    { title = "matthew-matvei"
+    let
+        page =
+            model.route |> Page.fromRoute |> Page.Model
+    in
+    { title = Page.title page
     , body =
         [ Header.view ()
-        , model.route |> Page.fromRoute |> Page.Model |> Page.view
+        , Page.view page
         , Footer.view ()
         ]
     }
