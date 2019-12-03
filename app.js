@@ -11075,6 +11075,9 @@ var $author$project$Header$view = function (_v0) {
 					]))
 			]));
 };
+var $author$project$Blog$Content$Collection = function (a) {
+	return {$: 'Collection', a: a};
+};
 var $author$project$Blog$Content$Emphasis = function (a) {
 	return {$: 'Emphasis', a: a};
 };
@@ -11208,7 +11211,44 @@ var $author$project$Blog$HowToKillYourself$getContent = function (_v0) {
 			}),
 			$author$project$Blog$Content$Section(
 			{
-				content: _List_Nil,
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If you\'re splitting out into multiple teams because you\'ve identified that a single team has '),
+								A2($author$project$Blog$Content$Link, 'https://www.theguardian.com/technology/2018/apr/24/the-two-pizza-rule-and-the-secret-of-amazons-success', 'exceeded the two pizza rule'),
+								$author$project$Blog$Content$Text(', then you\'ve already identified the fact that, at some point, more is less and a team can\n                become as bloated as the monolithic application you\'re trying to carve up. You might notice some\n                issues:')
+							])),
+						$author$project$Blog$Content$Collection(
+						_List_fromArray(
+							[
+								{text: 'Much like a big ball of mud, in a large team you may have a great variety of competing\n                  ideas, preferences and directions. With a multitude of responsibilities, it can be difficult to\n                  optimise a large team on a particular focus.', title: 'Big teams carry weight'},
+								{text: 'If you\'re lucky, you\'ll work with people who are at least okay to talk to, and\n                  communication might seem like a positive. However, if clear communication alone is relied on, you\n                  might find that important facts get lost in the onslaught of words and texts.', title: 'Big teams are noisy'},
+								{text: 'With a team too large to fully be on the same page, you may find members who go missing\n                  then return with 3 weeks\' worth of the wrong code, or others who are never really clear on what the\n                  plan or goal is. Such sized teams can also place more pressure on management skills of a senior\n                  developer who has likely never received any support in training from the company.', title: 'Big teams are dispersed'}
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If you\'re following '),
+								A2($author$project$Blog$Content$Link, 'https://en.wikipedia.org/wiki/Conway%27s_law', 'Conway\'s Law'),
+								$author$project$Blog$Content$Text(', you shouldn\'t just be organising into smaller, cross-functional teams which each aim to\n                handle a particular component of the business\' needs, you would also be structuring your teams with\n                similar communication processes to the micro services you\'re working on.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Sure, people aren\'t code '),
+								$author$project$Blog$Content$Emphasis('(at least not yet 😈 )'),
+								$author$project$Blog$Content$Text(' and the analogy will always break down after a while, but when you\'re splitting a large,\n                singular team into smaller groups of more highly-focussed teams, aren\'t you basically implementing the\n                \'HR\' aspect of micro services?')
+							])),
+						$author$project$Blog$Content$Collection(
+						_List_fromArray(
+							[
+								{text: 'A micro service should be able to stand on its own two feet. Aside from the possible\n                  cross-cutting concern of authentication, the service should ideally not depend greatly on any other\n                  services. Similarly, the teams working on the services should be able to exercise autonomy. Constantly\n                  re-sizing, mixing members and re-orienting teams will impede their ability to be independent.', title: 'Autonomy'},
+								{text: 'It\'s still definitely possible to write services that are highly coupled with each other,\n                  however the network overhead incurred when crossing a boundary should make it much better defined. In\n                  the same way, clear boundaries / responsibilities for a given team makes it manageable in knowing who\n                  you need to talk to when you have a question about a given service or who to talk to when some\n                  integration fails. It won\'t be ideal if two services fail to play nicely in production and you\'re not\n                  even sure who in what team last touched that code.', title: 'Boundaries'},
+								{text: 'With a single deployment pipeline per service, Service A can be deployed concurrently\n                  with Service B, without the two processes interfering with each other. Similarly, if you\'ve achieved\n                  autonomous (as much as is practical) teams, then you should be able to get a high amount of\n                  concurrency in their work. If you can\'t, because you find the work of one team frequently blocking\n                  another, then you may have drawn your boundaries incorrectly.', title: 'Concurrency'}
+							]))
+					]),
 				title: $elm$core$Maybe$Just(
 					{subTitle: 'Everyone everywhere all the time', title: 'Don\'t silo people into teams'})
 			}),
@@ -11231,9 +11271,6 @@ var $author$project$Blog$Content$BlockQuote = function (a) {
 };
 var $author$project$Blog$Content$CodeBlock = function (a) {
 	return {$: 'CodeBlock', a: a};
-};
-var $author$project$Blog$Content$Collection = function (a) {
-	return {$: 'Collection', a: a};
 };
 var $author$project$Blog$Content$Divider = {$: 'Divider'};
 var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
