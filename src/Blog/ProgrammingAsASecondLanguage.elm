@@ -304,4 +304,29 @@ var result = numbers
                 manner.""" ]
             ]
         }
+    , Divider
+    , Section
+        { title = Nothing
+        , content =
+            [ Paragraph
+                [ Text """ESL, perhaps unintuitively for the lay person, is often taught with English
+                as the medium when the teacher is a native speaker. This forces you to -
+                particularly when you have students at varying levels - learn how to communicate
+                complex ideas at varying levels of complexity. This isn't just applicable when
+                trying to explain to a child that 'I do, you do, but he / she / it """
+                , Strong "does"
+                , Text """', but also useful when giving an overview to your non-technical manager
+                how you're going to implement your new system's architecture. If you can't boil
+                down some pretty complicated ideas into a form that's palatable to them, you might
+                not be able to justify some of your work or argue some of your decisions."""
+                ]
+            , Paragraph
+                [ Text """Learning a second language draws a number of parallels with learning a
+                programming language. There is a syntax, a vocabulary - there are areas in which
+                there's no room for movement or interpretation, and others where the lines are less
+                clear. Broadly, though, I think you can learn a lot about your communication with
+                others, as well as an appreciation for the vast array of ways in which we can say
+                the same thing with our code.""" ]
+            ]
+        }
     ]
