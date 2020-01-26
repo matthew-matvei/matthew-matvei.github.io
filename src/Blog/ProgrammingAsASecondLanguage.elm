@@ -12,7 +12,7 @@ getContent _ =
         { title = Nothing
         , content =
             [ Image
-                { source = "../assets/img/meme3.jpg"
+                { source = "/assets/img/meme3.jpg"
                 , alt = "Useless teacher"
                 , attribution = TextAttribute "Memecenter"
                 }
@@ -168,7 +168,7 @@ processValues({
                 }
         , content =
             [ Image
-                { source = "../assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg"
+                { source = "/assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg"
                 , alt = "Less is more"
                 , attribution =
                     ComplexAttribute

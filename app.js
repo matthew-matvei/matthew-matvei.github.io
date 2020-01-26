@@ -6284,7 +6284,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 						{
 							aT: 'Useless teacher',
 							aV: $author$project$Blog$Content$TextAttribute('Memecenter'),
-							bt: '../assets/img/meme3.jpg'
+							bt: '/assets/img/meme3.jpg'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6386,7 +6386,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 							aT: 'Less is more',
 							aV: $author$project$Blog$Content$ComplexAttribute(
 								{bc: 'https://unsplash.com/@sarahdorweiler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge', by: 'Photo by Sarah Dorweiler on Unsplash'}),
-							bt: '../assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
+							bt: '/assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
