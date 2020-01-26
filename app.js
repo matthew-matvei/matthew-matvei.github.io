@@ -11075,14 +11075,24 @@ var $author$project$Header$view = function (_v0) {
 					]))
 			]));
 };
+var $author$project$Blog$Content$BlockQuote = function (a) {
+	return {$: 'BlockQuote', a: a};
+};
 var $author$project$Blog$Content$CodeBlock = function (a) {
 	return {$: 'CodeBlock', a: a};
 };
+var $author$project$Blog$Content$ComplexAttribute = function (a) {
+	return {$: 'ComplexAttribute', a: a};
+};
+var $author$project$Blog$Content$Divider = {$: 'Divider'};
 var $author$project$Blog$Content$Emphasis = function (a) {
 	return {$: 'Emphasis', a: a};
 };
 var $author$project$Blog$Content$Image = function (a) {
 	return {$: 'Image', a: a};
+};
+var $author$project$Blog$Content$InlineCode = function (a) {
+	return {$: 'InlineCode', a: a};
 };
 var $author$project$Blog$Content$Link = F2(
 	function (a, b) {
@@ -11093,6 +11103,9 @@ var $author$project$Blog$Content$Paragraph = function (a) {
 };
 var $author$project$Blog$Content$Section = function (a) {
 	return {$: 'Section', a: a};
+};
+var $author$project$Blog$Content$Strong = function (a) {
+	return {$: 'Strong', a: a};
 };
 var $author$project$Blog$Content$SubTitle = function (a) {
 	return {$: 'SubTitle', a: a};
@@ -11116,8 +11129,6 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 			{
 				content: _List_fromArray(
 					[
-						$author$project$Blog$Content$Image(
-						{alt: 'I know you\'re not talking while I\'m teaching (meme)', source: '../assets/img/bad-teacher-funny-teachers.jpg'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11138,6 +11149,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 					]),
 				title: $elm$core$Maybe$Nothing
 			}),
+			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
 				content: _List_fromArray(
@@ -11206,21 +11218,98 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 					]),
 				title: $elm$core$Maybe$Just(
 					{subTitle: '', title: 'There will never be one correct way'})
+			}),
+			$author$project$Blog$Content$Divider,
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Image(
+						{
+							alt: 'Less is more',
+							attribution: $author$project$Blog$Content$ComplexAttribute(
+								{link: 'https://unsplash.com/@sarahdorweiler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge', text: 'Photo by Sarah Dorweiler on Unsplash'}),
+							source: '../assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
+						}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('When teaching ESL, you\'re by nature of it communicating with people who\r\n                don\'t usually understand English very well... in English. That puts a lot of \r\n                pressure in being highly concise. Fewer words are often better. A long sentence can \r\n                often mask the truly important word or words that the students should be focusing \r\n                on.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('When writing code, the audience isn\'t really the computer. Your compiler\r\n                doesn\'t care how sensible your variable names are, but other developers who '),
+								$author$project$Blog$Content$Strong('will'),
+								$author$project$Blog$Content$Text(' have to understand your code some day will care, and they are your\r\n                audience. In this sense, then, you are writing a foreign language that will be read\r\n                and (ideally) understood by someone else for whom this is also a foreign language.\r\n                Imagine if we wrote all our instructions to a computer in Latin: knowing that\r\n                your colleague would have to make sense of it all, you would hopefully settle for -\r\n                where the option exists - simpler grammar and vocabulary.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Additionally, '),
+								A2($author$project$Blog$Content$Link, 'https://danieljscheufler.wordpress.com/2016/12/27/code-is-read-more-often-than-it-is-written/', 'code is read more often that it is written'),
+								$author$project$Blog$Content$Text('. Especially if what you\'re writing is a \'hot path\' in terms of other\r\n                developers being required to read and understand it, you should treat it as\r\n                optimisation to pause, think, and make your code as straight forward and to the\r\n                point as possible. Some examples might be:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{code: '\r\nvar numbers = new[] { 1, 2, 3 };\r\n\r\nvar result = new List<int>();\r\nfor (var i = 0; i < numbers.Count(); i++)\r\n{\r\n    var num = numbers[i];\r\n    if (num > 1)\r\n    {\r\n        var a = num * num;\r\n        result.Add(a);\r\n    }\r\n}\r\n\r\nConsole.WriteLine(result);\r\n                ', language: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This will get the job done. And for some, this is very readable, '),
+								$author$project$Blog$Content$Emphasis('concise'),
+								$author$project$Blog$Content$Text(' code. For me, though, the intention (signal) is lost in a sea of words\r\n                (noise). I don\'t want another developer to have to explore the bowels of my code to\r\n                understand it. Ideally, they could understand this more from the surface. So I might\r\n                instead use:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{code: '\r\nvar numbers = new[] { 1, 2, 3 };\r\n\r\nvar result = numbers\r\n    .Where(num => num > 1)\r\n    .Select(num => num * num);\r\n                ', language: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Not only is there the immediately noticeable advantage of '),
+								$author$project$Blog$Content$Emphasis('\'Oh hey, there are fewer words to read\''),
+								$author$project$Blog$Content$Text(', but those words are also more declarative. We could read this simply as')
+							])),
+						$author$project$Blog$Content$BlockQuote('The result is the numbers where they\'re greater than 1, mapping each one\r\n            by mutiplying it by itself.'),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('For anyone reading along who is unfamiliar with C# Linq syntax, you may have \r\n                even understood it by inference. This is of course a contrived example, and it\'s \r\n                probably fine leaving it where it is, but if you were to imagine that the callback \r\n                passed to the '),
+								$author$project$Blog$Content$InlineCode('.Where'),
+								$author$project$Blog$Content$Text(' and '),
+								$author$project$Blog$Content$InlineCode('.Select'),
+								$author$project$Blog$Content$Text(' methods were less trivial, and risked obfuscating this code, the use of\r\n                some local functions / private helper methods can alleviate this, to make it:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{code: '\r\nvar numbers = new[] { 1, 2, 3 };\r\n\r\nvar result = numbers\r\n    .Where(NumberGreaterThanOne)\r\n    .Select(SquareNumber);\r\n                ', language: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This only makes the broader code more concise if those callback functions\r\n                themselves are reasonable, something that the process of attempting to name them\r\n                may illuminate. Let\'s say some sick joke meant that the query ignored the last item:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{code: '\r\n// Notice our named helper method is becoming less concise\r\nvar result = numbers\r\n    .Where(NumberGreaterThanOneAndItemNotLast)\r\n    .Select(SquareNumber);\r\n\r\n// Whereas, if we were to keep these separate\r\nvar result = numbers\r\n    .Where(NumberGreaterThanOne)\r\n    .Where(ItemNotLast)\r\n    .Select(SquareNumber);\r\n                ', language: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Here, it was seen that it didn\'t make sense to shove two very different\r\n                actions into one private helper method, which resulted essentially in two calls to\r\n                the '),
+								$author$project$Blog$Content$InlineCode('.Where'),
+								$author$project$Blog$Content$Text(' method. It\'s arguable this is inefficient, and I would agree that\r\n                (particularly in languages that don\'t have any optimisation of these collection-based\r\n                functions) this - to a computer - may seem excessive, but hopefully to a human\r\n                reader this splits out the filtering requirements more discretely and concisely.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Starting with a simple base that other developers can easily understand\r\n                also makes it easier to add required embellishments later. Examples include a retry \r\n                policy surrounding a network call, or error logging to record exceptions occurred \r\n                during a HTTP request. Hopefully, the next developer, with a concentrated purpose,\r\n                will also be able to contribute to the shared codebase in an equally focused\r\n                manner.')
+							]))
+					]),
+				title: $elm$core$Maybe$Just(
+					{subTitle: '... less is more', title: 'Be concise'})
 			})
 		]);
-};
-var $author$project$Blog$Content$BlockQuote = function (a) {
-	return {$: 'BlockQuote', a: a};
 };
 var $author$project$Blog$Content$Collection = function (a) {
 	return {$: 'Collection', a: a};
 };
-var $author$project$Blog$Content$Divider = {$: 'Divider'};
-var $author$project$Blog$Content$InlineCode = function (a) {
-	return {$: 'InlineCode', a: a};
-};
-var $author$project$Blog$Content$Strong = function (a) {
-	return {$: 'Strong', a: a};
+var $author$project$Blog$Content$TextAttribute = function (a) {
+	return {$: 'TextAttribute', a: a};
 };
 var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 	return _List_fromArray(
@@ -11239,7 +11328,11 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 							])),
 						$author$project$Blog$Content$BlockQuote('Yes, but best practice...'),
 						$author$project$Blog$Content$Image(
-						{alt: 'boom-mic-drop', source: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'}),
+						{
+							alt: 'boom-mic-drop',
+							attribution: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							source: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11288,7 +11381,11 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' then we\'re gonna explode!')
 							])),
 						$author$project$Blog$Content$Image(
-						{alt: 'explosions', source: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'}),
+						{
+							alt: 'explosions',
+							attribution: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							source: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11358,7 +11455,11 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 				content: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
-						{alt: 'shifty-eyes', source: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'}),
+						{
+							alt: 'shifty-eyes',
+							attribution: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							source: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11439,7 +11540,11 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 				content: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
-						{alt: 'square-wheels', source: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'}),
+						{
+							alt: 'square-wheels',
+							attribution: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							source: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11583,24 +11688,59 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var $author$project$Page$Article$viewAttribution = function (attributionInfo) {
+	if (attributionInfo.$ === 'TextAttribute') {
+		var attribution = attributionInfo.a;
+		return A2(
+			$elm$html$Html$span,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('center-align')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(attribution)
+				]));
+	} else {
+		var attribution = attributionInfo.a;
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('center-align'),
+					$elm$html$Html$Attributes$href(attribution.link)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(attribution.text)
+				]));
+	}
+};
 var $author$project$Page$Article$viewImage = function (imageInfo) {
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('d-flex justify-content-centre')
+				$elm$html$Html$Attributes$class('d-flex align-items-centre flex-col')
 			]),
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$img,
+				$elm$html$Html$div,
+				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('responsive-img'),
-						$elm$html$Html$Attributes$src(imageInfo.source),
-						$elm$html$Html$Attributes$alt(imageInfo.alt)
-					]),
-				_List_Nil)
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('responsive-img'),
+								$elm$html$Html$Attributes$src(imageInfo.source),
+								$elm$html$Html$Attributes$alt(imageInfo.alt)
+							]),
+						_List_Nil)
+					])),
+				$author$project$Page$Article$viewAttribution(imageInfo.attribution)
 			]));
 };
 var $elm$html$Html$em = _VirtualDom_node('em');
