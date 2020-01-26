@@ -27,8 +27,7 @@ getContent _ =
             , Paragraph
                 [ Text """Prior to my current career, I worked mainly in the teaching of music and
             English as a Second Language. These weren't just gigs for money: I've been genuinely
-            interested in both. My favourite thing about teaching ESL was learning so much more of
-            my own language. When I look at how these jobs fit in with my current trajectory, I
+            interested in both. When I look at how these jobs fit in with my current trajectory, I
             scratch my head regarding music, but I've some ideas about how teaching / learning a
             second language has helped me as a programmer, and why I'd encourage anyone considering
             it to give it a go."""
@@ -58,7 +57,7 @@ getContent _ =
                 , Link
                     "https://www.jinfonet.com/resources/bi-defined/3-tier-architecture-complete-overview/"
                     "Three Tier Architecture"
-                , Text """ the dearer they'd likely hold it to their hearts, even though the larger
+                , Text """, the dearer they'd likely hold it to their hearts, even though the larger
                 the concept is the more likely a """
                 , Link
                     "https://jimmybogard.com/vertical-slice-architecture/"
@@ -85,7 +84,7 @@ getContent _ =
                 , Text " would mean 'the boy is eating a hamburger', whereas "
                 , Emphasis "'мальчика ест гамбургер'"
                 , Text """ is a viable way of saying 'the hamburger is eating a boy'. It would be
-                unusual to present the information in this order, since there are still patterns and
+                unusual to present the information in this way, since there are still patterns and
                 conventions in word order in Russian to keep things predictable (in a good way), 
                 but the 'source of truth' in the sentence's meaning would be the declension of the
                 adjectives / nouns and the conjugation of the verbs. In """
@@ -248,7 +247,7 @@ var result = numbers
                 , Text ", but those words are also more declarative. We could read this simply as"
                 ]
             , BlockQuote """The result is the numbers where they're greater than 1, mapping each one
-            by mutiplying it by itself."""
+            by multiplying it by itself."""
             , Paragraph
                 [ Text """For anyone reading along who is unfamiliar with C# Linq syntax, you may have 
                 even understood it by inference. This is of course a contrived example, and it's 
