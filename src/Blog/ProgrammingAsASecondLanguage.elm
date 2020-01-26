@@ -11,11 +11,7 @@ getContent _ =
     , Section
         { title = Nothing
         , content =
-            [ Image
-                { source = "../assets/img/bad-teacher-funny-teachers.jpg"
-                , alt = "I know you're not talking while I'm teaching (meme)"
-                }
-            , Paragraph
+            [ Paragraph
                 [ Text """I have come to the world of programming relatively late, at least compared
                 to some other people I work with. For anyone who has ever suffered with """
                 , Link "https://www.youtube.com/watch?v=eqhUHyVpAwE" "Imposter Syndrome"
@@ -40,6 +36,7 @@ getContent _ =
                 ]
             ]
         }
+    , Divider
     , Section
         { title =
             Just
