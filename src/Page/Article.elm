@@ -2,7 +2,8 @@ module Page.Article exposing (Model, view)
 
 import Blog.Content
     exposing
-        ( CodeBlockInfo
+        ( AttributionInfo(..)
+        , CodeBlockInfo
         , CollectionItem
         , Content(..)
         , ImageInfo
@@ -100,10 +101,23 @@ viewSectionTitle maybeSectionTitle =
             ]
 
 
+viewAttribution : AttributionInfo -> Html msg
+viewAttribution attributionInfo =
+    case attributionInfo of
+        TextAttribute attribution ->
+            span [ class "center-align" ] [ text attribution ]
+
+        ComplexAttribute attribution ->
+            a [ class "center-align", href attribution.link ] [ text attribution.text ]
+
+
 viewImage : ImageInfo -> Html msg
 viewImage imageInfo =
-    div [ class "d-flex justify-content-centre" ]
-        [ img [ class "responsive-img", src imageInfo.source, alt imageInfo.alt ] []
+    div [ class "d-flex align-items-centre flex-col" ]
+        [ div []
+            [ img [ class "responsive-img", src imageInfo.source, alt imageInfo.alt ] []
+            ]
+        , viewAttribution imageInfo.attribution
         ]
 
 

@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.Z.G === region.ai.G)
+	if (region.Z.G === region.aj.G)
 	{
 		return 'on line ' + region.Z.G;
 	}
-	return 'on lines ' + region.Z.G + ' through ' + region.ai.G;
+	return 'on lines ' + region.Z.G + ' through ' + region.aj.G;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.a8,
-		impl.bw,
-		impl.bs,
+		impl.ba,
+		impl.bz,
+		impl.bv,
 		function() { return function() {} }
 	);
 });
@@ -3883,11 +3883,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.a8,
-		impl.bw,
-		impl.bs,
+		impl.ba,
+		impl.bz,
+		impl.bv,
 		function(sendToApp, initialModel) {
-			var view = impl.bx;
+			var view = impl.bA;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3919,12 +3919,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.a8,
-		impl.bw,
-		impl.bs,
+		impl.ba,
+		impl.bz,
+		impl.bv,
 		function(sendToApp, initialModel) {
 			var divertHrefToApp = impl.Y && impl.Y(sendToApp)
-			var view = impl.bx;
+			var view = impl.bA;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3932,7 +3932,7 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.aU);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.aW);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
@@ -3993,8 +3993,8 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.bk;
-	var onUrlRequest = impl.bl;
+	var onUrlChange = impl.bn;
+	var onUrlRequest = impl.bo;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
@@ -4014,9 +4014,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.aA === next.aA
-							&& curr.ao === next.ao
-							&& curr.ax.a === next.ax.a
+							&& curr.aB === next.aB
+							&& curr.ap === next.ap
+							&& curr.ay.a === next.ay.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4024,13 +4024,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		a8: function(flags)
+		ba: function(flags)
 		{
-			return A3(impl.a8, flags, _Browser_getUrl(), key);
+			return A3(impl.ba, flags, _Browser_getUrl(), key);
 		},
-		bx: impl.bx,
-		bw: impl.bw,
-		bs: impl.bs
+		bA: impl.bA,
+		bz: impl.bz,
+		bv: impl.bv
 	});
 }
 
@@ -4096,17 +4096,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { a6: 'hidden', aW: 'visibilitychange' }
+		? { a8: 'hidden', aY: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { a6: 'mozHidden', aW: 'mozvisibilitychange' }
+		? { a8: 'mozHidden', aY: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { a6: 'msHidden', aW: 'msvisibilitychange' }
+		? { a8: 'msHidden', aY: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { a6: 'webkitHidden', aW: 'webkitvisibilitychange' }
-		: { a6: 'hidden', aW: 'visibilitychange' };
+		? { a8: 'webkitHidden', aY: 'webkitvisibilitychange' }
+		: { a8: 'hidden', aY: 'visibilitychange' };
 }
 
 
@@ -4187,12 +4187,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		aG: _Browser_getScene(),
-		aM: {
-			aO: _Browser_window.pageXOffset,
-			aP: _Browser_window.pageYOffset,
-			aN: _Browser_doc.documentElement.clientWidth,
-			an: _Browser_doc.documentElement.clientHeight
+		aH: _Browser_getScene(),
+		aN: {
+			aP: _Browser_window.pageXOffset,
+			aQ: _Browser_window.pageYOffset,
+			aO: _Browser_doc.documentElement.clientWidth,
+			ao: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4202,8 +4202,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		aN: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		an: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		aO: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		ao: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4226,15 +4226,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			aG: {
-				aN: node.scrollWidth,
-				an: node.scrollHeight
+			aH: {
+				aO: node.scrollWidth,
+				ao: node.scrollHeight
 			},
-			aM: {
-				aO: node.scrollLeft,
-				aP: node.scrollTop,
-				aN: node.clientWidth,
-				an: node.clientHeight
+			aN: {
+				aP: node.scrollLeft,
+				aQ: node.scrollTop,
+				aO: node.clientWidth,
+				ao: node.clientHeight
 			}
 		};
 	});
@@ -4264,18 +4264,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			aG: _Browser_getScene(),
-			aM: {
-				aO: x,
-				aP: y,
-				aN: _Browser_doc.documentElement.clientWidth,
-				an: _Browser_doc.documentElement.clientHeight
+			aH: _Browser_getScene(),
+			aN: {
+				aP: x,
+				aQ: y,
+				aO: _Browser_doc.documentElement.clientWidth,
+				ao: _Browser_doc.documentElement.clientHeight
 			},
-			a0: {
-				aO: x + rect.left,
-				aP: y + rect.top,
-				aN: rect.width,
-				an: rect.height
+			a2: {
+				aP: x + rect.left,
+				aQ: y + rect.top,
+				aO: rect.width,
+				ao: rect.height
 			}
 		};
 	});
@@ -4837,7 +4837,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {ak: fragment, ao: host, av: path, ax: port_, aA: protocol, aB: query};
+		return {al: fragment, ap: host, aw: path, ay: port_, aB: protocol, aC: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5118,7 +5118,7 @@ var $elm$core$Task$perform = F2(
 var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$Model = F2(
 	function (key, route) {
-		return {ap: key, X: route};
+		return {aq: key, X: route};
 	});
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
@@ -5749,9 +5749,9 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.av),
-					$elm$url$Url$Parser$prepareQuery(url.aB),
-					url.ak,
+					$elm$url$Url$Parser$preparePath(url.aw),
+					$elm$url$Url$Parser$prepareQuery(url.aC),
+					url.al,
 					$elm$core$Basics$identity)));
 	});
 var $author$project$Route$Article = function (a) {
@@ -5817,6 +5817,7 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 			parsers);
 	};
 };
+var $author$project$Article$ProgrammingAsASecondLanguage = 1;
 var $author$project$Article$ThreeBestPractices = 0;
 var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
@@ -5849,7 +5850,11 @@ var $author$project$Article$parser = $elm$url$Url$Parser$oneOf(
 			A2(
 			$elm$url$Url$Parser$map,
 			0,
-			$elm$url$Url$Parser$s('no-best-practices'))
+			$elm$url$Url$Parser$s('no-best-practices')),
+			A2(
+			$elm$url$Url$Parser$map,
+			1,
+			$elm$url$Url$Parser$s('programming-as-a-second-language'))
 		]));
 var $elm$url$Url$Parser$slash = F2(
 	function (_v0, _v1) {
@@ -5929,7 +5934,7 @@ var $elm$url$Url$addPrefixed = F3(
 	});
 var $elm$url$Url$toString = function (url) {
 	var http = function () {
-		var _v0 = url.aA;
+		var _v0 = url.aB;
 		if (!_v0) {
 			return 'http://';
 		} else {
@@ -5939,17 +5944,17 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.ak,
+		url.al,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
-			url.aB,
+			url.aC,
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.ax,
-					_Utils_ap(http, url.ao)),
-				url.av)));
+					url.ay,
+					_Utils_ap(http, url.ap)),
+				url.aw)));
 };
 var $author$project$Main$update = F2(
 	function (message, model) {
@@ -5970,7 +5975,7 @@ var $author$project$Main$update = F2(
 					model,
 					A2(
 						$elm$browser$Browser$Navigation$pushUrl,
-						model.ap,
+						model.aq,
 						$elm$url$Url$toString(url)));
 			} else {
 				var href = urlRequest.a;
@@ -6010,7 +6015,11 @@ var $author$project$Page$title = function (model) {
 			return 'mat-mat | Home';
 		default:
 			var slug = _v0.a;
-			return 'mat-mat | Three best practices';
+			if (!slug) {
+				return 'mat-mat | Three best practices';
+			} else {
+				return 'mat-mat | Programming as a Second Language';
+			}
 	}
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
@@ -6220,8 +6229,8 @@ var $author$project$Blog$Content$BlockQuote = function (a) {
 var $author$project$Blog$Content$CodeBlock = function (a) {
 	return {$: 8, a: a};
 };
-var $author$project$Blog$Content$Collection = function (a) {
-	return {$: 9, a: a};
+var $author$project$Blog$Content$ComplexAttribute = function (a) {
+	return {$: 1, a: a};
 };
 var $author$project$Blog$Content$Divider = {$: 7};
 var $author$project$Blog$Content$Emphasis = function (a) {
@@ -6252,11 +6261,229 @@ var $author$project$Blog$Content$SubTitle = function (a) {
 var $author$project$Blog$Content$Text = function (a) {
 	return {$: 0, a: a};
 };
+var $author$project$Blog$Content$TextAttribute = function (a) {
+	return {$: 0, a: a};
+};
 var $author$project$Blog$Content$Title = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Blog$Content$WhenCreated = function (a) {
 	return {$: 2, a: a};
+};
+var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0) {
+	return _List_fromArray(
+		[
+			$author$project$Blog$Content$Title('Programming as a Second Language'),
+			$author$project$Blog$Content$SubTitle('... and why I\'m glad I\'ve learnt / taught a second language'),
+			$author$project$Blog$Content$WhenCreated('January 26 2020'),
+			$author$project$Blog$Content$Section(
+			{
+				a$: _List_fromArray(
+					[
+						$author$project$Blog$Content$Image(
+						{
+							aT: 'Useless teacher',
+							aV: $author$project$Blog$Content$TextAttribute('Memecenter'),
+							bt: '/assets/img/meme3.jpg'
+						}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('I have come to the world of programming relatively late, at least compared\r\n                to some other people I work with. For anyone who has ever suffered with '),
+								A2($author$project$Blog$Content$Link, 'https://www.youtube.com/watch?v=eqhUHyVpAwE', 'Imposter Syndrome'),
+								$author$project$Blog$Content$Text(', you can understand how that might be quite daunting. It can feel like \r\n            you\'ve been wasting all this time and potential on travel, tangential job paths and other \r\n            pursuits.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Prior to my current career, I worked mainly in the teaching of music and\r\n            English as a Second Language. These weren\'t just gigs for money: I\'ve been genuinely\r\n            interested in both. When I look at how these jobs fit in with my current trajectory, I\r\n            scratch my head regarding music, but I\'ve some ideas about how teaching / learning a\r\n            second language has helped me as a programmer, and why I\'d encourage anyone considering\r\n            it to give it a go.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This article, then, describes how a pursuit that may seem irrelevant at\r\n                first to working as a software developer actually benefits me. If you have any\r\n                similar experience of working in a seemingly unrelated area, try to reflect on ways\r\n                in which it may actually come in handy for you.')
+							]))
+					]),
+				ab: $elm$core$Maybe$Nothing
+			}),
+			$author$project$Blog$Content$Divider,
+			$author$project$Blog$Content$Section(
+			{
+				a$: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('You\'ll often here someone try to argue that their idea, pattern etc. is the '),
+								$author$project$Blog$Content$Emphasis('best'),
+								$author$project$Blog$Content$Text(' or the '),
+								$author$project$Blog$Content$Emphasis('correct'),
+								$author$project$Blog$Content$Text(' way to do something. The larger that concept is, e.g. '),
+								A2($author$project$Blog$Content$Link, 'https://www.jinfonet.com/resources/bi-defined/3-tier-architecture-complete-overview/', 'Three Tier Architecture'),
+								$author$project$Blog$Content$Text(', the dearer they\'d likely hold it to their hearts, even though the larger\r\n                the concept is the more likely a '),
+								A2($author$project$Blog$Content$Link, 'https://jimmybogard.com/vertical-slice-architecture/', 'viable alternative exists'),
+								$author$project$Blog$Content$Text('. If you\'ve learnt some aspects of a foreign language, however, you can \r\n                see that there is a multitude of different, equally valid ways of attacking the \r\n                same problem.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('English places a lot of importance '),
+								A2($author$project$Blog$Content$Link, 'https://www.toeflgoanywhere.org/importance-word-order-english', 'on the order of words within a sentence'),
+								$author$project$Blog$Content$Text('. '),
+								$author$project$Blog$Content$Emphasis('\'The boy ate the burger\''),
+								$author$project$Blog$Content$Text(' and '),
+								$author$project$Blog$Content$Emphasis('\'the burger ate the boy\''),
+								$author$project$Blog$Content$Text(' are two very different news stories. This is because the language places\r\n                meaning into the order by codifying a \'Subject\' \'Verb\' \'Object\' pattern. Basically,\r\n                due to the burger coming first in the second sentence, '),
+								$author$project$Blog$Content$Emphasis('it'),
+								$author$project$Blog$Content$Text(' is the thing doing the eating. In Russian, however, '),
+								$author$project$Blog$Content$Emphasis('\'мальчик ест гамбургер\''),
+								$author$project$Blog$Content$Text(' would mean \'the boy is eating a hamburger\', whereas '),
+								$author$project$Blog$Content$Emphasis('\'мальчика ест гамбургер\''),
+								$author$project$Blog$Content$Text(' is a viable way of saying \'the hamburger is eating a boy\'. It would be\r\n                unusual to present the information in this way, since there are still patterns and\r\n                conventions in word order in Russian to keep things predictable (in a good way), \r\n                but the \'source of truth\' in the sentence\'s meaning would be the declension of the\r\n                adjectives / nouns and the conjugation of the verbs. In '),
+								$author$project$Blog$Content$Emphasis('\'мальчика ест гамбургер\''),
+								$author$project$Blog$Content$Text(', we know that the boy is the object of the sentence only due to the extra\r\n                \'а\' appearing at the end of the word \'мальчик\'. Pretty sneaky...')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('A parallel in programming that comes to mind is the use of positional\r\n                arguments for a function or method vs named arguments (or, where that\'s not possible,\r\n                an arguments object). For example, in JavaScript, we might:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{a_: '\r\nconst processValues = (name, email, password, dateOfBirth, hasConsented) => {\r\n    // We process the positional arguments in some way\r\n}\r\n\r\n// We then call this function like so\r\nprocessValues(\'Boris\', \'boris.y@rumbler.ru\', \'admin\', \'01-02-1931\', true);\r\n                ', bb: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('We\'ve placed a lot of importance on the order of words here. Essentially,\r\n                \'boris.y@rumbler.ru\' is only being interpreted as an email because of the somewhat\r\n                arbitrary order of arguments sent to the function. If someone wanted to refactor\r\n                this function by changing this order (if they, I don\'t know, really hate themselves),\r\n                there would be many unintended consequences as now names will be treated as emails\r\n                and dates of birth as passwords etc.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Alternatively, we could give the arguments meaning in and of themselves,\r\n                allowing them to be understood without the need for them to appear in a particular\r\n                order. One way to achieve this in JavaScript would be to:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{a_: '\r\nconst processValues = (args) => {\r\n    // We process the arguments object in some way using args.name, args.email etc.\r\n}\r\n\r\n// Or, we can just use deconstruction to keep things clearer\r\n\r\nconst processValues = ({ name, email, password, dateOfBirth, hasConsented }) => {\r\n    // We process the deconstructed arguments object in some way\r\n}\r\n\r\n// We then call this function like so\r\nprocessValues({ \r\n    name: \'Boris\', \r\n    email: \'boris.y@rumbler.ru\', \r\n    password: \'admin\', \r\n    dateOfBirth: \'01-02-1931\', \r\n    hasConsented: true\r\n});\r\n                ', bb: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This may seem less concise than the above option of using positional\r\n                arguments, which is why it may be overkill when a function has one or two arguments,\r\n                particularly when the order of those arguments is intuitive given the nature of the\r\n                function. The benefit, though, is there is no longer any meaning coupled with the\r\n                order of the arguments as given. If that same self-hating developer wanted to\r\n                refactor the function, they can move around the parameters to please themselves,\r\n                since JavaScript would be matching on property name, not the parameter order.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('As an analogy to English\'s and Russian\'s approach to word order, then, we \r\n                can choose whether we want to place meaning in the order the words appear, or \r\n                whether we want the words to describe their own meaning in that function. Both are\r\n                entirely valid options, and each will be most useful in certain circumstances.')
+							]))
+					]),
+				ab: $elm$core$Maybe$Just(
+					{bu: '', ab: 'There will never be one correct way'})
+			}),
+			$author$project$Blog$Content$Divider,
+			$author$project$Blog$Content$Section(
+			{
+				a$: _List_fromArray(
+					[
+						$author$project$Blog$Content$Image(
+						{
+							aT: 'Less is more',
+							aV: $author$project$Blog$Content$ComplexAttribute(
+								{bc: 'https://unsplash.com/@sarahdorweiler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge', by: 'Photo by Sarah Dorweiler on Unsplash'}),
+							bt: '/assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
+						}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('When teaching ESL, you\'re by nature of it communicating with people who\r\n                don\'t usually understand English very well... in English. That puts a lot of \r\n                pressure in being highly concise. Fewer words are often better. A long sentence can \r\n                often mask the truly important word or words that the students should be focusing \r\n                on.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('When writing code, the audience isn\'t really the computer. Your compiler\r\n                doesn\'t care how sensible your variable names are, but other developers who '),
+								$author$project$Blog$Content$Strong('will'),
+								$author$project$Blog$Content$Text(' have to understand your code some day will care, and they are your\r\n                audience. In this sense, then, you are writing a foreign language that will be read\r\n                and (ideally) understood by someone else for whom this is also a foreign language.\r\n                Imagine if we wrote all our instructions to a computer in Latin: knowing that\r\n                your colleague would have to make sense of it all, you would hopefully settle for -\r\n                where the option exists - simpler grammar and vocabulary.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Additionally, '),
+								A2($author$project$Blog$Content$Link, 'https://danieljscheufler.wordpress.com/2016/12/27/code-is-read-more-often-than-it-is-written/', 'code is read more often that it is written'),
+								$author$project$Blog$Content$Text('. Especially if what you\'re writing is a \'hot path\' in terms of other\r\n                developers being required to read and understand it, you should treat it as\r\n                optimisation to pause, think, and make your code as straight forward and to the\r\n                point as possible. Some examples might be:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{a_: '\r\nvar numbers = new[] { 1, 2, 3 };\r\n\r\nvar result = new List<int>();\r\nfor (var i = 0; i < numbers.Count(); i++)\r\n{\r\n    var num = numbers[i];\r\n    if (num > 1)\r\n    {\r\n        var a = num * num;\r\n        result.Add(a);\r\n    }\r\n}\r\n\r\nConsole.WriteLine(result);\r\n                ', bb: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This will get the job done. And for some, this is very readable, '),
+								$author$project$Blog$Content$Emphasis('concise'),
+								$author$project$Blog$Content$Text(' code. For me, though, the intention (signal) is lost in a sea of words\r\n                (noise). I don\'t want another developer to have to explore the bowels of my code to\r\n                understand it. Ideally, they could understand this more from the surface. So I might\r\n                instead use:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{a_: '\r\nvar numbers = new[] { 1, 2, 3 };\r\n\r\nvar result = numbers\r\n    .Where(num => num > 1)\r\n    .Select(num => num * num);\r\n                ', bb: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Not only is there the immediately noticeable advantage of '),
+								$author$project$Blog$Content$Emphasis('\'Oh hey, there are fewer words to read\''),
+								$author$project$Blog$Content$Text(', but those words are also more declarative. We could read this simply as')
+							])),
+						$author$project$Blog$Content$BlockQuote('The result is the numbers where they\'re greater than 1, mapping each one\r\n            by multiplying it by itself.'),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('For anyone reading along who is unfamiliar with C# Linq syntax, you may have \r\n                even understood it by inference. This is of course a contrived example, and it\'s \r\n                probably fine leaving it where it is, but if you were to imagine that the callback \r\n                passed to the '),
+								$author$project$Blog$Content$InlineCode('.Where'),
+								$author$project$Blog$Content$Text(' and '),
+								$author$project$Blog$Content$InlineCode('.Select'),
+								$author$project$Blog$Content$Text(' methods were less trivial, and risked obfuscating this code, the use of\r\n                some local functions / private helper methods can alleviate this, to make it:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{a_: '\r\nvar numbers = new[] { 1, 2, 3 };\r\n\r\nvar result = numbers\r\n    .Where(NumberGreaterThanOne)\r\n    .Select(SquareNumber);\r\n                ', bb: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This only makes the broader code more concise if those callback functions\r\n                themselves are reasonable, something that the process of attempting to name them\r\n                may illuminate. Let\'s say some sick joke meant that the query ignored the last item:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{a_: '\r\n// Notice our named helper method is becoming less concise\r\nvar result = numbers\r\n    .Where(NumberGreaterThanOneAndItemNotLast)\r\n    .Select(SquareNumber);\r\n\r\n// Whereas, if we were to keep these separate\r\nvar result = numbers\r\n    .Where(NumberGreaterThanOne)\r\n    .Where(ItemNotLast)\r\n    .Select(SquareNumber);\r\n                ', bb: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Here, it was seen that it didn\'t make sense to shove two very different\r\n                actions into one private helper method, which resulted essentially in two calls to\r\n                the '),
+								$author$project$Blog$Content$InlineCode('.Where'),
+								$author$project$Blog$Content$Text(' method. It\'s arguable this is inefficient, and I would agree that\r\n                (particularly in languages that don\'t have any optimisation of these collection-based\r\n                functions) this - to a computer - may seem excessive, but hopefully to a human\r\n                reader this splits out the filtering requirements more discretely and concisely.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Starting with a simple base that other developers can easily understand\r\n                also makes it easier to add required embellishments later. Examples include a retry \r\n                policy surrounding a network call, or error logging to record exceptions occurred \r\n                during a HTTP request. Hopefully, the next developer, with a concentrated purpose,\r\n                will also be able to contribute to the shared codebase in an equally focused\r\n                manner.')
+							]))
+					]),
+				ab: $elm$core$Maybe$Just(
+					{bu: '... less is more', ab: 'Be concise'})
+			}),
+			$author$project$Blog$Content$Divider,
+			$author$project$Blog$Content$Section(
+			{
+				a$: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('ESL, perhaps unintuitively for the lay person, is often taught with English\r\n                as the medium when the teacher is a native speaker. This forces you to -\r\n                particularly when you have students at varying levels - learn how to communicate\r\n                complex ideas at varying levels of complexity. This isn\'t just applicable when\r\n                trying to explain to a child that \'I do, you do, but he / she / it '),
+								$author$project$Blog$Content$Strong('does'),
+								$author$project$Blog$Content$Text('\', but also useful when giving an overview to your non-technical manager\r\n                how you\'re going to implement your new system\'s architecture. If you can\'t boil\r\n                down some pretty complicated ideas into a form that\'s palatable to them, you might\r\n                not be able to justify some of your work or argue some of your decisions.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Learning a second language draws a number of parallels with learning a\r\n                programming language. There is a syntax, a vocabulary - there are areas in which\r\n                there\'s no room for movement or interpretation, and others where the lines are less\r\n                clear. Broadly, though, I think you can learn a lot about your communication with\r\n                others, as well as an appreciation for the vast array of ways in which we can say\r\n                the same thing with our code.')
+							]))
+					]),
+				ab: $elm$core$Maybe$Nothing
+			})
+		]);
+};
+var $author$project$Blog$Content$Collection = function (a) {
+	return {$: 9, a: a};
 };
 var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 	return _List_fromArray(
@@ -6266,27 +6493,31 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 			$author$project$Blog$Content$WhenCreated('November 15 2019'),
 			$author$project$Blog$Content$Section(
 			{
-				aZ: _List_fromArray(
+				a$: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('We\'ve all had that argument with another developer where\n        we\'ve reasonably laid out our position why it would be a good idea to do something,\n        only to be met with')
+								$author$project$Blog$Content$Text('We\'ve all had that argument with another developer where\r\n        we\'ve reasonably laid out our position why it would be a good idea to do something,\r\n        only to be met with')
 							])),
 						$author$project$Blog$Content$BlockQuote('Yes, but best practice...'),
 						$author$project$Blog$Content$Image(
-						{aS: 'boom-mic-drop', bq: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'}),
+						{
+							aT: 'boom-mic-drop',
+							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bt: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('and that\'s all they need to say. And how can you respond to that? \'Sure, then I want to do\n            something less than best\' hardly wins anyone over. They\'ve said the relevant buzzword and we can now just\n            switch off our brains and do what the man on the Internet told us to do. If you\'ve never had this\n            conversation before, congratulations.')
+								$author$project$Blog$Content$Text('and that\'s all they need to say. And how can you respond to that? \'Sure, then I want to do\r\n            something less than best\' hardly wins anyone over. They\'ve said the relevant buzzword and we can now just\r\n            switch off our brains and do what the man on the Internet told us to do. If you\'ve never had this\r\n            conversation before, congratulations.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('For me, however, experience in this conversation brings me to my first 😓 blargh post. I want\n            to show you that there are no strictly '),
+								$author$project$Blog$Content$Text('For me, however, experience in this conversation brings me to my first 😓 blargh post. I want\r\n            to show you that there are no strictly '),
 								$author$project$Blog$Content$Emphasis('best'),
-								$author$project$Blog$Content$Text(' practices and remind you that everything really does\n            depend on the situation.')
+								$author$project$Blog$Content$Text(' practices and remind you that everything really does\r\n            depend on the situation.')
 							]))
 					]),
 				ab: $elm$core$Maybe$Nothing
@@ -6294,7 +6525,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				aZ: _List_fromArray(
+				a$: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6304,14 +6535,14 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' methods and simple object properties. This led to wonders such as...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{aY: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value\n                ', a9: 'cs'}),
+						{a_: '\r\n/// <summary>\r\n/// Returns the current value of this object.\r\n/// </summary>\r\n/// <returns>The current value of this object</returns>\r\npublic int GetValue() =>\r\n    this.Value\r\n                ', bb: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('with more text explaining than doing, regardless of whether the code is already\n            completely unambiguous. Worse still, this can easily be...')
+								$author$project$Blog$Content$Text('with more text explaining than doing, regardless of whether the code is already\r\n            completely unambiguous. Worse still, this can easily be...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{aY: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value ?? throw new InvalidOperationException();\n            ', a9: 'cs'}),
+						{a_: '\r\n/// <summary>\r\n/// Returns the current value of this object.\r\n/// </summary>\r\n/// <returns>The current value of this object</returns>\r\npublic int GetValue() =>\r\n    this.Value ?? throw new InvalidOperationException();\r\n            ', bb: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6324,27 +6555,31 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' then we\'re gonna explode!')
 							])),
 						$author$project$Blog$Content$Image(
-						{aS: 'explosions', bq: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'}),
+						{
+							aT: 'explosions',
+							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bt: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('On the other side of this spectrum is my current workplace, which strictly believes\n            that all code should be self-descriptive enough to not warrant any comments, ever. And there are some good\n            reasons:')
+								$author$project$Blog$Content$Text('On the other side of this spectrum is my current workplace, which strictly believes\r\n            that all code should be self-descriptive enough to not warrant any comments, ever. And there are some good\r\n            reasons:')
 							])),
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{bv: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', ab: 'Programmers will barely read your code, let alone the comments that go with it'},
-								{bv: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', ab: 'The compiler can never know whether your comments are correct anymore'},
-								{bv: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', ab: 'Maintenance costs'},
-								{bv: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', ab: 'There\'s no guarantee your code will be easier to understand'}
+								{by: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\r\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\r\n            comments.', ab: 'Programmers will barely read your code, let alone the comments that go with it'},
+								{by: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\r\n            no better than those that use social engineering to convince old ladies you work at her bank.', ab: 'The compiler can never know whether your comments are correct anymore'},
+								{by: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\r\n            in order to satisfy commenting standards that either my workplace or university had.', ab: 'Maintenance costs'},
+								{by: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\r\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\r\n            cause confusion.', ab: 'There\'s no guarantee your code will be easier to understand'}
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('That said, there is a time and place for documentation. The more your actual code can\n            inform this, the better. For example, think how your typed API is self-documenting when you have a\n            method...')
+								$author$project$Blog$Content$Text('That said, there is a time and place for documentation. The more your actual code can\r\n            inform this, the better. For example, think how your typed API is self-documenting when you have a\r\n            method...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{aY: '\nTask<bool> ItemExistsAsync(string itemId);\n                ', a9: 'cs'}),
+						{a_: '\r\nTask<bool> ItemExistsAsync(string itemId);\r\n                ', bb: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6359,7 +6594,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' patterns...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{aY: '\nEither<Error, Item> GetItem(string itemId);\n                ', a9: 'cs'}),
+						{a_: '\r\nEither<Error, Item> GetItem(string itemId);\r\n                ', bb: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6367,7 +6602,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$InlineCode('Error'),
 								$author$project$Blog$Content$Text(' (if something went wrong) or I\'ll get the '),
 								$author$project$Blog$Content$InlineCode('Item'),
-								$author$project$Blog$Content$Text(' I was looking for. This even means I don\'t need to dig into the bowels of the method to\n                discover that it might actually '),
+								$author$project$Blog$Content$Text(' I was looking for. This even means I don\'t need to dig into the bowels of the method to\r\n                discover that it might actually '),
 								$author$project$Blog$Content$InlineCode('throw'),
 								$author$project$Blog$Content$Text(' an exception (or even rely on code comments to describe this to me).')
 							])),
@@ -6375,38 +6610,42 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('I\'m glad you asked. I would consider the following when determining whether you should\n            use comments or not.')
+								$author$project$Blog$Content$Text('I\'m glad you asked. I would consider the following when determining whether you should\r\n            use comments or not.')
 							])),
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{bv: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', ab: 'Is the code understandable without it?'},
-								{bv: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', ab: 'Can I make things clearer by refactoring?'},
-								{bv: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', ab: 'How accessible is the code to the caller?'}
+								{by: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\r\n                  code review process can be very useful.', ab: 'Is the code understandable without it?'},
+								{by: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\r\n                  then perhaps you can assign that condition to a named function.', ab: 'Can I make things clearer by refactoring?'},
+								{by: 'Consider whether the caller of some code is able to see it. For example, a private method\r\n                will be called from within the same class, so if a developer is working on the caller, they will have\r\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\r\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\r\n                peer into the code as easily.', ab: 'How accessible is the code to the caller?'}
 							]))
 					]),
 				ab: $elm$core$Maybe$Just(
-					{br: 'Everyone\'s favourite pastime', ab: '1. Commenting'})
+					{bu: 'Everyone\'s favourite pastime', ab: '1. Commenting'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				aZ: _List_fromArray(
+				a$: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
-						{aS: 'shifty-eyes', bq: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'}),
+						{
+							aT: 'shifty-eyes',
+							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bt: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('It\'s generally considered best practice to not trust the calling code, and to always\n            check your arguments. But while you might not trust the guy down the street, do you trust your neighbours?\n            It isn\'t completely black and white, and some thought should be given to how defensive you need to be.')
+								$author$project$Blog$Content$Text('It\'s generally considered best practice to not trust the calling code, and to always\r\n            check your arguments. But while you might not trust the guy down the street, do you trust your neighbours?\r\n            It isn\'t completely black and white, and some thought should be given to how defensive you need to be.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('I\'ve seen, for example, code imitated by the following in a web application that uses\n            Dependency Injection to provide dependencies:')
+								$author$project$Blog$Content$Text('I\'ve seen, for example, code imitated by the following in a web application that uses\r\n            Dependency Injection to provide dependencies:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{aY: '\npublic MyService(\n    object depA,\n    object depB,\n    object depN\n)\n{\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\n}\n                ', a9: 'cs'}),
+						{a_: '\r\npublic MyService(\r\n    object depA,\r\n    object depB,\r\n    object depN\r\n)\r\n{\r\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\r\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\r\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\r\n}\r\n                ', bb: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6421,7 +6660,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Within the context of web-application code (where a consumer of your application\n            typically communicates via HTTP), this code isn\'t really library code and a developer designing this class\n            is likely going to be in a position to check the calling code. Also, keeping that same context in mind,\n        we know we\'re in a position where the dependencies are guaranteed by our DI framework to be resolved and\n        delivered; if a dependency cannot be resolved from the DI container, then with our setup an exception will be\n        thrown and the '),
+								$author$project$Blog$Content$Text('Within the context of web-application code (where a consumer of your application\r\n            typically communicates via HTTP), this code isn\'t really library code and a developer designing this class\r\n            is likely going to be in a position to check the calling code. Also, keeping that same context in mind,\r\n        we know we\'re in a position where the dependencies are guaranteed by our DI framework to be resolved and\r\n        delivered; if a dependency cannot be resolved from the DI container, then with our setup an exception will be\r\n        thrown and the '),
 								$author$project$Blog$Content$InlineCode('MyService'),
 								$author$project$Blog$Content$Text(' class will not be constructed.')
 							])),
@@ -6430,16 +6669,16 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 							[
 								$author$project$Blog$Content$Text('So you '),
 								$author$project$Blog$Content$Emphasis('could'),
-								$author$project$Blog$Content$Text(' see these checks as redundant. And whilst C# (above) let\'s you tidy this up with the null\n                coalescing ('),
+								$author$project$Blog$Content$Text(' see these checks as redundant. And whilst C# (above) let\'s you tidy this up with the null\r\n                coalescing ('),
 								$author$project$Blog$Content$InlineCode('??'),
-								$author$project$Blog$Content$Text(') operator, in some other languages this can become more distracting. There are two main ends\n                of the spectrum to be on with this.')
+								$author$project$Blog$Content$Text(') operator, in some other languages this can become more distracting. There are two main ends\r\n                of the spectrum to be on with this.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('You could say '),
 								$author$project$Blog$Content$Strong('I trust no one'),
-								$author$project$Blog$Content$Text(', and I can\'t guarantee that this class will always be resolved through Dependency Injection.\n                Even then, we may switch DI frameworks, the standard behaviour may be different and we might end up\n                trying to construct this class with '),
+								$author$project$Blog$Content$Text(', and I can\'t guarantee that this class will always be resolved through Dependency Injection.\r\n                Even then, we may switch DI frameworks, the standard behaviour may be different and we might end up\r\n                trying to construct this class with '),
 								$author$project$Blog$Content$InlineCode('null'),
 								$author$project$Blog$Content$Text(' dependencies.')
 							])),
@@ -6450,7 +6689,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Strong('Take responsibility when calling me'),
 								$author$project$Blog$Content$Text(', and decide that if a caller has attempted to manually construct this class with a '),
 								$author$project$Blog$Content$InlineCode('null'),
-								$author$project$Blog$Content$Text(' dependency, then they\'ve violated the class\' type contract (which asks in this example case\n                for an '),
+								$author$project$Blog$Content$Text(' dependency, then they\'ve violated the class\' type contract (which asks in this example case\r\n                for an '),
 								$author$project$Blog$Content$InlineCode('object'),
 								$author$project$Blog$Content$Text(', not an '),
 								$author$project$Blog$Content$InlineCode('object'),
@@ -6461,54 +6700,58 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('There\'s truth to both positions. It may be better in your situation to put responsibility on\n                the caller in order to minimise the bloat and complexity of this class, allowing it to evolve faster\n                (I\'ve given an example of a '),
+								$author$project$Blog$Content$Text('There\'s truth to both positions. It may be better in your situation to put responsibility on\r\n                the caller in order to minimise the bloat and complexity of this class, allowing it to evolve faster\r\n                (I\'ve given an example of a '),
 								$author$project$Blog$Content$InlineCode('class'),
-								$author$project$Blog$Content$Text('\' constructor, but this can apply to any of its methods\' arguments, including complex object\n                arguments). Or it may be, particularly if you\'re writing deeper-level library code, more appropriate to\n                guard against every inch of input you get from calling code.')
+								$author$project$Blog$Content$Text('\' constructor, but this can apply to any of its methods\' arguments, including complex object\r\n                arguments). Or it may be, particularly if you\'re writing deeper-level library code, more appropriate to\r\n                guard against every inch of input you get from calling code.')
 							]))
 					]),
 				ab: $elm$core$Maybe$Just(
-					{br: 'Trust no one', ab: '2. Get defensive'})
+					{bu: 'Trust no one', ab: '2. Get defensive'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				aZ: _List_fromArray(
+				a$: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
-						{aS: 'square-wheels', bq: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'}),
+						{
+							aT: 'square-wheels',
+							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bt: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Taken to the extreme, someone might want to import libraries (especially large utility\n            libraries, such as '),
+								$author$project$Blog$Content$Text('Taken to the extreme, someone might want to import libraries (especially large utility\r\n            libraries, such as '),
 								$author$project$Blog$Content$InlineCode('lodash.js'),
-								$author$project$Blog$Content$Text(') to get the job done for them. After all, someone else has likely written this functionality\n            before, and particularly if it\'s a popular, open-source code base, it\'s likely undergone more scrutiny than\n            my (given company policy) private repository will ever receive.')
+								$author$project$Blog$Content$Text(') to get the job done for them. After all, someone else has likely written this functionality\r\n            before, and particularly if it\'s a popular, open-source code base, it\'s likely undergone more scrutiny than\r\n            my (given company policy) private repository will ever receive.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('There\'s nothing wrong with this line of thinking, in most cases. It\'s been some years\n            since the '),
-								A2($author$project$Blog$Content$Link, 'https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/', '2016 chaos caused by pulling a\n            commonly-shared dependency'),
+								$author$project$Blog$Content$Text('There\'s nothing wrong with this line of thinking, in most cases. It\'s been some years\r\n            since the '),
+								A2($author$project$Blog$Content$Link, 'https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/', '2016 chaos caused by pulling a\r\n            commonly-shared dependency'),
 								$author$project$Blog$Content$Text(', the '),
 								$author$project$Blog$Content$InlineCode('npm'),
 								$author$project$Blog$Content$Text(' package '),
 								A2($author$project$Blog$Content$Link, 'https://www.npmjs.com/package/left-pad', 'left-pad'),
-								$author$project$Blog$Content$Text('. While it may be an extreme example, it does point out that sometimes wheels <b>can</b> be\n                reinvented. It\'s a cost / value ratio between the time it would take you to rewrite this functionality,\n                vs the \'costs\' (which may be your JS bundle size, or your coupling to a certain library / framework)\n                involved in importing something pre-rolled. For example, if you\'re in need of a function to recursively\n                flatten an array, consider the following code before importing half of '),
+								$author$project$Blog$Content$Text('. While it may be an extreme example, it does point out that sometimes wheels <b>can</b> be\r\n                reinvented. It\'s a cost / value ratio between the time it would take you to rewrite this functionality,\r\n                vs the \'costs\' (which may be your JS bundle size, or your coupling to a certain library / framework)\r\n                involved in importing something pre-rolled. For example, if you\'re in need of a function to recursively\r\n                flatten an array, consider the following code before importing half of '),
 								$author$project$Blog$Content$InlineCode('lodash.js'),
 								$author$project$Blog$Content$Text(' to do it for you:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{aY: '\nfunction flattenArray(array) {\n    return array.reduce(\n        (accumulator, current) => (Array.isArray(current)\n            ? accumulator.concat(flattenArray(current))\n            : accumulator.concat(current)),\n        []);\n}\n                ', a9: 'js'}),
+						{a_: '\r\nfunction flattenArray(array) {\r\n    return array.reduce(\r\n        (accumulator, current) => (Array.isArray(current)\r\n            ? accumulator.concat(flattenArray(current))\r\n            : accumulator.concat(current)),\r\n        []);\r\n}\r\n                ', bb: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Sure, certain aspects of it could be improved, the main one, depending on your project\'s\n                policy on defensiveness, would be checking the given '),
+								$author$project$Blog$Content$Text('Sure, certain aspects of it could be improved, the main one, depending on your project\'s\r\n                policy on defensiveness, would be checking the given '),
 								$author$project$Blog$Content$InlineCode('array'),
-								$author$project$Blog$Content$Text('. The costs would be the requirement of testing this function, and maintaining it in the\n            inevitable circumstance where you now need this function to flatten to a certain depth level. The benefits,\n            however, is that you would have negated the need for depending on a large library.')
+								$author$project$Blog$Content$Text('. The costs would be the requirement of testing this function, and maintaining it in the\r\n            inevitable circumstance where you now need this function to flatten to a certain depth level. The benefits,\r\n            however, is that you would have negated the need for depending on a large library.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Library code is complicated because it needs to incorporate a huge (and potentially growing)\n                range of callers, which might bring issues with environment, language version and unreasonable,\n                unexpected yet possible input. Even if you\'re not sure about your own abilities, you might find it a lot\n        simpler rolling your own in some cases, since you can keep your solution scoped to the needs of\n        your own project. Having actually written the functionality yourself, you\'ll also have '),
+								$author$project$Blog$Content$Text('Library code is complicated because it needs to incorporate a huge (and potentially growing)\r\n                range of callers, which might bring issues with environment, language version and unreasonable,\r\n                unexpected yet possible input. Even if you\'re not sure about your own abilities, you might find it a lot\r\n        simpler rolling your own in some cases, since you can keep your solution scoped to the needs of\r\n        your own project. Having actually written the functionality yourself, you\'ll also have '),
 								$author$project$Blog$Content$Strong('a)'),
 								$author$project$Blog$Content$Text(' learnt how it works in detail (making it easier to debug / reason about) and '),
 								$author$project$Blog$Content$Strong('b)'),
@@ -6517,37 +6760,37 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('I have been both on projects that import everything, usually landing us in some form\n            of dependency hell or another, and ones that attempt to start from scratch on everything. Before deciding,\n        consider:')
+								$author$project$Blog$Content$Text('I have been both on projects that import everything, usually landing us in some form\r\n            of dependency hell or another, and ones that attempt to start from scratch on everything. Before deciding,\r\n        consider:')
 							])),
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{bv: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', ab: 'What\'s the size / complexity of this functionality I want?'},
-								{bv: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', ab: 'What\'s available that\'s already done this?'},
-								{bv: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', ab: 'Will we be able to get out of this?'}
+								{by: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\r\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\r\n            write the code that you will labour over for another month.', ab: 'What\'s the size / complexity of this functionality I want?'},
+								{by: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\r\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\r\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', ab: 'What\'s available that\'s already done this?'},
+								{by: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\r\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\r\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\r\n                stopping you from adapting the source code of the few functions you need and killing the import. There\r\n                would be a simple way to remove that dependency on that library.', ab: 'Will we be able to get out of this?'}
 							]))
 					]),
 				ab: $elm$core$Maybe$Just(
-					{br: 'But why not try square tyres?', ab: '3. Don\'t reinvent the wheel'})
+					{bu: 'But why not try square tyres?', ab: '3. Don\'t reinvent the wheel'})
 			}),
 			$author$project$Blog$Content$Section(
 			{
-				aZ: _List_fromArray(
+				a$: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('There are countless other examples of \'best practices\' that people follow\n            dogmatically, even when over time \'best practices\' go through complete paradigm shifts (going from\n            Object-Oriented approaches to Functional-Oriented ones, de-duplicated data to allowing duplication where\n            read performance may be improved). You will likely, at first, just follow these and keep your head down.')
+								$author$project$Blog$Content$Text('There are countless other examples of \'best practices\' that people follow\r\n            dogmatically, even when over time \'best practices\' go through complete paradigm shifts (going from\r\n            Object-Oriented approaches to Functional-Oriented ones, de-duplicated data to allowing duplication where\r\n            read performance may be improved). You will likely, at first, just follow these and keep your head down.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('As you improve your own understanding of what it is you\'re doing as a developer,\n            however, start to ask \'why?\', even against well-established \'best practices\' that no one else questions. In\n            any case you\'ll come to understand the root reason why you should follow this rule, and be able to stop\n            telling people \'We should do this because it\'s best practice\'. You may even come to realise this practice\n            that is usually good isn\'t very appropriate for your given situation.')
+								$author$project$Blog$Content$Text('As you improve your own understanding of what it is you\'re doing as a developer,\r\n            however, start to ask \'why?\', even against well-established \'best practices\' that no one else questions. In\r\n            any case you\'ll come to understand the root reason why you should follow this rule, and be able to stop\r\n            telling people \'We should do this because it\'s best practice\'. You may even come to realise this practice\r\n            that is usually good isn\'t very appropriate for your given situation.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Or at the very least, you can feel the rage burn through your veins next week when\n            some other dev rips out your lovingly crafted function that was working just fine to import a library,\n            saying \'Haven\'t they even read about best practices here?\'')
+								$author$project$Blog$Content$Text('Or at the very least, you can feel the rage burn through your veins next week when\r\n            some other dev rips out your lovingly crafted function that was working just fine to import a library,\r\n            saying \'Haven\'t they even read about best practices here?\'')
 							]))
 					]),
 				ab: $elm$core$Maybe$Nothing
@@ -6555,7 +6798,11 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 		]);
 };
 var $author$project$Article$getContent = function (slug) {
-	return $author$project$Blog$ThreeBestPractices$getContent(0);
+	if (!slug) {
+		return $author$project$Blog$ThreeBestPractices$getContent(0);
+	} else {
+		return $author$project$Blog$ProgrammingAsASecondLanguage$getContent(0);
+	}
 };
 var $elm$html$Html$main_ = _VirtualDom_node('main');
 var $elm$html$Html$blockquote = _VirtualDom_node('blockquote');
@@ -6570,7 +6817,7 @@ var $author$project$Page$Article$viewCodeBlock = function (codeBlock) {
 		$elm$html$Html$pre,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('language-' + codeBlock.a9)
+				$elm$html$Html$Attributes$class('language-' + codeBlock.bb)
 			]),
 		_List_fromArray(
 			[
@@ -6579,7 +6826,7 @@ var $author$project$Page$Article$viewCodeBlock = function (codeBlock) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(codeBlock.aY)
+						$elm$html$Html$text(codeBlock.a_)
 					]))
 			]));
 };
@@ -6605,7 +6852,7 @@ var $author$project$Page$Article$viewCollectionItem = function (collectionItem) 
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(collectionItem.bv)
+						$elm$html$Html$text(collectionItem.by)
 					]))
 			]));
 };
@@ -6617,24 +6864,59 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var $author$project$Page$Article$viewAttribution = function (attributionInfo) {
+	if (!attributionInfo.$) {
+		var attribution = attributionInfo.a;
+		return A2(
+			$elm$html$Html$span,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('center-align')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(attribution)
+				]));
+	} else {
+		var attribution = attributionInfo.a;
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('center-align'),
+					$elm$html$Html$Attributes$href(attribution.bc)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(attribution.by)
+				]));
+	}
+};
 var $author$project$Page$Article$viewImage = function (imageInfo) {
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('d-flex justify-content-centre')
+				$elm$html$Html$Attributes$class('d-flex align-items-centre flex-col')
 			]),
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$img,
+				$elm$html$Html$div,
+				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('responsive-img'),
-						$elm$html$Html$Attributes$src(imageInfo.bq),
-						$elm$html$Html$Attributes$alt(imageInfo.aS)
-					]),
-				_List_Nil)
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('responsive-img'),
+								$elm$html$Html$Attributes$src(imageInfo.bt),
+								$elm$html$Html$Attributes$alt(imageInfo.aT)
+							]),
+						_List_Nil)
+					])),
+				$author$project$Page$Article$viewAttribution(imageInfo.aV)
 			]));
 };
 var $elm$html$Html$em = _VirtualDom_node('em');
@@ -6713,7 +6995,7 @@ var $author$project$Page$Article$viewSectionTitle = function (maybeSectionTitle)
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(sectionTitle.br)
+						$elm$html$Html$text(sectionTitle.bu)
 					]))
 			]);
 	}
@@ -6808,7 +7090,7 @@ var $author$project$Page$Article$viewSection = function (sectionInfo) {
 			]),
 		_Utils_ap(
 			$author$project$Page$Article$viewSectionTitle(sectionInfo.ab),
-			A2($elm$core$List$map, $author$project$Page$Article$viewContent, sectionInfo.aZ)));
+			A2($elm$core$List$map, $author$project$Page$Article$viewContent, sectionInfo.a$)));
 };
 var $author$project$Page$Article$view = function (model) {
 	return A2(
@@ -6818,6 +7100,62 @@ var $author$project$Page$Article$view = function (model) {
 				$elm$html$Html$Attributes$class('container')
 			]),
 		A2($elm$core$List$map, $author$project$Page$Article$viewContent, model));
+};
+var $author$project$Component$Card$viewAction = function (action) {
+	return A2(
+		$elm$html$Html$a,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$href(action.bc)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(action.by)
+			]));
+};
+var $author$project$Component$Card$view = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('card purple hoverable')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('card-content white-text')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$span,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('card-title')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(model.ab)
+							])),
+						A2(
+						$elm$html$Html$p,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(model.by)
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('card-action purple darken-2')
+					]),
+				A2($elm$core$List$map, $author$project$Component$Card$viewAction, model.ac))
+			]));
 };
 var $author$project$Page$Home$view = function (_v0) {
 	return A2(
@@ -6836,69 +7174,48 @@ var $author$project$Page$Home$view = function (_v0) {
 						$elm$html$Html$text('Latest musings')
 					])),
 				A2(
-				$elm$html$Html$ul,
-				_List_Nil,
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$li,
-						_List_Nil,
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('card blue hoverable')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('card-content white-text')
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$span,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('card-title')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('3 Best Practices in programming')
-													])),
-												A2(
-												$elm$html$Html$p,
-												_List_Nil,
-												_List_fromArray(
-													[
-														$elm$html$Html$text('... and how there are no best practices')
-													]))
-											])),
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('card-action')
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$a,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$href('/blog/no-best-practices')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('Read')
-													]))
-											]))
-									]))
+								$elm$html$Html$Attributes$class('col s12 m6 l6')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Component$Card$view(
+								{
+									ac: _List_fromArray(
+										[
+											{bc: '/blog/no-best-practices', by: 'Read'}
+										]),
+									by: '... and how there are no best practices',
+									ab: '3 Best Practices in programming'
+								})
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('col s12 m6 l6')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Component$Card$view(
+								{
+									ac: _List_fromArray(
+										[
+											{bc: '/blog/programming-as-a-second-language', by: 'Read'}
+										]),
+									by: '... and why I\'m glad I\'ve learnt / taught a second language',
+									ab: 'Programming as a Second Language'
+								})
 							]))
 					]))
 			]));
@@ -6951,7 +7268,7 @@ var $author$project$Main$view = function (model) {
 	var page = $author$project$Page$Model(
 		$author$project$Page$fromRoute(model.X));
 	return {
-		aU: _List_fromArray(
+		aW: _List_fromArray(
 			[
 				$author$project$Header$view(0),
 				$author$project$Page$view(page),
@@ -6961,6 +7278,6 @@ var $author$project$Main$view = function (model) {
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(
-	{a8: $author$project$Main$init, bk: $author$project$Main$UrlChanged, bl: $author$project$Main$LinkClicked, bs: $author$project$Main$subscriptions, bw: $author$project$Main$update, bx: $author$project$Main$view});
+	{ba: $author$project$Main$init, bn: $author$project$Main$UrlChanged, bo: $author$project$Main$LinkClicked, bv: $author$project$Main$subscriptions, bz: $author$project$Main$update, bA: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));

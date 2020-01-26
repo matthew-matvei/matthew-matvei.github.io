@@ -1,6 +1,6 @@
 module Blog.ThreeBestPractices exposing (getContent)
 
-import Blog.Content exposing (Content(..), ParagraphSegment(..))
+import Blog.Content exposing (AttributionInfo(..), Content(..), ParagraphSegment(..))
 
 
 getContent : () -> List Content
@@ -18,6 +18,7 @@ getContent _ =
             , Image
                 { source = "https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif"
                 , alt = "boom-mic-drop"
+                , attribution = TextAttribute "GIPHY"
                 }
             , Paragraph [ Text """and that's all they need to say. And how can you respond to that? 'Sure, then I want to do
             something less than best' hardly wins anyone over. They've said the relevant buzzword and we can now just
@@ -74,7 +75,11 @@ public int GetValue() =>
                 , InlineCode "null"
                 , Text " then we're gonna explode!"
                 ]
-            , Image { source = "https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif", alt = "explosions" }
+            , Image
+                { source = "https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif"
+                , alt = "explosions"
+                , attribution = TextAttribute "GIPHY"
+                }
             , Paragraph [ Text """On the other side of this spectrum is my current workplace, which strictly believes
             that all code should be self-descriptive enough to not warrant any comments, ever. And there are some good
             reasons:""" ]
@@ -160,7 +165,11 @@ Either<Error, Item> GetItem(string itemId);
     , Section
         { title = Just { title = "2. Get defensive", subTitle = "Trust no one" }
         , content =
-            [ Image { source = "https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif", alt = "shifty-eyes" }
+            [ Image
+                { source = "https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif"
+                , alt = "shifty-eyes"
+                , attribution = TextAttribute "GIPHY"
+                }
             , Paragraph [ Text """It's generally considered best practice to not trust the calling code, and to always
             check your arguments. But while you might not trust the guy down the street, do you trust your neighbours?
             It isn't completely black and white, and some thought should be given to how defensive you need to be.""" ]
@@ -247,7 +256,11 @@ public MyService(
     , Section
         { title = Just { title = "3. Don't reinvent the wheel", subTitle = "But why not try square tyres?" }
         , content =
-            [ Image { source = "https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif", alt = "square-wheels" }
+            [ Image
+                { source = "https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif"
+                , alt = "square-wheels"
+                , attribution = TextAttribute "GIPHY"
+                }
             , Paragraph
                 [ Text """Taken to the extreme, someone might want to import libraries (especially large utility
             libraries, such as """

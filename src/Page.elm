@@ -45,6 +45,9 @@ title model =
                 ThreeBestPractices ->
                     "mat-mat | Three best practices"
 
+                ProgrammingAsASecondLanguage ->
+                    "mat-mat | Programming as a Second Language"
+
 
 fromRoute : Maybe Route -> Page
 fromRoute maybeRoute =

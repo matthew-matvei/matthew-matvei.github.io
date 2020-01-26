@@ -1,24 +1,36 @@
 module Page.Home exposing (view)
 
-import Html exposing (Html, a, div, h2, li, main_, p, span, text, ul)
-import Html.Attributes exposing (class, href)
+import Component.Card as Card
+import Html exposing (Html, div, h2, main_, text)
+import Html.Attributes exposing (class)
 
 
 view : () -> Html msg
 view _ =
     main_ [ class "container" ]
         [ h2 [] [ text "Latest musings" ]
-        , ul []
-            [ li []
-                [ div [ class "card blue hoverable" ]
-                    [ div [ class "card-content white-text" ]
-                        [ span [ class "card-title" ] [ text "3 Best Practices in programming" ]
-                        , p [] [ text "... and how there are no best practices" ]
+        , div [ class "row" ]
+            [ div [ class "col s12 m6 l6" ]
+                [ Card.view
+                    { title = "3 Best Practices in programming"
+                    , text = "... and how there are no best practices"
+                    , actions =
+                        [ { link = "/blog/no-best-practices"
+                          , text = "Read"
+                          }
                         ]
-                    , div [ class "card-action" ]
-                        [ a [ href "/blog/no-best-practices" ] [ text "Read" ]
+                    }
+                ]
+            , div [ class "col s12 m6 l6" ]
+                [ Card.view
+                    { title = "Programming as a Second Language"
+                    , text = "... and why I'm glad I've learnt / taught a second language"
+                    , actions =
+                        [ { link = "/blog/programming-as-a-second-language"
+                          , text = "Read"
+                          }
                         ]
-                    ]
+                    }
                 ]
             ]
         ]

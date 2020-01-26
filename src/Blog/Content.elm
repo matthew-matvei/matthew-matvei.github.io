@@ -1,5 +1,6 @@
 module Blog.Content exposing
-    ( CodeBlockInfo
+    ( AttributionInfo(..)
+    , CodeBlockInfo
     , CollectionItem
     , Content(..)
     , ImageInfo
@@ -21,9 +22,18 @@ type alias SectionInfo =
     }
 
 
+type AttributionInfo
+    = TextAttribute String
+    | ComplexAttribute
+        { text : String
+        , link : String
+        }
+
+
 type alias ImageInfo =
     { source : String
     , alt : String
+    , attribution : AttributionInfo
     }
 
 
