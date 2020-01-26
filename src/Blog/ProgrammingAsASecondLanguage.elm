@@ -11,7 +11,12 @@ getContent _ =
     , Section
         { title = Nothing
         , content =
-            [ Paragraph
+            [ Image
+                { source = "../assets/img/meme3.jpg"
+                , alt = "Useless teacher"
+                , attribution = TextAttribute "Memecenter"
+                }
+            , Paragraph
                 [ Text """I have come to the world of programming relatively late, at least compared
                 to some other people I work with. For anyone who has ever suffered with """
                 , Link "https://www.youtube.com/watch?v=eqhUHyVpAwE" "Imposter Syndrome"
