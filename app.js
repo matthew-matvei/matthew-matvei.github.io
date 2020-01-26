@@ -11199,7 +11199,33 @@ var $author$project$Blog$HowToKillYourself$getContent = function (_v0) {
 			}),
 			$author$project$Blog$Content$Section(
 			{
-				content: _List_Nil,
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If you were deploying a single, large application about once a month, it '),
+								$author$project$Blog$Content$Emphasis('may'),
+								$author$project$Blog$Content$Text(' be reasonable to retain some manual part of the deployment process. That is,\n            while you\'ll always gain something from automation, you might not gain enough time saved\n            to justify the time investing in it.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('With multiple teams deploying smaller increments of work far more frequently,\n            however, the penalty you\'ll have to pay for under-investing in your CI/CD pipeline will\n            be higher.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This starts with (at the very least) Pull Requests - or, if you fly by the \n            seat of your pants, pushed changes to master - being picked up and built using your\n            build server of choice. Successful builds would then be run through a deployment\n            process of some description. Some extra considerations are:')
+							])),
+						$author$project$Blog$Content$Collection(
+						_List_fromArray(
+							[
+								{text: 'You likely already have automated tests run as part of your build\n                  process, but you could also include non-functional requirements you care strongly\n                  enough about. By running code analysis tools, you could fail a build because\n                  you\'ve crept over a certain cyclomatic complexity threshold, or fail a build\n                  because your dependency analyser has detected a critical defect.', title: 'Code maintenance'},
+								{text: 'Throughout your deployment process, you can run automated smoke and /\n                  or load tests. Smoke tests, which should be comparatively quicker to run, can be\n                  used to \'fail fast\', after which more extensive load tests can be run. The main\n                  difference with these tests is that an environment needs to be deployed first for\n                  them to be run against. In the case that these tests fail, the deployment process\n                  should fail.', title: 'Smoke / load tests'},
+								{text: '', title: 'Roll-back'}
+							]))
+					]),
 				title: $elm$core$Maybe$Just(
 					{subTitle: 'Because Visual Studio comes with Right-Click Publish', title: 'Don\'t invest in your CI / CD strategy'})
 			}),
@@ -11246,7 +11272,8 @@ var $author$project$Blog$HowToKillYourself$getContent = function (_v0) {
 							[
 								{text: 'A micro service should be able to stand on its own two feet. Aside from the possible\n                  cross-cutting concern of authentication, the service should ideally not depend greatly on any other\n                  services. Similarly, the teams working on the services should be able to exercise autonomy. Constantly\n                  re-sizing, mixing members and re-orienting teams will impede their ability to be independent.', title: 'Autonomy'},
 								{text: 'It\'s still definitely possible to write services that are highly coupled with each other,\n                  however the network overhead incurred when crossing a boundary should make it much better defined. In\n                  the same way, clear boundaries / responsibilities for a given team makes it manageable in knowing who\n                  you need to talk to when you have a question about a given service or who to talk to when some\n                  integration fails. It won\'t be ideal if two services fail to play nicely in production and you\'re not\n                  even sure who in what team last touched that code.', title: 'Boundaries'},
-								{text: 'With a single deployment pipeline per service, Service A can be deployed concurrently\n                  with Service B, without the two processes interfering with each other. Similarly, if you\'ve achieved\n                  autonomous (as much as is practical) teams, then you should be able to get a high amount of\n                  concurrency in their work. If you can\'t, because you find the work of one team frequently blocking\n                  another, then you may have drawn your boundaries incorrectly.', title: 'Concurrency'}
+								{text: 'With a single deployment pipeline per service, Service A can be deployed concurrently\n                  with Service B, without the two processes interfering with each other. Similarly, if you\'ve achieved\n                  autonomous (as much as is practical) teams, then you should be able to get a high amount of\n                  concurrency in their work. If you can\'t, because you find the work of one team frequently blocking\n                  another, then you may have drawn your boundaries incorrectly.', title: 'Concurrency'},
+								{text: 'Even autonomous teams / services will need to communicate / integrate with each other,\n                  and it\'s okay to do this when achieving a greater goal. The advantage, however, should be analogous\n                  to the advantage of an interface. A member of another team doesn\'t need to delve into the inner\n                  workings of your team / codebase, but rather you can focus communication on the points at which your\n                  services interact; perhaps a HTTP API or an upstream event message.', title: 'Focused communication'}
 							]))
 					]),
 				title: $elm$core$Maybe$Just(
@@ -11254,7 +11281,39 @@ var $author$project$Blog$HowToKillYourself$getContent = function (_v0) {
 			}),
 			$author$project$Blog$Content$Section(
 			{
-				content: _List_Nil,
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Image(
+						{alt: 'LGTM', source: 'https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This broaches on similar aspects to investing in your CI/CD pipeline. In fact, your higher-\n                level tests (anything testing a service within the context of more than jsut one service) '),
+								$author$project$Blog$Content$Emphasis('should'),
+								$author$project$Blog$Content$Text(' be part of your Continuous Deployment pipeline.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Generally though, you\'ll likely feel that once you\'ve created a second service that it\'s still\n                too early to start integration testing. Perhaps you\'re looking at an early UI that interacts with these\n                services and would rather wait until it grows in maturity / stability before writing Selenium tests.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If that\'s honestly the case, fine, but there are still alternatives in this situation. You\n                could at least look at elementary '),
+								A2($author$project$Blog$Content$Link, 'http://softwaretestingfundamentals.com/smoke-testing/', 'smoke tests'),
+								$author$project$Blog$Content$Text(', or consider starting non-UI integration tests. Your services should have already been\n                designed in such a way that you certainly do not '),
+								$author$project$Blog$Content$Emphasis('require'),
+								$author$project$Blog$Content$Text(' a graphical UI to interact with them, so there should be no problem writing automated tests\n                that simply talk to your HTTP APIs to ensure higher-level system functionality is working.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Hell, while you\'re at it, you might even find that there\'s nothing actually stopping you\n                writing conservative (at least at first) '),
+								A2($author$project$Blog$Content$Link, 'https://loadninja.com/load-testing/', 'load tests'),
+								$author$project$Blog$Content$Text('. After having implemented some of these alternatives, and once your UI is a little more\n                stable, you\'ll at least have the team-level experience of sticking some form of automated tests within\n                the deployment pipeline. You will also, largely by necessity, have broached the conversations that you\'ll\n                need to have, such as team responsibilities over which tests etc.')
+							]))
+					]),
 				title: $elm$core$Maybe$Just(
 					{subTitle: 'You can clearly see that it just works', title: 'Leave integration testing for now'})
 			}),
@@ -11286,7 +11345,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('We\'ve all had that argument with another developer where\n        we\'ve reasonably laid out our position why it would be a good idea to do something,\n        only to be met with')
+								$author$project$Blog$Content$Text('We\'ve all had that argument with another developer where\r\n        we\'ve reasonably laid out our position why it would be a good idea to do something,\r\n        only to be met with')
 							])),
 						$author$project$Blog$Content$BlockQuote('Yes, but best practice...'),
 						$author$project$Blog$Content$Image(
@@ -11294,14 +11353,14 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('and that\'s all they need to say. And how can you respond to that? \'Sure, then I want to do\n            something less than best\' hardly wins anyone over. They\'ve said the relevant buzzword and we can now just\n            switch off our brains and do what the man on the Internet told us to do. If you\'ve never had this\n            conversation before, congratulations.')
+								$author$project$Blog$Content$Text('and that\'s all they need to say. And how can you respond to that? \'Sure, then I want to do\r\n            something less than best\' hardly wins anyone over. They\'ve said the relevant buzzword and we can now just\r\n            switch off our brains and do what the man on the Internet told us to do. If you\'ve never had this\r\n            conversation before, congratulations.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('For me, however, experience in this conversation brings me to my first 😓 blargh post. I want\n            to show you that there are no strictly '),
+								$author$project$Blog$Content$Text('For me, however, experience in this conversation brings me to my first 😓 blargh post. I want\r\n            to show you that there are no strictly '),
 								$author$project$Blog$Content$Emphasis('best'),
-								$author$project$Blog$Content$Text(' practices and remind you that everything really does\n            depend on the situation.')
+								$author$project$Blog$Content$Text(' practices and remind you that everything really does\r\n            depend on the situation.')
 							]))
 					]),
 				title: $elm$core$Maybe$Nothing
@@ -11319,14 +11378,14 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' methods and simple object properties. This led to wonders such as...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{code: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value\n                ', language: 'cs'}),
+						{code: '\r\n/// <summary>\r\n/// Returns the current value of this object.\r\n/// </summary>\r\n/// <returns>The current value of this object</returns>\r\npublic int GetValue() =>\r\n    this.Value\r\n                ', language: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('with more text explaining than doing, regardless of whether the code is already\n            completely unambiguous. Worse still, this can easily be...')
+								$author$project$Blog$Content$Text('with more text explaining than doing, regardless of whether the code is already\r\n            completely unambiguous. Worse still, this can easily be...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{code: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value ?? throw new InvalidOperationException();\n            ', language: 'cs'}),
+						{code: '\r\n/// <summary>\r\n/// Returns the current value of this object.\r\n/// </summary>\r\n/// <returns>The current value of this object</returns>\r\npublic int GetValue() =>\r\n    this.Value ?? throw new InvalidOperationException();\r\n            ', language: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11343,23 +11402,23 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('On the other side of this spectrum is my current workplace, which strictly believes\n            that all code should be self-descriptive enough to not warrant any comments, ever. And there are some good\n            reasons:')
+								$author$project$Blog$Content$Text('On the other side of this spectrum is my current workplace, which strictly believes\r\n            that all code should be self-descriptive enough to not warrant any comments, ever. And there are some good\r\n            reasons:')
 							])),
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{text: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', title: 'Programmers will barely read your code, let alone the comments that go with it'},
-								{text: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', title: 'The compiler can never know whether your comments are correct anymore'},
-								{text: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', title: 'Maintenance costs'},
-								{text: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', title: 'There\'s no guarantee your code will be easier to understand'}
+								{text: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\r\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\r\n            comments.', title: 'Programmers will barely read your code, let alone the comments that go with it'},
+								{text: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\r\n            no better than those that use social engineering to convince old ladies you work at her bank.', title: 'The compiler can never know whether your comments are correct anymore'},
+								{text: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\r\n            in order to satisfy commenting standards that either my workplace or university had.', title: 'Maintenance costs'},
+								{text: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\r\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\r\n            cause confusion.', title: 'There\'s no guarantee your code will be easier to understand'}
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('That said, there is a time and place for documentation. The more your actual code can\n            inform this, the better. For example, think how your typed API is self-documenting when you have a\n            method...')
+								$author$project$Blog$Content$Text('That said, there is a time and place for documentation. The more your actual code can\r\n            inform this, the better. For example, think how your typed API is self-documenting when you have a\r\n            method...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{code: '\nTask<bool> ItemExistsAsync(string itemId);\n                ', language: 'cs'}),
+						{code: '\r\nTask<bool> ItemExistsAsync(string itemId);\r\n                ', language: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11374,7 +11433,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' patterns...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{code: '\nEither<Error, Item> GetItem(string itemId);\n                ', language: 'cs'}),
+						{code: '\r\nEither<Error, Item> GetItem(string itemId);\r\n                ', language: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11382,7 +11441,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$InlineCode('Error'),
 								$author$project$Blog$Content$Text(' (if something went wrong) or I\'ll get the '),
 								$author$project$Blog$Content$InlineCode('Item'),
-								$author$project$Blog$Content$Text(' I was looking for. This even means I don\'t need to dig into the bowels of the method to\n                discover that it might actually '),
+								$author$project$Blog$Content$Text(' I was looking for. This even means I don\'t need to dig into the bowels of the method to\r\n                discover that it might actually '),
 								$author$project$Blog$Content$InlineCode('throw'),
 								$author$project$Blog$Content$Text(' an exception (or even rely on code comments to describe this to me).')
 							])),
@@ -11390,14 +11449,14 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('I\'m glad you asked. I would consider the following when determining whether you should\n            use comments or not.')
+								$author$project$Blog$Content$Text('I\'m glad you asked. I would consider the following when determining whether you should\r\n            use comments or not.')
 							])),
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{text: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', title: 'Is the code understandable without it?'},
-								{text: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', title: 'Can I make things clearer by refactoring?'},
-								{text: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', title: 'How accessible is the code to the caller?'}
+								{text: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\r\n                  code review process can be very useful.', title: 'Is the code understandable without it?'},
+								{text: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\r\n                  then perhaps you can assign that condition to a named function.', title: 'Can I make things clearer by refactoring?'},
+								{text: 'Consider whether the caller of some code is able to see it. For example, a private method\r\n                will be called from within the same class, so if a developer is working on the caller, they will have\r\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\r\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\r\n                peer into the code as easily.', title: 'How accessible is the code to the caller?'}
 							]))
 					]),
 				title: $elm$core$Maybe$Just(
@@ -11413,15 +11472,15 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('It\'s generally considered best practice to not trust the calling code, and to always\n            check your arguments. But while you might not trust the guy down the street, do you trust your neighbours?\n            It isn\'t completely black and white, and some thought should be given to how defensive you need to be.')
+								$author$project$Blog$Content$Text('It\'s generally considered best practice to not trust the calling code, and to always\r\n            check your arguments. But while you might not trust the guy down the street, do you trust your neighbours?\r\n            It isn\'t completely black and white, and some thought should be given to how defensive you need to be.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('I\'ve seen, for example, code imitated by the following in a web application that uses\n            Dependency Injection to provide dependencies:')
+								$author$project$Blog$Content$Text('I\'ve seen, for example, code imitated by the following in a web application that uses\r\n            Dependency Injection to provide dependencies:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{code: '\npublic MyService(\n    object depA,\n    object depB,\n    object depN\n)\n{\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\n}\n                ', language: 'cs'}),
+						{code: '\r\npublic MyService(\r\n    object depA,\r\n    object depB,\r\n    object depN\r\n)\r\n{\r\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\r\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\r\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\r\n}\r\n                ', language: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11436,7 +11495,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Within the context of web-application code (where a consumer of your application\n            typically communicates via HTTP), this code isn\'t really library code and a developer designing this class\n            is likely going to be in a position to check the calling code. Also, keeping that same context in mind,\n        we know we\'re in a position where the dependencies are guaranteed by our DI framework to be resolved and\n        delivered; if a dependency cannot be resolved from the DI container, then with our setup an exception will be\n        thrown and the '),
+								$author$project$Blog$Content$Text('Within the context of web-application code (where a consumer of your application\r\n            typically communicates via HTTP), this code isn\'t really library code and a developer designing this class\r\n            is likely going to be in a position to check the calling code. Also, keeping that same context in mind,\r\n        we know we\'re in a position where the dependencies are guaranteed by our DI framework to be resolved and\r\n        delivered; if a dependency cannot be resolved from the DI container, then with our setup an exception will be\r\n        thrown and the '),
 								$author$project$Blog$Content$InlineCode('MyService'),
 								$author$project$Blog$Content$Text(' class will not be constructed.')
 							])),
@@ -11445,16 +11504,16 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 							[
 								$author$project$Blog$Content$Text('So you '),
 								$author$project$Blog$Content$Emphasis('could'),
-								$author$project$Blog$Content$Text(' see these checks as redundant. And whilst C# (above) let\'s you tidy this up with the null\n                coalescing ('),
+								$author$project$Blog$Content$Text(' see these checks as redundant. And whilst C# (above) let\'s you tidy this up with the null\r\n                coalescing ('),
 								$author$project$Blog$Content$InlineCode('??'),
-								$author$project$Blog$Content$Text(') operator, in some other languages this can become more distracting. There are two main ends\n                of the spectrum to be on with this.')
+								$author$project$Blog$Content$Text(') operator, in some other languages this can become more distracting. There are two main ends\r\n                of the spectrum to be on with this.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('You could say '),
 								$author$project$Blog$Content$Strong('I trust no one'),
-								$author$project$Blog$Content$Text(', and I can\'t guarantee that this class will always be resolved through Dependency Injection.\n                Even then, we may switch DI frameworks, the standard behaviour may be different and we might end up\n                trying to construct this class with '),
+								$author$project$Blog$Content$Text(', and I can\'t guarantee that this class will always be resolved through Dependency Injection.\r\n                Even then, we may switch DI frameworks, the standard behaviour may be different and we might end up\r\n                trying to construct this class with '),
 								$author$project$Blog$Content$InlineCode('null'),
 								$author$project$Blog$Content$Text(' dependencies.')
 							])),
@@ -11465,7 +11524,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Strong('Take responsibility when calling me'),
 								$author$project$Blog$Content$Text(', and decide that if a caller has attempted to manually construct this class with a '),
 								$author$project$Blog$Content$InlineCode('null'),
-								$author$project$Blog$Content$Text(' dependency, then they\'ve violated the class\' type contract (which asks in this example case\n                for an '),
+								$author$project$Blog$Content$Text(' dependency, then they\'ve violated the class\' type contract (which asks in this example case\r\n                for an '),
 								$author$project$Blog$Content$InlineCode('object'),
 								$author$project$Blog$Content$Text(', not an '),
 								$author$project$Blog$Content$InlineCode('object'),
@@ -11476,9 +11535,9 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('There\'s truth to both positions. It may be better in your situation to put responsibility on\n                the caller in order to minimise the bloat and complexity of this class, allowing it to evolve faster\n                (I\'ve given an example of a '),
+								$author$project$Blog$Content$Text('There\'s truth to both positions. It may be better in your situation to put responsibility on\r\n                the caller in order to minimise the bloat and complexity of this class, allowing it to evolve faster\r\n                (I\'ve given an example of a '),
 								$author$project$Blog$Content$InlineCode('class'),
-								$author$project$Blog$Content$Text('\' constructor, but this can apply to any of its methods\' arguments, including complex object\n                arguments). Or it may be, particularly if you\'re writing deeper-level library code, more appropriate to\n                guard against every inch of input you get from calling code.')
+								$author$project$Blog$Content$Text('\' constructor, but this can apply to any of its methods\' arguments, including complex object\r\n                arguments). Or it may be, particularly if you\'re writing deeper-level library code, more appropriate to\r\n                guard against every inch of input you get from calling code.')
 							]))
 					]),
 				title: $elm$core$Maybe$Just(
@@ -11494,36 +11553,36 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Taken to the extreme, someone might want to import libraries (especially large utility\n            libraries, such as '),
+								$author$project$Blog$Content$Text('Taken to the extreme, someone might want to import libraries (especially large utility\r\n            libraries, such as '),
 								$author$project$Blog$Content$InlineCode('lodash.js'),
-								$author$project$Blog$Content$Text(') to get the job done for them. After all, someone else has likely written this functionality\n            before, and particularly if it\'s a popular, open-source code base, it\'s likely undergone more scrutiny than\n            my (given company policy) private repository will ever receive.')
+								$author$project$Blog$Content$Text(') to get the job done for them. After all, someone else has likely written this functionality\r\n            before, and particularly if it\'s a popular, open-source code base, it\'s likely undergone more scrutiny than\r\n            my (given company policy) private repository will ever receive.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('There\'s nothing wrong with this line of thinking, in most cases. It\'s been some years\n            since the '),
-								A2($author$project$Blog$Content$Link, 'https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/', '2016 chaos caused by pulling a\n            commonly-shared dependency'),
+								$author$project$Blog$Content$Text('There\'s nothing wrong with this line of thinking, in most cases. It\'s been some years\r\n            since the '),
+								A2($author$project$Blog$Content$Link, 'https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/', '2016 chaos caused by pulling a\r\n            commonly-shared dependency'),
 								$author$project$Blog$Content$Text(', the '),
 								$author$project$Blog$Content$InlineCode('npm'),
 								$author$project$Blog$Content$Text(' package '),
 								A2($author$project$Blog$Content$Link, 'https://www.npmjs.com/package/left-pad', 'left-pad'),
-								$author$project$Blog$Content$Text('. While it may be an extreme example, it does point out that sometimes wheels <b>can</b> be\n                reinvented. It\'s a cost / value ratio between the time it would take you to rewrite this functionality,\n                vs the \'costs\' (which may be your JS bundle size, or your coupling to a certain library / framework)\n                involved in importing something pre-rolled. For example, if you\'re in need of a function to recursively\n                flatten an array, consider the following code before importing half of '),
+								$author$project$Blog$Content$Text('. While it may be an extreme example, it does point out that sometimes wheels <b>can</b> be\r\n                reinvented. It\'s a cost / value ratio between the time it would take you to rewrite this functionality,\r\n                vs the \'costs\' (which may be your JS bundle size, or your coupling to a certain library / framework)\r\n                involved in importing something pre-rolled. For example, if you\'re in need of a function to recursively\r\n                flatten an array, consider the following code before importing half of '),
 								$author$project$Blog$Content$InlineCode('lodash.js'),
 								$author$project$Blog$Content$Text(' to do it for you:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{code: '\nfunction flattenArray(array) {\n    return array.reduce(\n        (accumulator, current) => (Array.isArray(current)\n            ? accumulator.concat(flattenArray(current))\n            : accumulator.concat(current)),\n        []);\n}\n                ', language: 'js'}),
+						{code: '\r\nfunction flattenArray(array) {\r\n    return array.reduce(\r\n        (accumulator, current) => (Array.isArray(current)\r\n            ? accumulator.concat(flattenArray(current))\r\n            : accumulator.concat(current)),\r\n        []);\r\n}\r\n                ', language: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Sure, certain aspects of it could be improved, the main one, depending on your project\'s\n                policy on defensiveness, would be checking the given '),
+								$author$project$Blog$Content$Text('Sure, certain aspects of it could be improved, the main one, depending on your project\'s\r\n                policy on defensiveness, would be checking the given '),
 								$author$project$Blog$Content$InlineCode('array'),
-								$author$project$Blog$Content$Text('. The costs would be the requirement of testing this function, and maintaining it in the\n            inevitable circumstance where you now need this function to flatten to a certain depth level. The benefits,\n            however, is that you would have negated the need for depending on a large library.')
+								$author$project$Blog$Content$Text('. The costs would be the requirement of testing this function, and maintaining it in the\r\n            inevitable circumstance where you now need this function to flatten to a certain depth level. The benefits,\r\n            however, is that you would have negated the need for depending on a large library.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Library code is complicated because it needs to incorporate a huge (and potentially growing)\n                range of callers, which might bring issues with environment, language version and unreasonable,\n                unexpected yet possible input. Even if you\'re not sure about your own abilities, you might find it a lot\n        simpler rolling your own in some cases, since you can keep your solution scoped to the needs of\n        your own project. Having actually written the functionality yourself, you\'ll also have '),
+								$author$project$Blog$Content$Text('Library code is complicated because it needs to incorporate a huge (and potentially growing)\r\n                range of callers, which might bring issues with environment, language version and unreasonable,\r\n                unexpected yet possible input. Even if you\'re not sure about your own abilities, you might find it a lot\r\n        simpler rolling your own in some cases, since you can keep your solution scoped to the needs of\r\n        your own project. Having actually written the functionality yourself, you\'ll also have '),
 								$author$project$Blog$Content$Strong('a)'),
 								$author$project$Blog$Content$Text(' learnt how it works in detail (making it easier to debug / reason about) and '),
 								$author$project$Blog$Content$Strong('b)'),
@@ -11532,14 +11591,14 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('I have been both on projects that import everything, usually landing us in some form\n            of dependency hell or another, and ones that attempt to start from scratch on everything. Before deciding,\n        consider:')
+								$author$project$Blog$Content$Text('I have been both on projects that import everything, usually landing us in some form\r\n            of dependency hell or another, and ones that attempt to start from scratch on everything. Before deciding,\r\n        consider:')
 							])),
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{text: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', title: 'What\'s the size / complexity of this functionality I want?'},
-								{text: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', title: 'What\'s available that\'s already done this?'},
-								{text: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', title: 'Will we be able to get out of this?'}
+								{text: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\r\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\r\n            write the code that you will labour over for another month.', title: 'What\'s the size / complexity of this functionality I want?'},
+								{text: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\r\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\r\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', title: 'What\'s available that\'s already done this?'},
+								{text: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\r\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\r\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\r\n                stopping you from adapting the source code of the few functions you need and killing the import. There\r\n                would be a simple way to remove that dependency on that library.', title: 'Will we be able to get out of this?'}
 							]))
 					]),
 				title: $elm$core$Maybe$Just(
@@ -11552,17 +11611,17 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('There are countless other examples of \'best practices\' that people follow\n            dogmatically, even when over time \'best practices\' go through complete paradigm shifts (going from\n            Object-Oriented approaches to Functional-Oriented ones, de-duplicated data to allowing duplication where\n            read performance may be improved). You will likely, at first, just follow these and keep your head down.')
+								$author$project$Blog$Content$Text('There are countless other examples of \'best practices\' that people follow\r\n            dogmatically, even when over time \'best practices\' go through complete paradigm shifts (going from\r\n            Object-Oriented approaches to Functional-Oriented ones, de-duplicated data to allowing duplication where\r\n            read performance may be improved). You will likely, at first, just follow these and keep your head down.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('As you improve your own understanding of what it is you\'re doing as a developer,\n            however, start to ask \'why?\', even against well-established \'best practices\' that no one else questions. In\n            any case you\'ll come to understand the root reason why you should follow this rule, and be able to stop\n            telling people \'We should do this because it\'s best practice\'. You may even come to realise this practice\n            that is usually good isn\'t very appropriate for your given situation.')
+								$author$project$Blog$Content$Text('As you improve your own understanding of what it is you\'re doing as a developer,\r\n            however, start to ask \'why?\', even against well-established \'best practices\' that no one else questions. In\r\n            any case you\'ll come to understand the root reason why you should follow this rule, and be able to stop\r\n            telling people \'We should do this because it\'s best practice\'. You may even come to realise this practice\r\n            that is usually good isn\'t very appropriate for your given situation.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
-								$author$project$Blog$Content$Text('Or at the very least, you can feel the rage burn through your veins next week when\n            some other dev rips out your lovingly crafted function that was working just fine to import a library,\n            saying \'Haven\'t they even read about best practices here?\'')
+								$author$project$Blog$Content$Text('Or at the very least, you can feel the rage burn through your veins next week when\r\n            some other dev rips out your lovingly crafted function that was working just fine to import a library,\r\n            saying \'Haven\'t they even read about best practices here?\'')
 							]))
 					]),
 				title: $elm$core$Maybe$Nothing

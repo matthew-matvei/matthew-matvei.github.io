@@ -96,7 +96,44 @@ getContent _ =
                 { title = "Don't invest in your CI / CD strategy"
                 , subTitle = "Because Visual Studio comes with Right-Click Publish"
                 }
-        , content = []
+        , content =
+            [ Paragraph
+                [ Text "If you were deploying a single, large application about once a month, it "
+                , Emphasis "may"
+                , Text """ be reasonable to retain some manual part of the deployment process. That is,
+            while you'll always gain something from automation, you might not gain enough time saved
+            to justify the time investing in it."""
+                ]
+            , Paragraph
+                [ Text """With multiple teams deploying smaller increments of work far more frequently,
+            however, the penalty you'll have to pay for under-investing in your CI/CD pipeline will
+            be higher.""" ]
+            , Paragraph
+                [ Text """This starts with (at the very least) Pull Requests - or, if you fly by the 
+            seat of your pants, pushed changes to master - being picked up and built using your
+            build server of choice. Successful builds would then be run through a deployment
+            process of some description. Some extra considerations are:""" ]
+            , Collection
+                [ { title = "Code maintenance"
+                  , text = """You likely already have automated tests run as part of your build
+                  process, but you could also include non-functional requirements you care strongly
+                  enough about. By running code analysis tools, you could fail a build because
+                  you've crept over a certain cyclomatic complexity threshold, or fail a build
+                  because your dependency analyser has detected a critical defect."""
+                  }
+                , { title = "Smoke / load tests"
+                  , text = """Throughout your deployment process, you can run automated smoke and /
+                  or load tests. Smoke tests, which should be comparatively quicker to run, can be
+                  used to 'fail fast', after which more extensive load tests can be run. The main
+                  difference with these tests is that an environment needs to be deployed first for
+                  them to be run against. In the case that these tests fail, the deployment process
+                  should fail."""
+                  }
+                , { title = "Roll-back"
+                  , text = """"""
+                  }
+                ]
+            ]
         }
     , Section
         { title =
@@ -221,7 +258,7 @@ getContent _ =
                 , Link "https://loadninja.com/load-testing/" "load tests"
                 , Text """. After having implemented some of these alternatives, and once your UI is a little more
                 stable, you'll at least have the team-level experience of sticking some form of automated tests within
-                the deployment pipeline. You will also, largely by necessity, broached the conversations that you'll
+                the deployment pipeline. You will also, largely by necessity, have broached the conversations that you'll
                 need to have, such as team responsibilities over which tests etc."""
                 ]
             ]
