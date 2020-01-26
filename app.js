@@ -11075,6 +11075,15 @@ var $author$project$Header$view = function (_v0) {
 					]))
 			]));
 };
+var $author$project$Blog$Content$CodeBlock = function (a) {
+	return {$: 'CodeBlock', a: a};
+};
+var $author$project$Blog$Content$Emphasis = function (a) {
+	return {$: 'Emphasis', a: a};
+};
+var $author$project$Blog$Content$Image = function (a) {
+	return {$: 'Image', a: a};
+};
 var $author$project$Blog$Content$Link = F2(
 	function (a, b) {
 		return {$: 'Link', a: a, b: b};
@@ -11107,6 +11116,8 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 			{
 				content: _List_fromArray(
 					[
+						$author$project$Blog$Content$Image(
+						{alt: 'I know you\'re not talking while I\'m teaching (meme)', source: '../assets/img/bad-teacher-funny-teachers.jpg'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11118,28 +11129,93 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('Prior to my current career, I worked mainly in the teaching of music and\r\n            English as a Second Language. These weren\'t just gigs for money: I\'ve been genuinely\r\n            interested in both. My favourite thing about teaching ESL was learning so much more of\r\n            my own language. When I look at how these jobs fit in with my current trajectory, I\r\n            scratch my head regarding music, but I\'ve some ideas about how teaching / learning a\r\n            second language has helped me as a programmer, and why I\'d encourage anyone considering\r\n            it to give it a go.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This article, then, describes how a pursuit that may seem irrelevant at\r\n                first to working as a software developer actually benefits me. If you have any\r\n                similar experience of working in a seemingly unrelated area, try to reflect on ways\r\n                in which it may actually come in handy for you.')
 							]))
 					]),
 				title: $elm$core$Maybe$Nothing
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('You\'ll often here someone try to argue that their idea, pattern etc. is the '),
+								$author$project$Blog$Content$Emphasis('best'),
+								$author$project$Blog$Content$Text(' or the '),
+								$author$project$Blog$Content$Emphasis('correct'),
+								$author$project$Blog$Content$Text(' way to do something. The larger that concept is, e.g. '),
+								A2($author$project$Blog$Content$Link, 'https://www.jinfonet.com/resources/bi-defined/3-tier-architecture-complete-overview/', 'Three Tier Architecture'),
+								$author$project$Blog$Content$Text(' the dearer they\'d likely hold it to their hearts, even though the larger\r\n                the concept is the more likely a '),
+								A2($author$project$Blog$Content$Link, 'https://jimmybogard.com/vertical-slice-architecture/', 'viable alternative exists'),
+								$author$project$Blog$Content$Text('. If you\'ve learnt some aspects of a foreign language, however, you can \r\n                see that there is a multitude of different, equally valid ways of attacking the \r\n                same problem.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('English places a lot of importance '),
+								A2($author$project$Blog$Content$Link, 'https://www.toeflgoanywhere.org/importance-word-order-english', 'on the order of words within a sentence'),
+								$author$project$Blog$Content$Text('. '),
+								$author$project$Blog$Content$Emphasis('\'The boy ate the burger\''),
+								$author$project$Blog$Content$Text(' and '),
+								$author$project$Blog$Content$Emphasis('\'the burger ate the boy\''),
+								$author$project$Blog$Content$Text(' are two very different news stories. This is because the language places\r\n                meaning into the order by codifying a \'Subject\' \'Verb\' \'Object\' pattern. Basically,\r\n                due to the burger coming first in the second sentence, '),
+								$author$project$Blog$Content$Emphasis('it'),
+								$author$project$Blog$Content$Text(' is the thing doing the eating. In Russian, however, '),
+								$author$project$Blog$Content$Emphasis('\'мальчик ест гамбургер\''),
+								$author$project$Blog$Content$Text(' would mean \'the boy is eating a hamburger\', whereas '),
+								$author$project$Blog$Content$Emphasis('\'мальчика ест гамбургер\''),
+								$author$project$Blog$Content$Text(' is a viable way of saying \'the hamburger is eating a boy\'. It would be\r\n                unusual to present the information in this order, since there are still patterns and\r\n                conventions in word order in Russian to keep things predictable (in a good way), \r\n                but the \'source of truth\' in the sentence\'s meaning would be the declension of the\r\n                adjectives / nouns and the conjugation of the verbs. In '),
+								$author$project$Blog$Content$Emphasis('\'мальчика ест гамбургер\''),
+								$author$project$Blog$Content$Text(', we know that the boy is the object of the sentence only due to the extra\r\n                \'а\' appearing at the end of the word \'мальчик\'. Pretty sneaky...')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('A parallel in programming that comes to mind is the use of positional\r\n                arguments for a function or method vs named arguments (or, where that\'s not possible,\r\n                an arguments object). For example, in JavaScript, we might:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{code: '\r\nconst processValues = (name, email, password, dateOfBirth, hasConsented) => {\r\n    // We process the positional arguments in some way\r\n}\r\n\r\n// We then call this function like so\r\nprocessValues(\'Boris\', \'boris.y@rumbler.ru\', \'admin\', \'01-02-1931\', true);\r\n                ', language: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('We\'ve placed a lot of importance on the order of words here. Essentially,\r\n                \'boris.y@rumbler.ru\' is only being interpreted as an email because of the somewhat\r\n                arbitrary order of arguments sent to the function. If someone wanted to refactor\r\n                this function by changing this order (if they, I don\'t know, really hate themselves),\r\n                there would be many unintended consequences as now names will be treated as emails\r\n                and dates of birth as passwords etc.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Alternatively, we could give the arguments meaning in and of themselves,\r\n                allowing them to be understood without the need for them to appear in a particular\r\n                order. One way to achieve this in JavaScript would be to:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{code: '\r\nconst processValues = (args) => {\r\n    // We process the arguments object in some way using args.name, args.email etc.\r\n}\r\n\r\n// Or, we can just use deconstruction to keep things clearer\r\n\r\nconst processValues = ({ name, email, password, dateOfBirth, hasConsented }) => {\r\n    // We process the deconstructed arguments object in some way\r\n}\r\n\r\n// We then call this function like so\r\nprocessValues({ \r\n    name: \'Boris\', \r\n    email: \'boris.y@rumbler.ru\', \r\n    password: \'admin\', \r\n    dateOfBirth: \'01-02-1931\', \r\n    hasConsented: true\r\n});\r\n                ', language: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This may seem less concise than the above option of using positional\r\n                arguments, which is why it may be overkill when a function has one or two arguments,\r\n                particularly when the order of those arguments is intuitive given the nature of the\r\n                function. The benefit, though, is there is no longer any meaning coupled with the\r\n                order of the arguments as given. If that same self-hating developer wanted to\r\n                refactor the function, they can move around the parameters to please themselves,\r\n                since JavaScript would be matching on property name, not the parameter order.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('As an analogy to English\'s and Russian\'s approach to word order, then, we \r\n                can choose whether we want to place meaning in the order the words appear, or \r\n                whether we want the words to describe their own meaning in that function. Both are\r\n                entirely valid options, and each will be most useful in certain circumstances.')
+							]))
+					]),
+				title: $elm$core$Maybe$Just(
+					{subTitle: '', title: 'There will never be one correct way'})
 			})
 		]);
 };
 var $author$project$Blog$Content$BlockQuote = function (a) {
 	return {$: 'BlockQuote', a: a};
 };
-var $author$project$Blog$Content$CodeBlock = function (a) {
-	return {$: 'CodeBlock', a: a};
-};
 var $author$project$Blog$Content$Collection = function (a) {
 	return {$: 'Collection', a: a};
 };
 var $author$project$Blog$Content$Divider = {$: 'Divider'};
-var $author$project$Blog$Content$Emphasis = function (a) {
-	return {$: 'Emphasis', a: a};
-};
-var $author$project$Blog$Content$Image = function (a) {
-	return {$: 'Image', a: a};
-};
 var $author$project$Blog$Content$InlineCode = function (a) {
 	return {$: 'InlineCode', a: a};
 };
