@@ -33,4 +33,17 @@ view _ =
                     }
                 ]
             ]
+        , div [ class "row" ]
+            [ div [ class "col s12 m6 l6" ]
+                [ Card.view
+                    { title = "Are you providing value?"
+                    , text = "... and how the road to hell is paved with good intentions"
+                    , actions =
+                        [ { link = "/blog/are-you-providing-value"
+                          , text = "Read"
+                          }
+                        ]
+                    }
+                ]
+            ]
         ]

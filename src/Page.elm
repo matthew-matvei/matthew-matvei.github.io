@@ -48,6 +48,9 @@ title model =
                 ProgrammingAsASecondLanguage ->
                     "mat-mat | Programming as a Second Language"
 
+                AreYouProvidingValue ->
+                    "mat-mat | Are you providing value?"
+
 
 fromRoute : Maybe Route -> Page
 fromRoute maybeRoute =
