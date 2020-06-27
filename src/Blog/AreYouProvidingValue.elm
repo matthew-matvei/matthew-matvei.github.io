@@ -288,6 +288,120 @@ const result = relevantProductNames.reduce((acc, current) => acc + current + ';'
                 { title = "YAGNI"
                 , subTitle = "You ain't gonna need it (probably)"
                 }
-        , content = []
+        , content =
+            [ Paragraph
+                [ Text """A developer works all day on a given feature. They get their code ready,
+                write tests, and verify everything is working end-to-end. Then they look at what
+                they have - and spend another half a day writing things like:""" ]
+            , CodeBlock
+                { language = "cs"
+                , code = """
+public class Point
+{
+    public int X { get; }
+    public int Y { get; }
+
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    public override bool Equals(object obj) =>
+        Equals(obj as Point);
+
+    public bool Equals(Point other) =>
+        other != null
+            && X == other.X
+            && Y == other.Y;
+
+    public override int GetHashCode() =>
+        19 * X.GetHashCode() + 21 * Y.GetHashCode();
+}
+                """
+                }
+            , Paragraph
+                [ Text "They write tests again for the "
+                , InlineCode "Equals"
+                , Text " methods and "
+                , InlineCode "GetHashCode"
+                , Text """ method that they override. They find a bug or two and they look at how
+                they can improve the """
+                , InlineCode "GetHashCode"
+                , Text " method "
+                , Emphasis "(hint: it can be)"
+                , Text "."
+                ]
+            , Paragraph
+                [ Text "And it turns out that they do this not because they have any "
+                , InlineCode "IDictionary<Point, object>"
+                , Text " or "
+                , InlineCode "HashSet<Point>"
+                , Text """, but rather they've done this work so that that functionality could be
+                supported in future."""
+                ]
+            , Paragraph
+                [ Text """The thing is though, there's no way of knowing that this will actually be
+                a requirement for the """
+                , InlineCode "Point"
+                , Text """ class. Maybe it'll never need to be hashed, or equality ever checked, and
+                this has just been a great waste of time. If another developer is then working on
+                some more functionality surrounding """
+                , InlineCode "Point"
+                , Text """s, and needs this functionality, then that would be the responsible time
+                at which to implement these methods."""
+                ]
+            , Paragraph
+                [ Text """It isn't just a more responsible time for the sake of getting more work
+                out the door faster in an iterative fashion, but consider the possibility that """
+                , InlineCode "Point"
+                , Text " has in the meantime become:"
+                ]
+            , CodeBlock
+                { language = "cs"
+                , code = """
+public class Point
+{
+    public int X { get; }
+    public int Y { get; }
+    public int Z { get; }
+
+    public Point(int X, int Y, int Z)
+    {
+        X = x;
+        Y = y;
+        Z = z;
+    }
+
+    // ...
+}
+                """
+                }
+            , Paragraph
+                [ Text "A "
+                , InlineCode "Point"
+                , Text """ has now become a 3-dimensional point in space. This means that the
+                implementation of its """
+                , InlineCode "Equals"
+                , Text " methods and consequently its "
+                , InlineCode "GetHashCode"
+                , Text """ method would have to be updated. That isn't the end of the world, but in
+                the event these methods weren't implemented in the first place (since they weren't
+                previously required), then all the implementer has to do is write them as the
+                current 3-dimensional nature dictates. That might not seem like such a huge win in
+                the above contrived example, but consider complex objects that you may have worked
+                on, and how much they're capable of changing over time."""
+                ]
+            , Paragraph
+                [ Text "When writing the "
+                , InlineCode "Point"
+                , Text " class, don't try to write and implement the future; but "
+                , Emphasis "consider"
+                , Text """ the future. Think about how the type could be extended to support aspects
+                such as modifying, either mutably or immutably, points and whether it could be
+                easily modified to handle non-integer values (particularly about whether this could
+                be done in a non-breaking way)."""
+                ]
+            ]
         }
     ]
