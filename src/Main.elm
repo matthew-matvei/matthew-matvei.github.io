@@ -2,10 +2,12 @@ port module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Navigation
+import Date exposing (Date)
 import Footer
 import Header
 import Page
 import Route
+import Task
 import Url
 
 
@@ -24,17 +26,21 @@ main =
 type alias Model =
     { key : Navigation.Key
     , route : Maybe Route.Route
+    , today : Maybe Date
     }
 
 
 type Message
     = LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
+    | DateRetrieved Date
 
 
 init : () -> Url.Url -> Navigation.Key -> ( Model, Cmd Message )
 init _ url key =
-    ( Model key (Route.fromUrl url), updatePrism () )
+    ( Model key (Route.fromUrl url) Nothing
+    , Cmd.batch [ Date.today |> Task.perform DateRetrieved, updatePrism () ]
+    )
 
 
 update : Message -> Model -> ( Model, Cmd Message )
@@ -50,6 +56,9 @@ update message model =
 
                 Browser.External href ->
                     ( model, Navigation.load href )
+
+        DateRetrieved date ->
+            ( { model | today = Just date }, Cmd.none )
 
 
 subscriptions : Model -> Sub Message
@@ -67,7 +76,7 @@ view model =
     , body =
         [ Header.view ()
         , Page.view page
-        , Footer.view ()
+        , Footer.view model.today
         ]
     }
 

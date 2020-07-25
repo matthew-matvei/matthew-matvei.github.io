@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.Z.G === region.aj.G)
+	if (region.ag.L === region.av.L)
 	{
-		return 'on line ' + region.Z.G;
+		return 'on line ' + region.ag.L;
 	}
-	return 'on lines ' + region.Z.G + ' through ' + region.aj.G;
+	return 'on lines ' + region.ag.L + ' through ' + region.av.L;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ba,
-		impl.bz,
-		impl.bv,
+		impl.bB,
+		impl.b$,
+		impl.bX,
 		function() { return function() {} }
 	);
 });
@@ -2659,9 +2659,9 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		v: func(record.v),
-		_: record._,
-		W: record.W
+		z: func(record.z),
+		ah: record.ah,
+		ad: record.ad
 	}
 });
 
@@ -2929,11 +2929,11 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.v;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value._;
+		var message = !tag ? value : tag < 3 ? value.a : value.z;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.ah;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.W) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.ad) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3883,11 +3883,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ba,
-		impl.bz,
-		impl.bv,
+		impl.bB,
+		impl.b$,
+		impl.bX,
 		function(sendToApp, initialModel) {
-			var view = impl.bA;
+			var view = impl.b0;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3919,12 +3919,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.ba,
-		impl.bz,
-		impl.bv,
+		impl.bB,
+		impl.b$,
+		impl.bX,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.Y && impl.Y(sendToApp)
-			var view = impl.bA;
+			var divertHrefToApp = impl.af && impl.af(sendToApp)
+			var view = impl.b0;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3932,12 +3932,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.aW);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.bk);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.ab) && (_VirtualDom_doc.title = title = doc.ab);
+				(title !== doc.aj) && (_VirtualDom_doc.title = title = doc.aj);
 			});
 		}
 	);
@@ -3993,12 +3993,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.bn;
-	var onUrlRequest = impl.bo;
+	var onUrlChange = impl.bP;
+	var onUrlRequest = impl.bQ;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		Y: function(sendToApp)
+		af: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4014,9 +4014,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.aB === next.aB
-							&& curr.ap === next.ap
-							&& curr.ay.a === next.ay.a
+							&& curr.aU === next.aU
+							&& curr.aE === next.aE
+							&& curr.aQ.a === next.aQ.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4024,13 +4024,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		ba: function(flags)
+		bB: function(flags)
 		{
-			return A3(impl.ba, flags, _Browser_getUrl(), key);
+			return A3(impl.bB, flags, _Browser_getUrl(), key);
 		},
-		bA: impl.bA,
-		bz: impl.bz,
-		bv: impl.bv
+		b0: impl.b0,
+		b$: impl.b$,
+		bX: impl.bX
 	});
 }
 
@@ -4096,17 +4096,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { a8: 'hidden', aY: 'visibilitychange' }
+		? { bz: 'hidden', bm: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { a8: 'mozHidden', aY: 'mozvisibilitychange' }
+		? { bz: 'mozHidden', bm: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { a8: 'msHidden', aY: 'msvisibilitychange' }
+		? { bz: 'msHidden', bm: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { a8: 'webkitHidden', aY: 'webkitvisibilitychange' }
-		: { a8: 'hidden', aY: 'visibilitychange' };
+		? { bz: 'webkitHidden', bm: 'webkitvisibilitychange' }
+		: { bz: 'hidden', bm: 'visibilitychange' };
 }
 
 
@@ -4187,12 +4187,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		aH: _Browser_getScene(),
-		aN: {
-			aP: _Browser_window.pageXOffset,
-			aQ: _Browser_window.pageYOffset,
-			aO: _Browser_doc.documentElement.clientWidth,
-			ao: _Browser_doc.documentElement.clientHeight
+		a0: _Browser_getScene(),
+		a9: {
+			bd: _Browser_window.pageXOffset,
+			be: _Browser_window.pageYOffset,
+			bc: _Browser_doc.documentElement.clientWidth,
+			aC: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4202,8 +4202,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		aO: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		ao: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		bc: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		aC: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4226,15 +4226,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			aH: {
-				aO: node.scrollWidth,
-				ao: node.scrollHeight
+			a0: {
+				bc: node.scrollWidth,
+				aC: node.scrollHeight
 			},
-			aN: {
-				aP: node.scrollLeft,
-				aQ: node.scrollTop,
-				aO: node.clientWidth,
-				ao: node.clientHeight
+			a9: {
+				bd: node.scrollLeft,
+				be: node.scrollTop,
+				bc: node.clientWidth,
+				aC: node.clientHeight
 			}
 		};
 	});
@@ -4264,18 +4264,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			aH: _Browser_getScene(),
-			aN: {
-				aP: x,
-				aQ: y,
-				aO: _Browser_doc.documentElement.clientWidth,
-				ao: _Browser_doc.documentElement.clientHeight
+			a0: _Browser_getScene(),
+			a9: {
+				bd: x,
+				be: y,
+				bc: _Browser_doc.documentElement.clientWidth,
+				aC: _Browser_doc.documentElement.clientHeight
 			},
-			a2: {
-				aP: x + rect.left,
-				aQ: y + rect.top,
-				aO: rect.width,
-				ao: rect.height
+			bt: {
+				bd: x + rect.left,
+				be: y + rect.top,
+				bc: rect.width,
+				aC: rect.height
 			}
 		};
 	});
@@ -4327,7 +4327,53 @@ function _Url_percentDecode(string)
 	{
 		return $elm$core$Maybe$Nothing;
 	}
-}var $author$project$Main$LinkClicked = function (a) {
+}
+
+
+function _Time_now(millisToPosix)
+{
+	return _Scheduler_binding(function(callback)
+	{
+		callback(_Scheduler_succeed(millisToPosix(Date.now())));
+	});
+}
+
+var _Time_setInterval = F2(function(interval, task)
+{
+	return _Scheduler_binding(function(callback)
+	{
+		var id = setInterval(function() { _Scheduler_rawSpawn(task); }, interval);
+		return function() { clearInterval(id); };
+	});
+});
+
+function _Time_here()
+{
+	return _Scheduler_binding(function(callback)
+	{
+		callback(_Scheduler_succeed(
+			A2($elm$time$Time$customZone, -(new Date().getTimezoneOffset()), _List_Nil)
+		));
+	});
+}
+
+
+function _Time_getZoneName()
+{
+	return _Scheduler_binding(function(callback)
+	{
+		try
+		{
+			var name = $elm$time$Time$Name(Intl.DateTimeFormat().resolvedOptions().timeZone);
+		}
+		catch (e)
+		{
+			var name = $elm$time$Time$Offset(new Date().getTimezoneOffset());
+		}
+		callback(_Scheduler_succeed(name));
+	});
+}
+var $author$project$Main$LinkClicked = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Main$UrlChanged = function (a) {
@@ -4739,25 +4785,25 @@ var $elm$core$Array$treeFromBuilder = F2(
 	});
 var $elm$core$Array$builderToArray = F2(
 	function (reverseNodeList, builder) {
-		if (!builder.b) {
+		if (!builder.f) {
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.d),
+				$elm$core$Elm$JsArray$length(builder.h),
 				$elm$core$Array$shiftStep,
 				$elm$core$Elm$JsArray$empty,
-				builder.d);
+				builder.h);
 		} else {
-			var treeLen = builder.b * $elm$core$Array$branchFactor;
+			var treeLen = builder.f * $elm$core$Array$branchFactor;
 			var depth = $elm$core$Basics$floor(
 				A2($elm$core$Basics$logBase, $elm$core$Array$branchFactor, treeLen - 1));
-			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.e) : builder.e;
-			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.b);
+			var correctNodeList = reverseNodeList ? $elm$core$List$reverse(builder.i) : builder.i;
+			var tree = A2($elm$core$Array$treeFromBuilder, correctNodeList, builder.f);
 			return A4(
 				$elm$core$Array$Array_elm_builtin,
-				$elm$core$Elm$JsArray$length(builder.d) + treeLen,
+				$elm$core$Elm$JsArray$length(builder.h) + treeLen,
 				A2($elm$core$Basics$max, 5, depth * $elm$core$Array$shiftStep),
 				tree,
-				builder.d);
+				builder.h);
 		}
 	});
 var $elm$core$Basics$idiv = _Basics_idiv;
@@ -4770,7 +4816,7 @@ var $elm$core$Array$initializeHelp = F5(
 				return A2(
 					$elm$core$Array$builderToArray,
 					false,
-					{e: nodeList, b: (len / $elm$core$Array$branchFactor) | 0, d: tail});
+					{i: nodeList, f: (len / $elm$core$Array$branchFactor) | 0, h: tail});
 			} else {
 				var leaf = $elm$core$Array$Leaf(
 					A3($elm$core$Elm$JsArray$initialize, $elm$core$Array$branchFactor, fromIndex, fn));
@@ -4837,7 +4883,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {al: fragment, ap: host, aw: path, ay: port_, aB: protocol, aC: query};
+		return {az: fragment, aE: host, aO: path, aQ: port_, aU: protocol, aV: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5116,13 +5162,17 @@ var $elm$core$Task$perform = F2(
 			A2($elm$core$Task$map, toMessage, task));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Main$Model = F2(
-	function (key, route) {
-		return {aq: key, X: route};
+var $author$project$Main$DateRetrieved = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Main$Model = F3(
+	function (key, route, today) {
+		return {aI: key, ae: route, ak: today};
 	});
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
-		return {y: frag, z: params, x: unvisited, t: value, B: visited};
+		return {C: frag, D: params, B: unvisited, x: value, F: visited};
 	});
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -5132,12 +5182,12 @@ var $elm$url$Url$Parser$getFirstMatch = function (states) {
 		} else {
 			var state = states.a;
 			var rest = states.b;
-			var _v1 = state.x;
+			var _v1 = state.B;
 			if (!_v1.b) {
-				return $elm$core$Maybe$Just(state.t);
+				return $elm$core$Maybe$Just(state.x);
 			} else {
 				if ((_v1.a === '') && (!_v1.b.b)) {
-					return $elm$core$Maybe$Just(state.t);
+					return $elm$core$Maybe$Just(state.x);
 				} else {
 					var $temp$states = rest;
 					states = $temp$states;
@@ -5749,9 +5799,9 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.aw),
-					$elm$url$Url$Parser$prepareQuery(url.aC),
-					url.al,
+					$elm$url$Url$Parser$preparePath(url.aO),
+					$elm$url$Url$Parser$prepareQuery(url.aV),
+					url.az,
 					$elm$core$Basics$identity)));
 	});
 var $author$project$Route$Article = function (a) {
@@ -5761,11 +5811,11 @@ var $author$project$Route$Home = {$: 0};
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
-		var visited = _v0.B;
-		var unvisited = _v0.x;
-		var params = _v0.z;
-		var frag = _v0.y;
-		var value = _v0.t;
+		var visited = _v0.F;
+		var unvisited = _v0.B;
+		var params = _v0.D;
+		var frag = _v0.C;
+		var value = _v0.x;
 		return A5(
 			$elm$url$Url$Parser$State,
 			visited,
@@ -5778,11 +5828,11 @@ var $elm$url$Url$Parser$map = F2(
 	function (subValue, _v0) {
 		var parseArg = _v0;
 		return function (_v1) {
-			var visited = _v1.B;
-			var unvisited = _v1.x;
-			var params = _v1.z;
-			var frag = _v1.y;
-			var value = _v1.t;
+			var visited = _v1.F;
+			var unvisited = _v1.B;
+			var params = _v1.D;
+			var frag = _v1.C;
+			var value = _v1.x;
 			return A2(
 				$elm$core$List$map,
 				$elm$url$Url$Parser$mapState(value),
@@ -5821,11 +5871,11 @@ var $author$project$Article$ProgrammingAsASecondLanguage = 1;
 var $author$project$Article$ThreeBestPractices = 0;
 var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
-		var visited = _v0.B;
-		var unvisited = _v0.x;
-		var params = _v0.z;
-		var frag = _v0.y;
-		var value = _v0.t;
+		var visited = _v0.F;
+		var unvisited = _v0.B;
+		var params = _v0.D;
+		var frag = _v0.C;
+		var value = _v0.x;
 		if (!unvisited.b) {
 			return _List_Nil;
 		} else {
@@ -5890,6 +5940,232 @@ var $author$project$Route$parser = $elm$url$Url$Parser$oneOf(
 var $author$project$Route$fromUrl = function (url) {
 	return A2($elm$url$Url$Parser$parse, $author$project$Route$parser, url);
 };
+var $justinmimbs$date$Date$RD = $elm$core$Basics$identity;
+var $elm$core$Basics$clamp = F3(
+	function (low, high, number) {
+		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
+	});
+var $elm$core$Basics$modBy = _Basics_modBy;
+var $elm$core$Basics$neq = _Utils_notEqual;
+var $justinmimbs$date$Date$isLeapYear = function (y) {
+	return ((!A2($elm$core$Basics$modBy, 4, y)) && (!(!A2($elm$core$Basics$modBy, 100, y)))) || (!A2($elm$core$Basics$modBy, 400, y));
+};
+var $justinmimbs$date$Date$daysBeforeMonth = F2(
+	function (y, m) {
+		var leapDays = $justinmimbs$date$Date$isLeapYear(y) ? 1 : 0;
+		switch (m) {
+			case 0:
+				return 0;
+			case 1:
+				return 31;
+			case 2:
+				return 59 + leapDays;
+			case 3:
+				return 90 + leapDays;
+			case 4:
+				return 120 + leapDays;
+			case 5:
+				return 151 + leapDays;
+			case 6:
+				return 181 + leapDays;
+			case 7:
+				return 212 + leapDays;
+			case 8:
+				return 243 + leapDays;
+			case 9:
+				return 273 + leapDays;
+			case 10:
+				return 304 + leapDays;
+			default:
+				return 334 + leapDays;
+		}
+	});
+var $justinmimbs$date$Date$floorDiv = F2(
+	function (a, b) {
+		return $elm$core$Basics$floor(a / b);
+	});
+var $justinmimbs$date$Date$daysBeforeYear = function (y1) {
+	var y = y1 - 1;
+	var leapYears = (A2($justinmimbs$date$Date$floorDiv, y, 4) - A2($justinmimbs$date$Date$floorDiv, y, 100)) + A2($justinmimbs$date$Date$floorDiv, y, 400);
+	return (365 * y) + leapYears;
+};
+var $justinmimbs$date$Date$daysInMonth = F2(
+	function (y, m) {
+		switch (m) {
+			case 0:
+				return 31;
+			case 1:
+				return $justinmimbs$date$Date$isLeapYear(y) ? 29 : 28;
+			case 2:
+				return 31;
+			case 3:
+				return 30;
+			case 4:
+				return 31;
+			case 5:
+				return 30;
+			case 6:
+				return 31;
+			case 7:
+				return 31;
+			case 8:
+				return 30;
+			case 9:
+				return 31;
+			case 10:
+				return 30;
+			default:
+				return 31;
+		}
+	});
+var $justinmimbs$date$Date$fromCalendarDate = F3(
+	function (y, m, d) {
+		return ($justinmimbs$date$Date$daysBeforeYear(y) + A2($justinmimbs$date$Date$daysBeforeMonth, y, m)) + A3(
+			$elm$core$Basics$clamp,
+			1,
+			A2($justinmimbs$date$Date$daysInMonth, y, m),
+			d);
+	});
+var $elm$time$Time$flooredDiv = F2(
+	function (numerator, denominator) {
+		return $elm$core$Basics$floor(numerator / denominator);
+	});
+var $elm$time$Time$posixToMillis = function (_v0) {
+	var millis = _v0;
+	return millis;
+};
+var $elm$time$Time$toAdjustedMinutesHelp = F3(
+	function (defaultOffset, posixMinutes, eras) {
+		toAdjustedMinutesHelp:
+		while (true) {
+			if (!eras.b) {
+				return posixMinutes + defaultOffset;
+			} else {
+				var era = eras.a;
+				var olderEras = eras.b;
+				if (_Utils_cmp(era.ag, posixMinutes) < 0) {
+					return posixMinutes + era.b;
+				} else {
+					var $temp$defaultOffset = defaultOffset,
+						$temp$posixMinutes = posixMinutes,
+						$temp$eras = olderEras;
+					defaultOffset = $temp$defaultOffset;
+					posixMinutes = $temp$posixMinutes;
+					eras = $temp$eras;
+					continue toAdjustedMinutesHelp;
+				}
+			}
+		}
+	});
+var $elm$time$Time$toAdjustedMinutes = F2(
+	function (_v0, time) {
+		var defaultOffset = _v0.a;
+		var eras = _v0.b;
+		return A3(
+			$elm$time$Time$toAdjustedMinutesHelp,
+			defaultOffset,
+			A2(
+				$elm$time$Time$flooredDiv,
+				$elm$time$Time$posixToMillis(time),
+				60000),
+			eras);
+	});
+var $elm$core$Basics$ge = _Utils_ge;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$time$Time$toCivil = function (minutes) {
+	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
+	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
+	var dayOfEra = rawDay - (era * 146097);
+	var yearOfEra = ((((dayOfEra - ((dayOfEra / 1460) | 0)) + ((dayOfEra / 36524) | 0)) - ((dayOfEra / 146096) | 0)) / 365) | 0;
+	var dayOfYear = dayOfEra - (((365 * yearOfEra) + ((yearOfEra / 4) | 0)) - ((yearOfEra / 100) | 0));
+	var mp = (((5 * dayOfYear) + 2) / 153) | 0;
+	var month = mp + ((mp < 10) ? 3 : (-9));
+	var year = yearOfEra + (era * 400);
+	return {
+		at: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
+		aL: month,
+		bf: year + ((month <= 2) ? 1 : 0)
+	};
+};
+var $elm$time$Time$toDay = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).at;
+	});
+var $elm$time$Time$Apr = 3;
+var $elm$time$Time$Aug = 7;
+var $elm$time$Time$Dec = 11;
+var $elm$time$Time$Feb = 1;
+var $elm$time$Time$Jan = 0;
+var $elm$time$Time$Jul = 6;
+var $elm$time$Time$Jun = 5;
+var $elm$time$Time$Mar = 2;
+var $elm$time$Time$May = 4;
+var $elm$time$Time$Nov = 10;
+var $elm$time$Time$Oct = 9;
+var $elm$time$Time$Sep = 8;
+var $elm$time$Time$toMonth = F2(
+	function (zone, time) {
+		var _v0 = $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).aL;
+		switch (_v0) {
+			case 1:
+				return 0;
+			case 2:
+				return 1;
+			case 3:
+				return 2;
+			case 4:
+				return 3;
+			case 5:
+				return 4;
+			case 6:
+				return 5;
+			case 7:
+				return 6;
+			case 8:
+				return 7;
+			case 9:
+				return 8;
+			case 10:
+				return 9;
+			case 11:
+				return 10;
+			default:
+				return 11;
+		}
+	});
+var $elm$time$Time$toYear = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).bf;
+	});
+var $justinmimbs$date$Date$fromPosix = F2(
+	function (zone, posix) {
+		return A3(
+			$justinmimbs$date$Date$fromCalendarDate,
+			A2($elm$time$Time$toYear, zone, posix),
+			A2($elm$time$Time$toMonth, zone, posix),
+			A2($elm$time$Time$toDay, zone, posix));
+	});
+var $elm$time$Time$Name = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$time$Time$Offset = function (a) {
+	return {$: 1, a: a};
+};
+var $elm$time$Time$Zone = F2(
+	function (a, b) {
+		return {$: 0, a: a, b: b};
+	});
+var $elm$time$Time$customZone = $elm$time$Time$Zone;
+var $elm$time$Time$here = _Time_here(0);
+var $elm$time$Time$Posix = $elm$core$Basics$identity;
+var $elm$time$Time$millisToPosix = $elm$core$Basics$identity;
+var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
+var $justinmimbs$date$Date$today = A3($elm$core$Task$map2, $justinmimbs$date$Date$fromPosix, $elm$time$Time$here, $elm$time$Time$now);
 var $elm$json$Json$Encode$null = _Json_encodeNull;
 var $author$project$Main$updatePrism = _Platform_outgoingPort(
 	'updatePrism',
@@ -5899,11 +6175,17 @@ var $author$project$Main$updatePrism = _Platform_outgoingPort(
 var $author$project$Main$init = F3(
 	function (_v0, url, key) {
 		return _Utils_Tuple2(
-			A2(
+			A3(
 				$author$project$Main$Model,
 				key,
-				$author$project$Route$fromUrl(url)),
-			$author$project$Main$updatePrism(0));
+				$author$project$Route$fromUrl(url),
+				$elm$core$Maybe$Nothing),
+			$elm$core$Platform$Cmd$batch(
+				_List_fromArray(
+					[
+						A2($elm$core$Task$perform, $author$project$Main$DateRetrieved, $justinmimbs$date$Date$today),
+						$author$project$Main$updatePrism(0)
+					])));
 	});
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
@@ -5911,6 +6193,7 @@ var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $elm$url$Url$addPort = F2(
 	function (maybePort, starter) {
@@ -5934,7 +6217,7 @@ var $elm$url$Url$addPrefixed = F3(
 	});
 var $elm$url$Url$toString = function (url) {
 	var http = function () {
-		var _v0 = url.aB;
+		var _v0 = url.aU;
 		if (!_v0) {
 			return 'http://';
 		} else {
@@ -5944,49 +6227,59 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.al,
+		url.az,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
-			url.aC,
+			url.aV,
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.ay,
-					_Utils_ap(http, url.ap)),
-				url.aw)));
+					url.aQ,
+					_Utils_ap(http, url.aE)),
+				url.aO)));
 };
 var $author$project$Main$update = F2(
 	function (message, model) {
-		if (message.$ === 1) {
-			var url = message.a;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{
-						X: $author$project$Route$fromUrl(url)
-					}),
-				$author$project$Main$updatePrism(0));
-		} else {
-			var urlRequest = message.a;
-			if (!urlRequest.$) {
-				var url = urlRequest.a;
+		switch (message.$) {
+			case 1:
+				var url = message.a;
 				return _Utils_Tuple2(
-					model,
-					A2(
-						$elm$browser$Browser$Navigation$pushUrl,
-						model.aq,
-						$elm$url$Url$toString(url)));
-			} else {
-				var href = urlRequest.a;
+					_Utils_update(
+						model,
+						{
+							ae: $author$project$Route$fromUrl(url)
+						}),
+					$author$project$Main$updatePrism(0));
+			case 0:
+				var urlRequest = message.a;
+				if (!urlRequest.$) {
+					var url = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.aI,
+							$elm$url$Url$toString(url)));
+				} else {
+					var href = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						$elm$browser$Browser$Navigation$load(href));
+				}
+			default:
+				var date = message.a;
 				return _Utils_Tuple2(
-					model,
-					$elm$browser$Browser$Navigation$load(href));
-			}
+					_Utils_update(
+						model,
+						{
+							ak: $elm$core$Maybe$Just(date)
+						}),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Page$Model = function (page) {
-	return {V: page};
+	return {ac: page};
 };
 var $author$project$Page$Article = function (a) {
 	return {$: 2, a: a};
@@ -6007,7 +6300,7 @@ var $author$project$Page$fromRoute = function (maybeRoute) {
 	}
 };
 var $author$project$Page$title = function (model) {
-	var _v0 = model.V;
+	var _v0 = model.ac;
 	switch (_v0.$) {
 		case 0:
 			return '404 | Page Not Found';
@@ -6073,8 +6366,64 @@ var $author$project$Footer$footerLink = F2(
 				]));
 	});
 var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return $elm$core$Maybe$Just(
+				f(value));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $justinmimbs$date$Date$divWithRemainder = F2(
+	function (a, b) {
+		return _Utils_Tuple2(
+			A2($justinmimbs$date$Date$floorDiv, a, b),
+			A2($elm$core$Basics$modBy, b, a));
+	});
+var $justinmimbs$date$Date$year = function (_v0) {
+	var rd = _v0;
+	var _v1 = A2($justinmimbs$date$Date$divWithRemainder, rd, 146097);
+	var n400 = _v1.a;
+	var r400 = _v1.b;
+	var _v2 = A2($justinmimbs$date$Date$divWithRemainder, r400, 36524);
+	var n100 = _v2.a;
+	var r100 = _v2.b;
+	var _v3 = A2($justinmimbs$date$Date$divWithRemainder, r100, 1461);
+	var n4 = _v3.a;
+	var r4 = _v3.b;
+	var _v4 = A2($justinmimbs$date$Date$divWithRemainder, r4, 365);
+	var n1 = _v4.a;
+	var r1 = _v4.b;
+	var n = (!r1) ? 0 : 1;
+	return ((((n400 * 400) + (n100 * 100)) + (n4 * 4)) + n1) + n;
+};
+var $author$project$Footer$showYear = function (date) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		A2(
+			$elm$core$Maybe$map,
+			function (y) {
+				return y + ' ';
+			},
+			A2(
+				$elm$core$Maybe$map,
+				$elm$core$String$fromInt,
+				A2($elm$core$Maybe$map, $justinmimbs$date$Date$year, date))));
+};
 var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$Footer$view = function (_v0) {
+var $author$project$Footer$view = function (today) {
 	return A2(
 		$elm$html$Html$footer,
 		_List_fromArray(
@@ -6155,7 +6504,8 @@ var $author$project$Footer$view = function (_v0) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('© 2019 matthew-matvei')
+								$elm$html$Html$text(
+								'© ' + ($author$project$Footer$showYear(today) + 'matthew-matvei '))
 							]))
 					]))
 			]));
@@ -6292,13 +6642,13 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 			$author$project$Blog$Content$WhenCreated('January 26 2020'),
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							aT: 'Useless teacher',
-							aV: $author$project$Blog$Content$TextAttribute('Memecenter'),
-							bt: '/assets/img/meme3.jpg'
+							bh: 'Useless teacher',
+							bj: $author$project$Blog$Content$TextAttribute('Memecenter'),
+							bV: '/assets/img/meme3.jpg'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6318,12 +6668,12 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('This article, then, describes how a pursuit that may seem irrelevant at\n                first to working as a software developer actually benefits me. If you have any\n                similar experience of working in a seemingly unrelated area, try to reflect on ways\n                in which it may actually come in handy for you.')
 							]))
 					]),
-				ab: $elm$core$Maybe$Nothing
+				aj: $elm$core$Maybe$Nothing
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6363,7 +6713,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('A parallel in programming that comes to mind is the use of positional\n                arguments for a function or method vs named arguments (or, where that\'s not possible,\n                an arguments object). For example, in JavaScript, we might:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nconst processValues = (name, email, password, dateOfBirth, hasConsented) => {\n    // We process the positional arguments in some way\n}\n\n// We then call this function like so\nprocessValues(\'Boris\', \'boris.y@rumbler.ru\', \'admin\', \'01-02-1931\', true);\n                ', bb: 'js'}),
+						{bo: '\nconst processValues = (name, email, password, dateOfBirth, hasConsented) => {\n    // We process the positional arguments in some way\n}\n\n// We then call this function like so\nprocessValues(\'Boris\', \'boris.y@rumbler.ru\', \'admin\', \'01-02-1931\', true);\n                ', bD: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6375,7 +6725,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('Alternatively, we could give the arguments meaning in and of themselves,\n                allowing them to be understood without the need for them to appear in a particular\n                order. One way to achieve this in JavaScript would be to:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nconst processValues = (args) => {\n    // We process the arguments object in some way using args.name, args.email etc.\n}\n\n// Or, we can just use deconstruction to keep things clearer\n\nconst processValues = ({ name, email, password, dateOfBirth, hasConsented }) => {\n    // We process the deconstructed arguments object in some way\n}\n\n// We then call this function like so\nprocessValues({ \n    name: \'Boris\', \n    email: \'boris.y@rumbler.ru\', \n    password: \'admin\', \n    dateOfBirth: \'01-02-1931\', \n    hasConsented: true\n});\n                ', bb: 'js'}),
+						{bo: '\nconst processValues = (args) => {\n    // We process the arguments object in some way using args.name, args.email etc.\n}\n\n// Or, we can just use deconstruction to keep things clearer\n\nconst processValues = ({ name, email, password, dateOfBirth, hasConsented }) => {\n    // We process the deconstructed arguments object in some way\n}\n\n// We then call this function like so\nprocessValues({ \n    name: \'Boris\', \n    email: \'boris.y@rumbler.ru\', \n    password: \'admin\', \n    dateOfBirth: \'01-02-1931\', \n    hasConsented: true\n});\n                ', bD: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6387,20 +6737,20 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('As an analogy to English\'s and Russian\'s approach to word order, then, we \n                can choose whether we want to place meaning in the order the words appear, or \n                whether we want the words to describe their own meaning in that function. Both are\n                entirely valid options, and each will be most useful in certain circumstances.')
 							]))
 					]),
-				ab: $elm$core$Maybe$Just(
-					{bu: '', ab: 'There will never be one correct way'})
+				aj: $elm$core$Maybe$Just(
+					{bW: '', aj: 'There will never be one correct way'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							aT: 'Less is more',
-							aV: $author$project$Blog$Content$ComplexAttribute(
-								{bc: 'https://unsplash.com/@sarahdorweiler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge', by: 'Photo by Sarah Dorweiler on Unsplash'}),
-							bt: '/assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
+							bh: 'Less is more',
+							bj: $author$project$Blog$Content$ComplexAttribute(
+								{bE: 'https://unsplash.com/@sarahdorweiler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge', b_: 'Photo by Sarah Dorweiler on Unsplash'}),
+							bV: '/assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6422,7 +6772,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('. Especially if what you\'re writing is a \'hot path\' in terms of other\n                developers being required to read and understand it, you should treat it as\n                optimisation to pause, think, and make your code as straight forward and to the\n                point as possible. Some examples might be:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = new List<int>();\nfor (var i = 0; i < numbers.Count(); i++)\n{\n    var num = numbers[i];\n    if (num > 1)\n    {\n        var a = num * num;\n        result.Add(a);\n    }\n}\n\nConsole.WriteLine(result);\n                ', bb: 'cs'}),
+						{bo: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = new List<int>();\nfor (var i = 0; i < numbers.Count(); i++)\n{\n    var num = numbers[i];\n    if (num > 1)\n    {\n        var a = num * num;\n        result.Add(a);\n    }\n}\n\nConsole.WriteLine(result);\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6431,7 +6781,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text(' code. For me, though, the intention (signal) is lost in a sea of words\n                (noise). I don\'t want another developer to have to explore the bowels of my code to\n                understand it. Ideally, they could understand this more from the surface. So I might\n                instead use:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(num => num > 1)\n    .Select(num => num * num);\n                ', bb: 'cs'}),
+						{bo: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(num => num > 1)\n    .Select(num => num * num);\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6450,14 +6800,14 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text(' methods were less trivial, and risked obfuscating this code, the use of\n                some local functions / private helper methods can alleviate this, to make it:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Select(SquareNumber);\n                ', bb: 'cs'}),
+						{bo: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Select(SquareNumber);\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('This only makes the broader code more concise if those callback functions\n                themselves are reasonable, something that the process of attempting to name them\n                may illuminate. Let\'s say some sick joke meant that the query ignored the last item:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\n// Notice our named helper method is becoming less concise\nvar result = numbers\n    .Where(NumberGreaterThanOneAndItemNotLast)\n    .Select(SquareNumber);\n\n// Whereas, if we were to keep these separate\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Where(ItemNotLast)\n    .Select(SquareNumber);\n                ', bb: 'cs'}),
+						{bo: '\n// Notice our named helper method is becoming less concise\nvar result = numbers\n    .Where(NumberGreaterThanOneAndItemNotLast)\n    .Select(SquareNumber);\n\n// Whereas, if we were to keep these separate\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Where(ItemNotLast)\n    .Select(SquareNumber);\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6471,13 +6821,13 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('Starting with a simple base that other developers can easily understand\n                also makes it easier to add required embellishments later. Examples include a retry \n                policy surrounding a network call, or error logging to record exceptions occurred \n                during a HTTP request. Hopefully, the next developer, with a concentrated purpose,\n                will also be able to contribute to the shared codebase in an equally focused\n                manner.')
 							]))
 					]),
-				ab: $elm$core$Maybe$Just(
-					{bu: '... less is more', ab: 'Be concise'})
+				aj: $elm$core$Maybe$Just(
+					{bW: '... less is more', aj: 'Be concise'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6492,7 +6842,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('Learning a second language draws a number of parallels with learning a\n                programming language. There is a syntax, a vocabulary - there are areas in which\n                there\'s no room for movement or interpretation, and others where the lines are less\n                clear. Broadly, though, I think you can learn a lot about your communication with\n                others, as well as an appreciation for the vast array of ways in which we can say\n                the same thing with our code.')
 							]))
 					]),
-				ab: $elm$core$Maybe$Nothing
+				aj: $elm$core$Maybe$Nothing
 			})
 		]);
 };
@@ -6507,7 +6857,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 			$author$project$Blog$Content$WhenCreated('November 15 2019'),
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6517,9 +6867,9 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$BlockQuote('Yes, but best practice...'),
 						$author$project$Blog$Content$Image(
 						{
-							aT: 'boom-mic-drop',
-							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bt: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'
+							bh: 'boom-mic-drop',
+							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bV: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6534,12 +6884,12 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' practices and remind you that everything really does\n            depend on the situation.')
 							]))
 					]),
-				ab: $elm$core$Maybe$Nothing
+				aj: $elm$core$Maybe$Nothing
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6549,14 +6899,14 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' methods and simple object properties. This led to wonders such as...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value\n                ', bb: 'cs'}),
+						{bo: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('with more text explaining than doing, regardless of whether the code is already\n            completely unambiguous. Worse still, this can easily be...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value ?? throw new InvalidOperationException();\n            ', bb: 'cs'}),
+						{bo: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value ?? throw new InvalidOperationException();\n            ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6570,9 +6920,9 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 							])),
 						$author$project$Blog$Content$Image(
 						{
-							aT: 'explosions',
-							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bt: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'
+							bh: 'explosions',
+							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bV: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6582,10 +6932,10 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{by: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', ab: 'Programmers will barely read your code, let alone the comments that go with it'},
-								{by: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', ab: 'The compiler can never know whether your comments are correct anymore'},
-								{by: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', ab: 'Maintenance costs'},
-								{by: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', ab: 'There\'s no guarantee your code will be easier to understand'}
+								{b_: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', aj: 'Programmers will barely read your code, let alone the comments that go with it'},
+								{b_: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', aj: 'The compiler can never know whether your comments are correct anymore'},
+								{b_: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', aj: 'Maintenance costs'},
+								{b_: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', aj: 'There\'s no guarantee your code will be easier to understand'}
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6593,7 +6943,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('That said, there is a time and place for documentation. The more your actual code can\n            inform this, the better. For example, think how your typed API is self-documenting when you have a\n            method...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nTask<bool> ItemExistsAsync(string itemId);\n                ', bb: 'cs'}),
+						{bo: '\nTask<bool> ItemExistsAsync(string itemId);\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6608,7 +6958,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' patterns...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nEither<Error, Item> GetItem(string itemId);\n                ', bb: 'cs'}),
+						{bo: '\nEither<Error, Item> GetItem(string itemId);\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6629,24 +6979,24 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{by: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', ab: 'Is the code understandable without it?'},
-								{by: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', ab: 'Can I make things clearer by refactoring?'},
-								{by: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', ab: 'How accessible is the code to the caller?'}
+								{b_: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', aj: 'Is the code understandable without it?'},
+								{b_: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', aj: 'Can I make things clearer by refactoring?'},
+								{b_: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', aj: 'How accessible is the code to the caller?'}
 							]))
 					]),
-				ab: $elm$core$Maybe$Just(
-					{bu: 'Everyone\'s favourite pastime', ab: '1. Commenting'})
+				aj: $elm$core$Maybe$Just(
+					{bW: 'Everyone\'s favourite pastime', aj: '1. Commenting'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							aT: 'shifty-eyes',
-							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bt: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'
+							bh: 'shifty-eyes',
+							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bV: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6659,7 +7009,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('I\'ve seen, for example, code imitated by the following in a web application that uses\n            Dependency Injection to provide dependencies:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\npublic MyService(\n    object depA,\n    object depB,\n    object depN\n)\n{\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\n}\n                ', bb: 'cs'}),
+						{bo: '\npublic MyService(\n    object depA,\n    object depB,\n    object depN\n)\n{\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\n}\n                ', bD: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6719,19 +7069,19 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('\' constructor, but this can apply to any of its methods\' arguments, including complex object\n                arguments). Or it may be, particularly if you\'re writing deeper-level library code, more appropriate to\n                guard against every inch of input you get from calling code.')
 							]))
 					]),
-				ab: $elm$core$Maybe$Just(
-					{bu: 'Trust no one', ab: '2. Get defensive'})
+				aj: $elm$core$Maybe$Just(
+					{bW: 'Trust no one', aj: '2. Get defensive'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							aT: 'square-wheels',
-							aV: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bt: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'
+							bh: 'square-wheels',
+							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							bV: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6754,7 +7104,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' to do it for you:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{a_: '\nfunction flattenArray(array) {\n    return array.reduce(\n        (accumulator, current) => (Array.isArray(current)\n            ? accumulator.concat(flattenArray(current))\n            : accumulator.concat(current)),\n        []);\n}\n                ', bb: 'js'}),
+						{bo: '\nfunction flattenArray(array) {\n    return array.reduce(\n        (accumulator, current) => (Array.isArray(current)\n            ? accumulator.concat(flattenArray(current))\n            : accumulator.concat(current)),\n        []);\n}\n                ', bD: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6779,17 +7129,17 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{by: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', ab: 'What\'s the size / complexity of this functionality I want?'},
-								{by: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', ab: 'What\'s available that\'s already done this?'},
-								{by: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', ab: 'Will we be able to get out of this?'}
+								{b_: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', aj: 'What\'s the size / complexity of this functionality I want?'},
+								{b_: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', aj: 'What\'s available that\'s already done this?'},
+								{b_: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', aj: 'Will we be able to get out of this?'}
 							]))
 					]),
-				ab: $elm$core$Maybe$Just(
-					{bu: 'But why not try square tyres?', ab: '3. Don\'t reinvent the wheel'})
+				aj: $elm$core$Maybe$Just(
+					{bW: 'But why not try square tyres?', aj: '3. Don\'t reinvent the wheel'})
 			}),
 			$author$project$Blog$Content$Section(
 			{
-				a$: _List_fromArray(
+				bp: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6807,7 +7157,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('Or at the very least, you can feel the rage burn through your veins next week when\n            some other dev rips out your lovingly crafted function that was working just fine to import a library,\n            saying \'Haven\'t they even read about best practices here?\'')
 							]))
 					]),
-				ab: $elm$core$Maybe$Nothing
+				aj: $elm$core$Maybe$Nothing
 			})
 		]);
 };
@@ -6831,7 +7181,7 @@ var $author$project$Page$Article$viewCodeBlock = function (codeBlock) {
 		$elm$html$Html$pre,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('language-' + codeBlock.bb)
+				$elm$html$Html$Attributes$class('language-' + codeBlock.bD)
 			]),
 		_List_fromArray(
 			[
@@ -6840,7 +7190,7 @@ var $author$project$Page$Article$viewCodeBlock = function (codeBlock) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(codeBlock.a_)
+						$elm$html$Html$text(codeBlock.bo)
 					]))
 			]));
 };
@@ -6859,14 +7209,14 @@ var $author$project$Page$Article$viewCollectionItem = function (collectionItem) 
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(collectionItem.ab)
+						$elm$html$Html$text(collectionItem.aj)
 					])),
 				A2(
 				$elm$html$Html$p,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(collectionItem.by)
+						$elm$html$Html$text(collectionItem.b_)
 					]))
 			]));
 };
@@ -6898,11 +7248,11 @@ var $author$project$Page$Article$viewAttribution = function (attributionInfo) {
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('center-align'),
-					$elm$html$Html$Attributes$href(attribution.bc)
+					$elm$html$Html$Attributes$href(attribution.bE)
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text(attribution.by)
+					$elm$html$Html$text(attribution.b_)
 				]));
 	}
 };
@@ -6925,12 +7275,12 @@ var $author$project$Page$Article$viewImage = function (imageInfo) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('responsive-img'),
-								$elm$html$Html$Attributes$src(imageInfo.bt),
-								$elm$html$Html$Attributes$alt(imageInfo.aT)
+								$elm$html$Html$Attributes$src(imageInfo.bV),
+								$elm$html$Html$Attributes$alt(imageInfo.bh)
 							]),
 						_List_Nil)
 					])),
-				$author$project$Page$Article$viewAttribution(imageInfo.aV)
+				$author$project$Page$Article$viewAttribution(imageInfo.bj)
 			]));
 };
 var $elm$html$Html$em = _VirtualDom_node('em');
@@ -7002,14 +7352,14 @@ var $author$project$Page$Article$viewSectionTitle = function (maybeSectionTitle)
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(sectionTitle.ab)
+						$elm$html$Html$text(sectionTitle.aj)
 					])),
 				A2(
 				$elm$html$Html$h4,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(sectionTitle.bu)
+						$elm$html$Html$text(sectionTitle.bW)
 					]))
 			]);
 	}
@@ -7103,8 +7453,8 @@ var $author$project$Page$Article$viewSection = function (sectionInfo) {
 				$elm$html$Html$Attributes$class('section')
 			]),
 		_Utils_ap(
-			$author$project$Page$Article$viewSectionTitle(sectionInfo.ab),
-			A2($elm$core$List$map, $author$project$Page$Article$viewContent, sectionInfo.a$)));
+			$author$project$Page$Article$viewSectionTitle(sectionInfo.aj),
+			A2($elm$core$List$map, $author$project$Page$Article$viewContent, sectionInfo.bp)));
 };
 var $author$project$Page$Article$view = function (model) {
 	return A2(
@@ -7120,11 +7470,11 @@ var $author$project$Component$Card$viewAction = function (action) {
 		$elm$html$Html$a,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$href(action.bc)
+				$elm$html$Html$Attributes$href(action.bE)
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text(action.by)
+				$elm$html$Html$text(action.b_)
 			]));
 };
 var $author$project$Component$Card$view = function (model) {
@@ -7152,14 +7502,14 @@ var $author$project$Component$Card$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text(model.ab)
+								$elm$html$Html$text(model.aj)
 							])),
 						A2(
 						$elm$html$Html$p,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text(model.by)
+								$elm$html$Html$text(model.b_)
 							]))
 					])),
 				A2(
@@ -7168,7 +7518,7 @@ var $author$project$Component$Card$view = function (model) {
 					[
 						$elm$html$Html$Attributes$class('card-action purple darken-3')
 					]),
-				A2($elm$core$List$map, $author$project$Component$Card$viewAction, model.ac))
+				A2($elm$core$List$map, $author$project$Component$Card$viewAction, model.am))
 			]));
 };
 var $author$project$Page$Home$view = function (_v0) {
@@ -7205,12 +7555,12 @@ var $author$project$Page$Home$view = function (_v0) {
 							[
 								$author$project$Component$Card$view(
 								{
-									ac: _List_fromArray(
+									am: _List_fromArray(
 										[
-											{bc: '/blog/no-best-practices', by: 'Read'}
+											{bE: '/blog/no-best-practices', b_: 'Read'}
 										]),
-									by: '... and how there are no best practices',
-									ab: '3 Best Practices in programming'
+									b_: '... and how there are no best practices',
+									aj: '3 Best Practices in programming'
 								})
 							])),
 						A2(
@@ -7223,12 +7573,12 @@ var $author$project$Page$Home$view = function (_v0) {
 							[
 								$author$project$Component$Card$view(
 								{
-									ac: _List_fromArray(
+									am: _List_fromArray(
 										[
-											{bc: '/blog/programming-as-a-second-language', by: 'Read'}
+											{bE: '/blog/programming-as-a-second-language', b_: 'Read'}
 										]),
-									by: '... and why I\'m glad I\'ve learnt / taught a second language',
-									ab: 'Programming as a Second Language'
+									b_: '... and why I\'m glad I\'ve learnt / taught a second language',
+									aj: 'Programming as a Second Language'
 								})
 							]))
 					]))
@@ -7266,7 +7616,7 @@ var $author$project$Page$NotFound$view = function (_v0) {
 			]));
 };
 var $author$project$Page$view = function (model) {
-	var _v0 = model.V;
+	var _v0 = model.ac;
 	switch (_v0.$) {
 		case 0:
 			return $author$project$Page$NotFound$view(0);
@@ -7280,18 +7630,18 @@ var $author$project$Page$view = function (model) {
 };
 var $author$project$Main$view = function (model) {
 	var page = $author$project$Page$Model(
-		$author$project$Page$fromRoute(model.X));
+		$author$project$Page$fromRoute(model.ae));
 	return {
-		aW: _List_fromArray(
+		bk: _List_fromArray(
 			[
 				$author$project$Header$view(0),
 				$author$project$Page$view(page),
-				$author$project$Footer$view(0)
+				$author$project$Footer$view(model.ak)
 			]),
-		ab: $author$project$Page$title(page)
+		aj: $author$project$Page$title(page)
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(
-	{ba: $author$project$Main$init, bn: $author$project$Main$UrlChanged, bo: $author$project$Main$LinkClicked, bv: $author$project$Main$subscriptions, bz: $author$project$Main$update, bA: $author$project$Main$view});
+	{bB: $author$project$Main$init, bP: $author$project$Main$UrlChanged, bQ: $author$project$Main$LinkClicked, bX: $author$project$Main$subscriptions, b$: $author$project$Main$update, b0: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
