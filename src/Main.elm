@@ -5,12 +5,11 @@ import Browser.Navigation as Navigation
 import Footer
 import Header
 import Page
-import Process
 import Route
-import Task
 import Url
 
 
+main : Program () Model Message
 main =
     Browser.application
         { init = init

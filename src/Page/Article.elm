@@ -13,6 +13,7 @@ import Blog.Content
         )
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, href, src)
+import Widget exposing (externalLink)
 
 
 type alias Model =
@@ -77,8 +78,8 @@ viewParagraphSegment segment =
         Strong t ->
             strong [] [ text t ]
 
-        Link link label ->
-            a [ href link ] [ text label ]
+        ExternalLink link label ->
+            externalLink [ href link ] [ text label ]
 
 
 viewSection : SectionInfo -> Html msg
@@ -108,7 +109,7 @@ viewAttribution attributionInfo =
             span [ class "center-align" ] [ text attribution ]
 
         ComplexAttribute attribution ->
-            a [ class "center-align", href attribution.link ] [ text attribution.text ]
+            externalLink [ class "center-align", href attribution.link ] [ text attribution.text ]
 
 
 viewImage : ImageInfo -> Html msg

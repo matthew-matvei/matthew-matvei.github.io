@@ -1,7 +1,8 @@
 module Footer exposing (view)
 
-import Html exposing (Html, a, div, footer, li, text, ul)
-import Html.Attributes exposing (class, href, target)
+import Html exposing (Html, div, footer, li, text, ul)
+import Html.Attributes exposing (class, href)
+import Widget exposing (externalLink)
 
 
 view : () -> Html msg
@@ -36,4 +37,4 @@ view _ =
 
 footerLink : String -> String -> Html msg
 footerLink link content =
-    a [ class "blue-text text-lighten-3", href link, target "_blank" ] [ text content ]
+    externalLink [ class "blue-text text-lighten-3", href link ] [ text content ]

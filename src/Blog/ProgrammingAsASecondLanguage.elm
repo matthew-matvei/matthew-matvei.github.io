@@ -19,7 +19,7 @@ getContent _ =
             , Paragraph
                 [ Text """I have come to the world of programming relatively late, at least compared
                 to some other people I work with. For anyone who has ever suffered with """
-                , Link "https://www.youtube.com/watch?v=eqhUHyVpAwE" "Imposter Syndrome"
+                , ExternalLink "https://www.youtube.com/watch?v=eqhUHyVpAwE" "Imposter Syndrome"
                 , Text """, you can understand how that might be quite daunting. It can feel like 
             you've been wasting all this time and potential on travel, tangential job paths and other 
             pursuits."""
@@ -54,12 +54,12 @@ getContent _ =
                 , Text " or the "
                 , Emphasis "correct"
                 , Text " way to do something. The larger that concept is, e.g. "
-                , Link
+                , ExternalLink
                     "https://www.jinfonet.com/resources/bi-defined/3-tier-architecture-complete-overview/"
                     "Three Tier Architecture"
                 , Text """, the dearer they'd likely hold it to their hearts, even though the larger
                 the concept is the more likely a """
-                , Link
+                , ExternalLink
                     "https://jimmybogard.com/vertical-slice-architecture/"
                     "viable alternative exists"
                 , Text """. If you've learnt some aspects of a foreign language, however, you can 
@@ -68,7 +68,7 @@ getContent _ =
                 ]
             , Paragraph
                 [ Text "English places a lot of importance "
-                , Link
+                , ExternalLink
                     "https://www.toeflgoanywhere.org/importance-word-order-english"
                     "on the order of words within a sentence"
                 , Text ". "
@@ -196,7 +196,7 @@ processValues({
                 ]
             , Paragraph
                 [ Text "Additionally, "
-                , Link
+                , ExternalLink
                     "https://danieljscheufler.wordpress.com/2016/12/27/code-is-read-more-often-than-it-is-written/"
                     "code is read more often that it is written"
                 , Text """. Especially if what you're writing is a 'hot path' in terms of other
