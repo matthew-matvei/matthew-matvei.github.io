@@ -26,7 +26,7 @@ view model =
                 ]
             , p [] [ text model.text ]
             ]
-        , div [ class "card-action purple darken-2" ]
+        , div [ class "card-action purple darken-3" ]
             (List.map
                 viewAction
                 model.actions

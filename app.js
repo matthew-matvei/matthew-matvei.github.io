@@ -7166,7 +7166,7 @@ var $author$project$Component$Card$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('card-action purple darken-2')
+						$elm$html$Html$Attributes$class('card-action purple darken-3')
 					]),
 				A2($elm$core$List$map, $author$project$Component$Card$viewAction, model.ac))
 			]));
