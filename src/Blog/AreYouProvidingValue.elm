@@ -59,7 +59,7 @@ getContent _ =
 int ParseNumber(string number);
 
 // I'll 'Either' return you success or fail, and you need to handle those possibilities
-Either<int> ParseNumber(string number);
+Either<Error, int> ParseNumber(string number);
             """
                 }
             , Paragraph
