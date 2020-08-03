@@ -304,14 +304,6 @@ const result = relevantProductNames.reduce((acc, current) => acc + current + ';'
     , Section
         { title =
             Just
-                { title = "Tests"
-                , subTitle = "More = better?"
-                }
-        , content = []
-        }
-    , Section
-        { title =
-            Just
                 { title = "YAGNI"
                 , subTitle = "You ain't gonna need it (probably)"
                 }
