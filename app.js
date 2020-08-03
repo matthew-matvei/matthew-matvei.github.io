@@ -11489,6 +11489,11 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('You are not employed to write clean code, you are not paid to write tests;\n                they keep you around in the hope that you will '),
 								$author$project$Blog$Content$Strong('add value'),
 								$author$project$Blog$Content$Text('.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('There are many value sinks in the world of programming. The only problem\n                is is that what they are depends on what actually brings value to your business.\n                Maybe you\'re dealing with throwaway proof-of-concept projects for which complex\n                testing isn\'t required. Or perhaps you\'re creating a distributed system for which\n                the most complex SQL optimisations is overkill. There are numerous factors in\n                deciding whether you\'re adding value, I\'d like to go through some of them with the\n                below examples.')
 							]))
 					]),
 				title: $elm$core$Maybe$Nothing

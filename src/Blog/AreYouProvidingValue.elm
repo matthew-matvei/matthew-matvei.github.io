@@ -10,6 +10,25 @@ getContent _ =
     , SubTitle "... and how the road to hell is paved with good intentions"
     , WhenCreated "June 21 2020"
     , Section
+        { title = Nothing
+        , content =
+            [ Paragraph
+                [ Text """You are not employed to write clean code, you are not paid to write tests;
+                they keep you around in the hope that you will """
+                , Strong "add value"
+                , Text "."
+                ]
+            , Paragraph
+                [ Text """There are many value sinks in the world of programming. The only problem
+                is is that what they are depends on what actually brings value to your business.
+                Maybe you're dealing with throwaway proof-of-concept projects for which complex
+                testing isn't required. Or perhaps you're creating a distributed system for which
+                the most complex SQL optimisations is overkill. There are numerous factors in
+                deciding whether you're adding value, I'd like to go through some of them with the
+                below examples.""" ]
+            ]
+        }
+    , Section
         { title =
             Just
                 { title = "Good ideas"
