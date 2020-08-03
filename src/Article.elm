@@ -14,8 +14,8 @@ type Slug
 parser : Parser (Slug -> a) a
 parser =
     Parser.oneOf
-        [ Parser.map ThreeBestPractices (Parser.s "no-best-practices")
-        , Parser.map ProgrammingAsASecondLanguage (Parser.s "programming-as-a-second-language")
+        [ Parser.s "no-best-practices" |> Parser.map ThreeBestPractices
+        , Parser.s "programming-as-a-second-language" |> Parser.map ProgrammingAsASecondLanguage
         ]
 
 

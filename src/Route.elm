@@ -18,7 +18,7 @@ fromUrl url =
 parser : Parser (Route -> a) a
 parser =
     Parser.oneOf
-        [ Parser.map Home Parser.top
-        , Parser.map Home (Parser.s "index.html")
-        , Parser.map Article (Parser.s "blog" </> Article.parser)
+        [ Parser.top |> Parser.map Home
+        , Parser.s "index.html" |> Parser.map Home
+        , Parser.s "blog" </> Article.parser |> Parser.map Article
         ]

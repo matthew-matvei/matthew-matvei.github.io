@@ -39,7 +39,7 @@ type Message
 init : () -> Url.Url -> Navigation.Key -> ( Model, Cmd Message )
 init _ url key =
     ( Model key (Route.fromUrl url) Nothing
-    , Cmd.batch [ Date.today |> Task.perform DateRetrieved, updatePrism () ]
+    , Cmd.batch [ Task.perform DateRetrieved Date.today, updatePrism () ]
     )
 
 
@@ -47,12 +47,12 @@ update : Message -> Model -> ( Model, Cmd Message )
 update message model =
     case message of
         UrlChanged url ->
-            ( { model | route = url |> Route.fromUrl }, updatePrism () )
+            ( { model | route = Route.fromUrl url }, updatePrism () )
 
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
-                    ( model, Navigation.pushUrl model.key (Url.toString url) )
+                    ( model, url |> Url.toString |> Navigation.pushUrl model.key )
 
                 Browser.External href ->
                     ( model, Navigation.load href )
