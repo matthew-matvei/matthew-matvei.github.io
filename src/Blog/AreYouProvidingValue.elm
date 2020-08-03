@@ -111,14 +111,6 @@ Either<Error, int> ParseNumber(string number);
     , Section
         { title =
             Just
-                { title = "Principles over practice"
-                , subTitle = ""
-                }
-        , content = []
-        }
-    , Section
-        { title =
-            Just
                 { title = "Helper libraries"
                 , subTitle = "...graveyard modules"
                 }
