@@ -32,7 +32,7 @@ getContent _ =
         { title =
             Just
                 { title = "Good ideas"
-                , subTitle = "...that don't work"
+                , subTitle = "... that don't work"
                 }
         , content =
             [ Paragraph
@@ -121,10 +121,17 @@ Either<Error, int> ParseNumber(string number);
         { title =
             Just
                 { title = "Helper libraries"
-                , subTitle = "...graveyard modules"
+                , subTitle = "... graveyard modules"
                 }
         , content =
-            [ Paragraph
+            [ Image
+                { source = "/assets/img/afterlife.jpg"
+                , alt = "The after life"
+                , attribution =
+                    ComplexAttribute
+                        { text = "Imgflip", link = "https://imgflip.com/i/2qhd80" }
+                }
+            , Paragraph
                 [ Text """So you're writing a view component - maybe in React or Vue, and you want to
                 extract a rather complicated function out into its own module... because the
                 function is complicated."""

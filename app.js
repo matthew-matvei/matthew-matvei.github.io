@@ -11568,18 +11568,19 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 							]))
 					]),
 				title: $elm$core$Maybe$Just(
-					{subTitle: '...that don\'t work', title: 'Good ideas'})
-			}),
-			$author$project$Blog$Content$Section(
-			{
-				content: _List_Nil,
-				title: $elm$core$Maybe$Just(
-					{subTitle: '', title: 'Principles over practice'})
+					{subTitle: '... that don\'t work', title: 'Good ideas'})
 			}),
 			$author$project$Blog$Content$Section(
 			{
 				content: _List_fromArray(
 					[
+						$author$project$Blog$Content$Image(
+						{
+							alt: 'The after life',
+							attribution: $author$project$Blog$Content$ComplexAttribute(
+								{link: 'https://imgflip.com/i/2qhd80', text: 'Imgflip'}),
+							source: '/assets/img/afterlife.jpg'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11668,7 +11669,7 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 							]))
 					]),
 				title: $elm$core$Maybe$Just(
-					{subTitle: '...graveyard modules', title: 'Helper libraries'})
+					{subTitle: '... graveyard modules', title: 'Helper libraries'})
 			}),
 			$author$project$Blog$Content$Section(
 			{
