@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.ag.L === region.av.L)
+	if (region.ak.O === region.aB.O)
 	{
-		return 'on line ' + region.ag.L;
+		return 'on line ' + region.ak.O;
 	}
-	return 'on lines ' + region.ag.L + ' through ' + region.av.L;
+	return 'on lines ' + region.ak.O + ' through ' + region.aB.O;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bB,
+		impl.bG,
 		impl.b$,
-		impl.bX,
+		impl.bY,
 		function() { return function() {} }
 	);
 });
@@ -2660,8 +2660,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		z: func(record.z),
-		ah: record.ah,
-		ad: record.ad
+		al: record.al,
+		ah: record.ah
 	}
 });
 
@@ -2930,10 +2930,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.z;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.ah;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.al;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.ad) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.ah) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3883,9 +3883,9 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bB,
+		impl.bG,
 		impl.b$,
-		impl.bX,
+		impl.bY,
 		function(sendToApp, initialModel) {
 			var view = impl.b0;
 			/**/
@@ -3919,11 +3919,11 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bB,
+		impl.bG,
 		impl.b$,
-		impl.bX,
+		impl.bY,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.af && impl.af(sendToApp)
+			var divertHrefToApp = impl.aj && impl.aj(sendToApp)
 			var view = impl.b0;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
@@ -3932,12 +3932,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.bk);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.br);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aj) && (_VirtualDom_doc.title = title = doc.aj);
+				(title !== doc.H) && (_VirtualDom_doc.title = title = doc.H);
 			});
 		}
 	);
@@ -3993,12 +3993,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.bP;
-	var onUrlRequest = impl.bQ;
+	var onUrlChange = impl.bS;
+	var onUrlRequest = impl.bT;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		af: function(sendToApp)
+		aj: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4014,9 +4014,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.aU === next.aU
-							&& curr.aE === next.aE
-							&& curr.aQ.a === next.aQ.a
+							&& curr.a$ === next.a$
+							&& curr.aK === next.aK
+							&& curr.aX.a === next.aX.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4024,13 +4024,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		bB: function(flags)
+		bG: function(flags)
 		{
-			return A3(impl.bB, flags, _Browser_getUrl(), key);
+			return A3(impl.bG, flags, _Browser_getUrl(), key);
 		},
 		b0: impl.b0,
 		b$: impl.b$,
-		bX: impl.bX
+		bY: impl.bY
 	});
 }
 
@@ -4096,17 +4096,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { bz: 'hidden', bm: 'visibilitychange' }
+		? { bE: 'hidden', bt: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { bz: 'mozHidden', bm: 'mozvisibilitychange' }
+		? { bE: 'mozHidden', bt: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { bz: 'msHidden', bm: 'msvisibilitychange' }
+		? { bE: 'msHidden', bt: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { bz: 'webkitHidden', bm: 'webkitvisibilitychange' }
-		: { bz: 'hidden', bm: 'visibilitychange' };
+		? { bE: 'webkitHidden', bt: 'webkitvisibilitychange' }
+		: { bE: 'hidden', bt: 'visibilitychange' };
 }
 
 
@@ -4187,12 +4187,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		a0: _Browser_getScene(),
-		a9: {
-			bd: _Browser_window.pageXOffset,
-			be: _Browser_window.pageYOffset,
-			bc: _Browser_doc.documentElement.clientWidth,
-			aC: _Browser_doc.documentElement.clientHeight
+		a7: _Browser_getScene(),
+		bi: {
+			bm: _Browser_window.pageXOffset,
+			bn: _Browser_window.pageYOffset,
+			bl: _Browser_doc.documentElement.clientWidth,
+			aI: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4202,8 +4202,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		bc: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		aC: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		bl: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		aI: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4226,15 +4226,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			a0: {
-				bc: node.scrollWidth,
-				aC: node.scrollHeight
+			a7: {
+				bl: node.scrollWidth,
+				aI: node.scrollHeight
 			},
-			a9: {
-				bd: node.scrollLeft,
-				be: node.scrollTop,
-				bc: node.clientWidth,
-				aC: node.clientHeight
+			bi: {
+				bm: node.scrollLeft,
+				bn: node.scrollTop,
+				bl: node.clientWidth,
+				aI: node.clientHeight
 			}
 		};
 	});
@@ -4264,18 +4264,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			a0: _Browser_getScene(),
-			a9: {
-				bd: x,
-				be: y,
-				bc: _Browser_doc.documentElement.clientWidth,
-				aC: _Browser_doc.documentElement.clientHeight
+			a7: _Browser_getScene(),
+			bi: {
+				bm: x,
+				bn: y,
+				bl: _Browser_doc.documentElement.clientWidth,
+				aI: _Browser_doc.documentElement.clientHeight
 			},
-			bt: {
-				bd: x + rect.left,
-				be: y + rect.top,
-				bc: rect.width,
-				aC: rect.height
+			by: {
+				bm: x + rect.left,
+				bn: y + rect.top,
+				bl: rect.width,
+				aI: rect.height
 			}
 		};
 	});
@@ -4883,7 +4883,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {az: fragment, aE: host, aO: path, aQ: port_, aU: protocol, aV: query};
+		return {aF: fragment, aK: host, aV: path, aX: port_, a$: protocol, a0: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5167,12 +5167,12 @@ var $author$project$Main$DateRetrieved = function (a) {
 };
 var $author$project$Main$Model = F3(
 	function (key, route, today) {
-		return {aI: key, ae: route, ak: today};
+		return {aO: key, ai: route, ao: today};
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
-		return {C: frag, D: params, B: unvisited, x: value, F: visited};
+		return {D: frag, F: params, B: unvisited, x: value, I: visited};
 	});
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -5799,9 +5799,9 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.aO),
-					$elm$url$Url$Parser$prepareQuery(url.aV),
-					url.az,
+					$elm$url$Url$Parser$preparePath(url.aV),
+					$elm$url$Url$Parser$prepareQuery(url.a0),
+					url.aF,
 					$elm$core$Basics$identity)));
 	});
 var $author$project$Route$Article = function (a) {
@@ -5811,10 +5811,10 @@ var $author$project$Route$Home = {$: 0};
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
-		var visited = _v0.F;
+		var visited = _v0.I;
 		var unvisited = _v0.B;
-		var params = _v0.D;
-		var frag = _v0.C;
+		var params = _v0.F;
+		var frag = _v0.D;
 		var value = _v0.x;
 		return A5(
 			$elm$url$Url$Parser$State,
@@ -5828,10 +5828,10 @@ var $elm$url$Url$Parser$map = F2(
 	function (subValue, _v0) {
 		var parseArg = _v0;
 		return function (_v1) {
-			var visited = _v1.F;
+			var visited = _v1.I;
 			var unvisited = _v1.B;
-			var params = _v1.D;
-			var frag = _v1.C;
+			var params = _v1.F;
+			var frag = _v1.D;
 			var value = _v1.x;
 			return A2(
 				$elm$core$List$map,
@@ -5867,14 +5867,15 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 			parsers);
 	};
 };
+var $author$project$Article$AreYouProvidingValue = 2;
 var $author$project$Article$ProgrammingAsASecondLanguage = 1;
 var $author$project$Article$ThreeBestPractices = 0;
 var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
-		var visited = _v0.F;
+		var visited = _v0.I;
 		var unvisited = _v0.B;
-		var params = _v0.D;
-		var frag = _v0.C;
+		var params = _v0.F;
+		var frag = _v0.D;
 		var value = _v0.x;
 		if (!unvisited.b) {
 			return _List_Nil;
@@ -5904,7 +5905,11 @@ var $author$project$Article$parser = $elm$url$Url$Parser$oneOf(
 			A2(
 			$elm$url$Url$Parser$map,
 			1,
-			$elm$url$Url$Parser$s('programming-as-a-second-language'))
+			$elm$url$Url$Parser$s('programming-as-a-second-language')),
+			A2(
+			$elm$url$Url$Parser$map,
+			2,
+			$elm$url$Url$Parser$s('are-you-providing-value'))
 		]));
 var $elm$url$Url$Parser$slash = F2(
 	function (_v0, _v1) {
@@ -6043,7 +6048,7 @@ var $elm$time$Time$toAdjustedMinutesHelp = F3(
 			} else {
 				var era = eras.a;
 				var olderEras = eras.b;
-				if (_Utils_cmp(era.ag, posixMinutes) < 0) {
+				if (_Utils_cmp(era.ak, posixMinutes) < 0) {
 					return posixMinutes + era.b;
 				} else {
 					var $temp$defaultOffset = defaultOffset,
@@ -6084,15 +6089,15 @@ var $elm$time$Time$toCivil = function (minutes) {
 	var month = mp + ((mp < 10) ? 3 : (-9));
 	var year = yearOfEra + (era * 400);
 	return {
-		at: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
-		aL: month,
-		bf: year + ((month <= 2) ? 1 : 0)
+		az: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
+		aS: month,
+		bo: year + ((month <= 2) ? 1 : 0)
 	};
 };
 var $elm$time$Time$toDay = F2(
 	function (zone, time) {
 		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).at;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).az;
 	});
 var $elm$time$Time$Apr = 3;
 var $elm$time$Time$Aug = 7;
@@ -6109,7 +6114,7 @@ var $elm$time$Time$Sep = 8;
 var $elm$time$Time$toMonth = F2(
 	function (zone, time) {
 		var _v0 = $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).aL;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).aS;
 		switch (_v0) {
 			case 1:
 				return 0;
@@ -6140,7 +6145,7 @@ var $elm$time$Time$toMonth = F2(
 var $elm$time$Time$toYear = F2(
 	function (zone, time) {
 		return $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).bf;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).bo;
 	});
 var $justinmimbs$date$Date$fromPosix = F2(
 	function (zone, posix) {
@@ -6217,7 +6222,7 @@ var $elm$url$Url$addPrefixed = F3(
 	});
 var $elm$url$Url$toString = function (url) {
 	var http = function () {
-		var _v0 = url.aU;
+		var _v0 = url.a$;
 		if (!_v0) {
 			return 'http://';
 		} else {
@@ -6227,17 +6232,17 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.az,
+		url.aF,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
-			url.aV,
+			url.a0,
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.aQ,
-					_Utils_ap(http, url.aE)),
-				url.aO)));
+					url.aX,
+					_Utils_ap(http, url.aK)),
+				url.aV)));
 };
 var $author$project$Main$update = F2(
 	function (message, model) {
@@ -6248,7 +6253,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							ae: $author$project$Route$fromUrl(url)
+							ai: $author$project$Route$fromUrl(url)
 						}),
 					$author$project$Main$updatePrism(0));
 			case 0:
@@ -6259,7 +6264,7 @@ var $author$project$Main$update = F2(
 						model,
 						A2(
 							$elm$browser$Browser$Navigation$pushUrl,
-							model.aI,
+							model.aO,
 							$elm$url$Url$toString(url)));
 				} else {
 					var href = urlRequest.a;
@@ -6273,13 +6278,13 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							ak: $elm$core$Maybe$Just(date)
+							ao: $elm$core$Maybe$Just(date)
 						}),
 					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Page$Model = function (page) {
-	return {ac: page};
+	return {ag: page};
 };
 var $author$project$Page$Article = function (a) {
 	return {$: 2, a: a};
@@ -6300,7 +6305,7 @@ var $author$project$Page$fromRoute = function (maybeRoute) {
 	}
 };
 var $author$project$Page$title = function (model) {
-	var _v0 = model.ac;
+	var _v0 = model.ag;
 	switch (_v0.$) {
 		case 0:
 			return '404 | Page Not Found';
@@ -6308,10 +6313,13 @@ var $author$project$Page$title = function (model) {
 			return 'mat-mat | Home';
 		default:
 			var slug = _v0.a;
-			if (!slug) {
-				return 'mat-mat | Three best practices';
-			} else {
-				return 'mat-mat | Programming as a Second Language';
+			switch (slug) {
+				case 0:
+					return 'mat-mat | Three best practices';
+				case 1:
+					return 'mat-mat | Programming as a Second Language';
+				default:
+					return 'mat-mat | Are you providing value?';
 			}
 	}
 };
@@ -6596,7 +6604,6 @@ var $author$project$Blog$Content$CodeBlock = function (a) {
 var $author$project$Blog$Content$ComplexAttribute = function (a) {
 	return {$: 1, a: a};
 };
-var $author$project$Blog$Content$Divider = {$: 7};
 var $author$project$Blog$Content$Emphasis = function (a) {
 	return {$: 1, a: a};
 };
@@ -6625,14 +6632,284 @@ var $author$project$Blog$Content$SubTitle = function (a) {
 var $author$project$Blog$Content$Text = function (a) {
 	return {$: 0, a: a};
 };
-var $author$project$Blog$Content$TextAttribute = function (a) {
-	return {$: 0, a: a};
-};
 var $author$project$Blog$Content$Title = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Blog$Content$WhenCreated = function (a) {
 	return {$: 2, a: a};
+};
+var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
+	return _List_fromArray(
+		[
+			$author$project$Blog$Content$Title('Are you providing value?'),
+			$author$project$Blog$Content$SubTitle('... and how the road to hell is paved with good intentions'),
+			$author$project$Blog$Content$WhenCreated('August 3 2020'),
+			$author$project$Blog$Content$Section(
+			{
+				V: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('You are not employed to write clean code, you are not paid to write tests;\n                they keep you around in the hope that you will '),
+								$author$project$Blog$Content$Strong('add value'),
+								$author$project$Blog$Content$Text('.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('There are many value sinks in the world of programming. The only problem\n                is is that what they are depends on what actually brings value to your business.\n                Maybe you\'re dealing with throwaway proof-of-concept projects for which complex\n                testing isn\'t required. Or perhaps you\'re creating a distributed system for which\n                the most complex SQL optimisations is overkill. There are numerous factors in\n                deciding whether you\'re adding value, I\'d like to go through some of them with the\n                below examples.')
+							]))
+					]),
+				H: $elm$core$Maybe$Nothing
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				V: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('The Either monad is a lovely way to handle success / fail code paths in a \n                concise, logical and (dependening on your language) compile-time knowledge that you \n                are handling possible errors that a method you call can result in. You can follow\n                this pattern in many different ways '),
+								A2($author$project$Blog$Content$ExternalLink, 'https://blog.logrocket.com/elegant-error-handling-with-the-javascript-either-monad-76c7ae4924a1/', 'in JavaScript'),
+								$author$project$Blog$Content$Text(' and '),
+								A2($author$project$Blog$Content$ExternalLink, 'https://medium.com/@dimpapadim3/either-is-a-common-type-in-functional-languages-94b86eea325c', 'in C#'),
+								$author$project$Blog$Content$Text('.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('By comparison, catching exceptions is a lawless, risky business. Consider the\n            following method signatures:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\n// I\'ll return you an int (but I might blow up if I don\'t like \'number\')\nint ParseNumber(string number);\n\n// I\'ll \'Either\' return you success or fail, and you need to handle those possibilities\nEither<Error, int> ParseNumber(string number);\n            ', E: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('As you can see, the issue with exceptions can be that they hide the fact\n                that they have possible '),
+								$author$project$Blog$Content$Emphasis('alternative return values'),
+								$author$project$Blog$Content$Text('. It\'s possible that the method will result in an '),
+								$author$project$Blog$Content$InlineCode('int'),
+								$author$project$Blog$Content$Text(', but it\'s also possible that it may result in one of many exceptions\n                raised due to the nature of the '),
+								$author$project$Blog$Content$InlineCode('number'),
+								$author$project$Blog$Content$Text(' parameter. Often, it\'s left up to a caller simply to '),
+								$author$project$Blog$Content$Emphasis('know'),
+								$author$project$Blog$Content$Text(' that this may happen, or look at documentation for the method, which can\n                be lacking, stale or misleading. It may not even be clear to the developer who\n                documented the method in the first place, since the exceptions that it potentially\n                throws may just be thrown by its dependencies.')
+							])),
+						$author$project$Blog$Content$BlockQuote('Right then, I hear ya, let\'s replace it all with methods that return \'Either\'s'),
+						$author$project$Blog$Content$Image(
+						{
+							as: 'Replace all the things',
+							au: $author$project$Blog$Content$ComplexAttribute(
+								{aR: 'http://www.quickmeme.com/meme/354gb5', bg: 'Quick Meme'}),
+							ba: '/assets/img/replace-all-the-things.jpg'
+						}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Whoa there Nelly. Do the other developers on your team know what the hell\n                an \'Either\' object is? Or how to nicely bind Either instances with successive\n                functions to chain multiple actions into one ultimate result?')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Unfortunately, if they don\'t '),
+								$author$project$Blog$Content$Emphasis('get it'),
+								$author$project$Blog$Content$Text(', they won\'t use it properly, and all the benefits of it will be in vain.\n                You can try to make the argument that they should just suck it up and learn it, and\n                learning new things is lovely and all, but we all work to real constraints. Perhaps\n                they have enough on their plate keeping up with new practices of system monitoring\n                and persisting data. If they are used to catching exceptions, and let\'s face it, '),
+								$author$project$Blog$Content$Emphasis('they probably are'),
+								$author$project$Blog$Content$Text(', then they\'re more likely to do this correctly. It fits more naturally in\n                with the talents of the team and therefore lets them actually contribute more value\n                to the business.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This isn\'t to piss on the potential value of other patterns. If the team\n                is up for the learning, and there\'s something to gain for everyone (not just for you,\n                the person who suggested everyone adopt a new pattern), then that\'s positive. But\n                consider whether this other feature, no matter how fantastic it may seem in isolation,\n                is '),
+								$author$project$Blog$Content$Strong('actually'),
+								$author$project$Blog$Content$Text(' the right tool for the job. Or rather, it\'s a screw that other developers\n                have the right screwdrivers for...')
+							]))
+					]),
+				H: $elm$core$Maybe$Just(
+					{am: '... that don\'t work', H: 'Good ideas'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				V: _List_fromArray(
+					[
+						$author$project$Blog$Content$Image(
+						{
+							as: 'The after life',
+							au: $author$project$Blog$Content$ComplexAttribute(
+								{aR: 'https://imgflip.com/i/2qhd80', bg: 'Imgflip'}),
+							ba: '/assets/img/afterlife.jpg'
+						}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('So you\'re writing a view component - maybe in React or Vue, and you want to\n                extract a rather complicated function out into its own module... because the\n                function is complicated.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Since there\'s no overarching '),
+								$author$project$Blog$Content$Emphasis('reason'),
+								$author$project$Blog$Content$Text(' for this module, other than just to house this function that you\'re going\n                to import the function from (which, you reason, will make the code more reusable\n                and testable), you decide to put it in a new file called '),
+								$author$project$Blog$Content$InlineCode('helpers.js'),
+								$author$project$Blog$Content$Text('. You put the function there, write some tests, and import it in one place\n                - the component you were working on when you extracted out this function.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('A few weeks later you notice in this same code base a very similar function\n                that was clearly written for one other particular component as well. This time, the\n                developer put it in a file called '),
+								$author$project$Blog$Content$InlineCode('utils.js'),
+								$author$project$Blog$Content$Text(' and they had no idea that your function that lives is '),
+								$author$project$Blog$Content$InlineCode('helpers.js'),
+								$author$project$Blog$Content$Text(' even existed. After all, they saw a file called '),
+								$author$project$Blog$Content$InlineCode('helpers.js'),
+								$author$project$Blog$Content$Text(' and had no idea that the particular function they needed at the time \n                would be in there. And how would they? The module\'s name gives no clues about what\n                area of functionality it\'s centred on.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('If you want to provide value to other developers with reusable code that\n                can be worked with and extended logically, consider what can be seen as generic, has\n                few dependencies and doesn\'t make strong assumptions about the calling code. For\n                example:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\n// helpers.js\n\nconst formatResult = (data, excludedProducts) => {\n    let result = "";\n    for (var product of data) {\n        if (excludedProducts.some(p => p.info.id === product.info.id))\n            continue;\n            \n        result = result + product.info.name + \';\'\n    }\n}\n                ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This non-descript '),
+								$author$project$Blog$Content$InlineCode('helpers.js'),
+								$author$project$Blog$Content$Text(' module now has a very uninformatively named '),
+								$author$project$Blog$Content$InlineCode('formatResult'),
+								$author$project$Blog$Content$Text(' function. Whether it serves any immediate use is one thing, but anyone\n                who tries to apply this to any other problem they have are likely to find it\'s not\n                fit for their purpose.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('To get something useful from this, let\'s try to think about what this \n                rather contrived function is, at the heart of it, trying to do.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Essentially, it takes an array of data and concatenates product names with\n                a trailing \';\' from it, as long as those products shouldn\'t be excluded. There\'s a\n                great number of ways that we can make this a little more generic to hopefully make\n                this a better candidate for reuse, depending on how much power / responsibility we\n                want to place back into the caller\'s hands. Some examples are:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\n// products.js\n\nconst formatNames = (data, excludedProducts) => {\n    // Implementation as above\n}\n                ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This first alternative doesn\'t change much at all. In fact, all it does\n                is centre this functionality in a products-related module. Depending on how\n                consistent your product models are, this may be enough for this function to now be\n                easier to find and more reusable. That said, it still makes a lot of assumptions\n                about both what these products look like and the fact that \'format\' means\n                \'concatenate\'.')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\n// products.js\n\nconst concatProductNames = (\n    data, \n    {\n        selectName = x => x, \n        excludeIf = x => false\n    } = {}) => \n    data\n        .filter(product => !excludeIf(product))\n        .map(selectName)\n        .reduce((result, current) => result + current + \';\', \'\');\n\n// Then call this with\n\nconcatProductNames(\n    products,\n    {\n        selectName: p => p.info.name,\n        excludeIf: p => productsToExclude.some(pe => pe.info.id === p.info.id)\n    });\n)\n            ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This option places more responsibility again on the caller, asking them\n                to provide a function for both selecting a product\'s name and determining whether\n                a product should be included or not. This means that any other potential caller can\n                reuse this, even if they have a different shape of product, and even if they have a\n                different (or no) requirements about whether the product should be excluded. That\n                said, it still makes some assumptions about how the result should be concatenated,\n                which may be just enough contained functionality to still make this function\n                valuable in the domain of products.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('I rewrote the implementation above to show that, mainly, this function is\n                really just a filter and a map, with some string concatenation that the caller may\n                or may not want. What if we had no real domain logic that specified that we often\n                need product names listed in this contrived way? We could offer the following:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\n// arrays.js\n\nconst filterMap = (array, filter, map) => {\n    const result = [];\n\n    for (var elem of array) {\n        if (filter(elem)) {\n            result.push(map(elem));\n        }\n    }\n\n    return result;\n}\n\n// Then, to get the same result as we did before\n\nconst relevantProductNames = filterMap(\n    products,\n    p => excludedProducts.every(pe => pe.info.id !== p.info.id),\n    p => p.info.name\n);\n\nconst result = relevantProductNames.reduce((acc, current) => acc + current + \';\', \'\');\n                ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This places almost all power and responsibility at the feet of the caller,\n                but provides purely generic array-based functionality which could be relevant for\n                any manner of purpose. In fact, the only real feature this function offers is\n                avoiding the double enumeration of an array, which could get expensive in larger\n                arrays (and they\'d better be large before you start worrying too much about this).')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('On the great spectrum of reusable code, this may be verging on the side of\n                \'but do I even need this\', and yeah in most cases the caller could simply '),
+								$author$project$Blog$Content$InlineCode('.filter'),
+								$author$project$Blog$Content$Text(' and '),
+								$author$project$Blog$Content$InlineCode('.map'),
+								$author$project$Blog$Content$Text(' themselves. The most reusable yet useful function may lie somewhere in\n                the middle of the two extremes I\'ve provided.')
+							]))
+					]),
+				H: $elm$core$Maybe$Just(
+					{am: '... graveyard modules', H: 'Helper libraries'})
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				V: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('A developer works all day on a given feature. They get their code ready,\n                write tests, and verify everything is working end-to-end. Then they look at what\n                they have - and spend another half a day writing things like:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\npublic class Point\n{\n    public int X { get; }\n    public int Y { get; }\n\n    public Point(int x, int y)\n    {\n        X = x;\n        Y = y;\n    }\n\n    public override bool Equals(object obj) =>\n        Equals(obj as Point);\n\n    public bool Equals(Point other) =>\n        other != null\n            && X == other.X\n            && Y == other.Y;\n\n    public override int GetHashCode() =>\n        19 * X.GetHashCode() + 21 * Y.GetHashCode();\n}\n                ', E: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('They write tests again for the '),
+								$author$project$Blog$Content$InlineCode('Equals'),
+								$author$project$Blog$Content$Text(' methods and '),
+								$author$project$Blog$Content$InlineCode('GetHashCode'),
+								$author$project$Blog$Content$Text(' method that they override. They find a bug or two and they look at how\n                they can improve the '),
+								$author$project$Blog$Content$InlineCode('GetHashCode'),
+								$author$project$Blog$Content$Text(' method '),
+								$author$project$Blog$Content$Emphasis('(hint: it can be)'),
+								$author$project$Blog$Content$Text('.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('And it turns out that they do this not because they have any '),
+								$author$project$Blog$Content$InlineCode('IDictionary<Point, object>'),
+								$author$project$Blog$Content$Text(' or '),
+								$author$project$Blog$Content$InlineCode('HashSet<Point>'),
+								$author$project$Blog$Content$Text(', but rather they\'ve done this work so that that functionality could be\n                supported in future.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('The thing is though, there\'s no way of knowing that this will actually be\n                a requirement for the '),
+								$author$project$Blog$Content$InlineCode('Point'),
+								$author$project$Blog$Content$Text(' class. Maybe it\'ll never need to be hashed, or equality ever checked, and\n                this has just been a great waste of time. If another developer is then working on\n                some more functionality surrounding '),
+								$author$project$Blog$Content$InlineCode('Point'),
+								$author$project$Blog$Content$Text('s, and needs this functionality, then that would be the responsible time\n                at which to implement these methods.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('It isn\'t just a more responsible time for the sake of getting more work\n                out the door faster in an iterative fashion, but consider the possibility that '),
+								$author$project$Blog$Content$InlineCode('Point'),
+								$author$project$Blog$Content$Text(' has in the meantime become:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\npublic class Point\n{\n    public int X { get; }\n    public int Y { get; }\n    public int Z { get; }\n\n    public Point(int X, int Y, int Z)\n    {\n        X = x;\n        Y = y;\n        Z = z;\n    }\n\n    // ...\n}\n                ', E: 'cs'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('A '),
+								$author$project$Blog$Content$InlineCode('Point'),
+								$author$project$Blog$Content$Text(' has now become a 3-dimensional point in space. This means that the\n                implementation of its '),
+								$author$project$Blog$Content$InlineCode('Equals'),
+								$author$project$Blog$Content$Text(' methods and consequently its '),
+								$author$project$Blog$Content$InlineCode('GetHashCode'),
+								$author$project$Blog$Content$Text(' method would have to be updated. That isn\'t the end of the world, but in\n                the event these methods weren\'t implemented in the first place (since they weren\'t\n                previously required), then all the implementer has to do is write them as the\n                current 3-dimensional nature dictates. That might not seem like such a huge win in\n                the above contrived example, but consider complex objects that you may have worked\n                on, and how much they\'re capable of changing over time.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('When writing the '),
+								$author$project$Blog$Content$InlineCode('Point'),
+								$author$project$Blog$Content$Text(' class, don\'t try to write and implement the future; but '),
+								$author$project$Blog$Content$Emphasis('consider'),
+								$author$project$Blog$Content$Text(' the future. Think about how the type could be extended to support aspects\n                such as modifying, either mutably or immutably, points and whether it could be\n                easily modified to handle non-integer values (particularly about whether this could\n                be done in a non-breaking way).')
+							]))
+					]),
+				H: $elm$core$Maybe$Just(
+					{am: 'You ain\'t gonna need it (probably)', H: 'YAGNI'})
+			})
+		]);
+};
+var $author$project$Blog$Content$Divider = {$: 7};
+var $author$project$Blog$Content$TextAttribute = function (a) {
+	return {$: 0, a: a};
 };
 var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0) {
 	return _List_fromArray(
@@ -6642,13 +6919,13 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 			$author$project$Blog$Content$WhenCreated('January 26 2020'),
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							bh: 'Useless teacher',
-							bj: $author$project$Blog$Content$TextAttribute('Memecenter'),
-							bV: '/assets/img/meme3.jpg'
+							as: 'Useless teacher',
+							au: $author$project$Blog$Content$TextAttribute('Memecenter'),
+							ba: '/assets/img/meme3.jpg'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6668,12 +6945,12 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('This article, then, describes how a pursuit that may seem irrelevant at\n                first to working as a software developer actually benefits me. If you have any\n                similar experience of working in a seemingly unrelated area, try to reflect on ways\n                in which it may actually come in handy for you.')
 							]))
 					]),
-				aj: $elm$core$Maybe$Nothing
+				H: $elm$core$Maybe$Nothing
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6713,7 +6990,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('A parallel in programming that comes to mind is the use of positional\n                arguments for a function or method vs named arguments (or, where that\'s not possible,\n                an arguments object). For example, in JavaScript, we might:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nconst processValues = (name, email, password, dateOfBirth, hasConsented) => {\n    // We process the positional arguments in some way\n}\n\n// We then call this function like so\nprocessValues(\'Boris\', \'boris.y@rumbler.ru\', \'admin\', \'01-02-1931\', true);\n                ', bD: 'js'}),
+						{C: '\nconst processValues = (name, email, password, dateOfBirth, hasConsented) => {\n    // We process the positional arguments in some way\n}\n\n// We then call this function like so\nprocessValues(\'Boris\', \'boris.y@rumbler.ru\', \'admin\', \'01-02-1931\', true);\n                ', E: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6725,7 +7002,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('Alternatively, we could give the arguments meaning in and of themselves,\n                allowing them to be understood without the need for them to appear in a particular\n                order. One way to achieve this in JavaScript would be to:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nconst processValues = (args) => {\n    // We process the arguments object in some way using args.name, args.email etc.\n}\n\n// Or, we can just use deconstruction to keep things clearer\n\nconst processValues = ({ name, email, password, dateOfBirth, hasConsented }) => {\n    // We process the deconstructed arguments object in some way\n}\n\n// We then call this function like so\nprocessValues({ \n    name: \'Boris\', \n    email: \'boris.y@rumbler.ru\', \n    password: \'admin\', \n    dateOfBirth: \'01-02-1931\', \n    hasConsented: true\n});\n                ', bD: 'js'}),
+						{C: '\nconst processValues = (args) => {\n    // We process the arguments object in some way using args.name, args.email etc.\n}\n\n// Or, we can just use deconstruction to keep things clearer\n\nconst processValues = ({ name, email, password, dateOfBirth, hasConsented }) => {\n    // We process the deconstructed arguments object in some way\n}\n\n// We then call this function like so\nprocessValues({ \n    name: \'Boris\', \n    email: \'boris.y@rumbler.ru\', \n    password: \'admin\', \n    dateOfBirth: \'01-02-1931\', \n    hasConsented: true\n});\n                ', E: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6737,20 +7014,20 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('As an analogy to English\'s and Russian\'s approach to word order, then, we \n                can choose whether we want to place meaning in the order the words appear, or \n                whether we want the words to describe their own meaning in that function. Both are\n                entirely valid options, and each will be most useful in certain circumstances.')
 							]))
 					]),
-				aj: $elm$core$Maybe$Just(
-					{bW: '', aj: 'There will never be one correct way'})
+				H: $elm$core$Maybe$Just(
+					{am: '', H: 'There will never be one correct way'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							bh: 'Less is more',
-							bj: $author$project$Blog$Content$ComplexAttribute(
-								{bE: 'https://unsplash.com/@sarahdorweiler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge', b_: 'Photo by Sarah Dorweiler on Unsplash'}),
-							bV: '/assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
+							as: 'Less is more',
+							au: $author$project$Blog$Content$ComplexAttribute(
+								{aR: 'https://unsplash.com/@sarahdorweiler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge', bg: 'Photo by Sarah Dorweiler on Unsplash'}),
+							ba: '/assets/img/sarah-dorweiler-x2Tmfd1-SgA-unsplash.jpg'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6772,7 +7049,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('. Especially if what you\'re writing is a \'hot path\' in terms of other\n                developers being required to read and understand it, you should treat it as\n                optimisation to pause, think, and make your code as straight forward and to the\n                point as possible. Some examples might be:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = new List<int>();\nfor (var i = 0; i < numbers.Count(); i++)\n{\n    var num = numbers[i];\n    if (num > 1)\n    {\n        var a = num * num;\n        result.Add(a);\n    }\n}\n\nConsole.WriteLine(result);\n                ', bD: 'cs'}),
+						{C: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = new List<int>();\nfor (var i = 0; i < numbers.Count(); i++)\n{\n    var num = numbers[i];\n    if (num > 1)\n    {\n        var a = num * num;\n        result.Add(a);\n    }\n}\n\nConsole.WriteLine(result);\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6781,7 +7058,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text(' code. For me, though, the intention (signal) is lost in a sea of words\n                (noise). I don\'t want another developer to have to explore the bowels of my code to\n                understand it. Ideally, they could understand this more from the surface. So I might\n                instead use:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(num => num > 1)\n    .Select(num => num * num);\n                ', bD: 'cs'}),
+						{C: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(num => num > 1)\n    .Select(num => num * num);\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6800,14 +7077,14 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text(' methods were less trivial, and risked obfuscating this code, the use of\n                some local functions / private helper methods can alleviate this, to make it:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Select(SquareNumber);\n                ', bD: 'cs'}),
+						{C: '\nvar numbers = new[] { 1, 2, 3 };\n\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Select(SquareNumber);\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('This only makes the broader code more concise if those callback functions\n                themselves are reasonable, something that the process of attempting to name them\n                may illuminate. Let\'s say some sick joke meant that the query ignored the last item:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\n// Notice our named helper method is becoming less concise\nvar result = numbers\n    .Where(NumberGreaterThanOneAndItemNotLast)\n    .Select(SquareNumber);\n\n// Whereas, if we were to keep these separate\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Where(ItemNotLast)\n    .Select(SquareNumber);\n                ', bD: 'cs'}),
+						{C: '\n// Notice our named helper method is becoming less concise\nvar result = numbers\n    .Where(NumberGreaterThanOneAndItemNotLast)\n    .Select(SquareNumber);\n\n// Whereas, if we were to keep these separate\nvar result = numbers\n    .Where(NumberGreaterThanOne)\n    .Where(ItemNotLast)\n    .Select(SquareNumber);\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6821,13 +7098,13 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('Starting with a simple base that other developers can easily understand\n                also makes it easier to add required embellishments later. Examples include a retry \n                policy surrounding a network call, or error logging to record exceptions occurred \n                during a HTTP request. Hopefully, the next developer, with a concentrated purpose,\n                will also be able to contribute to the shared codebase in an equally focused\n                manner.')
 							]))
 					]),
-				aj: $elm$core$Maybe$Just(
-					{bW: '... less is more', aj: 'Be concise'})
+				H: $elm$core$Maybe$Just(
+					{am: '... less is more', H: 'Be concise'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6842,7 +7119,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text('Learning a second language draws a number of parallels with learning a\n                programming language. There is a syntax, a vocabulary - there are areas in which\n                there\'s no room for movement or interpretation, and others where the lines are less\n                clear. Broadly, though, I think you can learn a lot about your communication with\n                others, as well as an appreciation for the vast array of ways in which we can say\n                the same thing with our code.')
 							]))
 					]),
-				aj: $elm$core$Maybe$Nothing
+				H: $elm$core$Maybe$Nothing
 			})
 		]);
 };
@@ -6857,7 +7134,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 			$author$project$Blog$Content$WhenCreated('November 15 2019'),
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6867,9 +7144,9 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$BlockQuote('Yes, but best practice...'),
 						$author$project$Blog$Content$Image(
 						{
-							bh: 'boom-mic-drop',
-							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bV: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'
+							as: 'boom-mic-drop',
+							au: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							ba: 'https://media.giphy.com/media/d0NnEG1WnnXqg/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6884,12 +7161,12 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' practices and remind you that everything really does\n            depend on the situation.')
 							]))
 					]),
-				aj: $elm$core$Maybe$Nothing
+				H: $elm$core$Maybe$Nothing
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6899,14 +7176,14 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' methods and simple object properties. This led to wonders such as...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value\n                ', bD: 'cs'}),
+						{C: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('with more text explaining than doing, regardless of whether the code is already\n            completely unambiguous. Worse still, this can easily be...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value ?? throw new InvalidOperationException();\n            ', bD: 'cs'}),
+						{C: '\n/// <summary>\n/// Returns the current value of this object.\n/// </summary>\n/// <returns>The current value of this object</returns>\npublic int GetValue() =>\n    this.Value ?? throw new InvalidOperationException();\n            ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6920,9 +7197,9 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 							])),
 						$author$project$Blog$Content$Image(
 						{
-							bh: 'explosions',
-							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bV: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'
+							as: 'explosions',
+							au: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							ba: 'https://media.giphy.com/media/13d2jHlSlxklVe/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6932,10 +7209,10 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{b_: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', aj: 'Programmers will barely read your code, let alone the comments that go with it'},
-								{b_: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', aj: 'The compiler can never know whether your comments are correct anymore'},
-								{b_: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', aj: 'Maintenance costs'},
-								{b_: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', aj: 'There\'s no guarantee your code will be easier to understand'}
+								{bg: 'We deal with tight deadlines and a lot of words to process. I am human, and if there are\n            reasonable shortcuts to take, I\'ll take them. First things first, you\'re well-versed yet untestable code\n            comments.', H: 'Programmers will barely read your code, let alone the comments that go with it'},
+								{bg: 'If you change what a JavaScript function returns without changing your JS Doc, then you\'re\n            no better than those that use social engineering to convince old ladies you work at her bank.', H: 'The compiler can never know whether your comments are correct anymore'},
+								{bg: 'There\'s no such thing as a free sandwich, and I have found myself wasting very real time\n            in order to satisfy commenting standards that either my workplace or university had.', H: 'Maintenance costs'},
+								{bg: 'Walls of description can distract coders from the nuts and bolts of the code, and if the\n            comments become stale (where the code has moved on but the comment has not been updated) then they only\n            cause confusion.', H: 'There\'s no guarantee your code will be easier to understand'}
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -6943,7 +7220,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('That said, there is a time and place for documentation. The more your actual code can\n            inform this, the better. For example, think how your typed API is self-documenting when you have a\n            method...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nTask<bool> ItemExistsAsync(string itemId);\n                ', bD: 'cs'}),
+						{C: '\nTask<bool> ItemExistsAsync(string itemId);\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6958,7 +7235,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' patterns...')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nEither<Error, Item> GetItem(string itemId);\n                ', bD: 'cs'}),
+						{C: '\nEither<Error, Item> GetItem(string itemId);\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -6979,24 +7256,24 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{b_: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', aj: 'Is the code understandable without it?'},
-								{b_: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', aj: 'Can I make things clearer by refactoring?'},
-								{b_: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', aj: 'How accessible is the code to the caller?'}
+								{bg: 'This can be difficult, since it\'ll always be understandable to the author, which is why a\n                  code review process can be very useful.', H: 'Is the code understandable without it?'},
+								{bg: 'If there\'s a certain if condition that makes people\'s eyes bleed and scratch their heads,\n                  then perhaps you can assign that condition to a named function.', H: 'Can I make things clearer by refactoring?'},
+								{bg: 'Consider whether the caller of some code is able to see it. For example, a private method\n                will be called from within the same class, so if a developer is working on the caller, they will have\n                full access to it. If you\'re writing the outer API of some library code (or, using OpenAPI, documenting\n                a HTTP API) there\'ll likely be more value in commenting, since the consumer perhaps won\'t be able to\n                peer into the code as easily.', H: 'How accessible is the code to the caller?'}
 							]))
 					]),
-				aj: $elm$core$Maybe$Just(
-					{bW: 'Everyone\'s favourite pastime', aj: '1. Commenting'})
+				H: $elm$core$Maybe$Just(
+					{am: 'Everyone\'s favourite pastime', H: '1. Commenting'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							bh: 'shifty-eyes',
-							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bV: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'
+							as: 'shifty-eyes',
+							au: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							ba: 'https://media.giphy.com/media/32b3S2YQbby2A/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -7009,7 +7286,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('I\'ve seen, for example, code imitated by the following in a web application that uses\n            Dependency Injection to provide dependencies:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\npublic MyService(\n    object depA,\n    object depB,\n    object depN\n)\n{\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\n}\n                ', bD: 'cs'}),
+						{C: '\npublic MyService(\n    object depA,\n    object depB,\n    object depN\n)\n{\n    this.depA = depA ?? throw new ArgumentNullException(nameof(depA));\n    this.depB = depB ?? throw new ArgumentNullException(nameof(depB));\n    this.depN = depN ?? throw new ArgumentNullException(nameof(depN));\n}\n                ', E: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -7069,19 +7346,19 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('\' constructor, but this can apply to any of its methods\' arguments, including complex object\n                arguments). Or it may be, particularly if you\'re writing deeper-level library code, more appropriate to\n                guard against every inch of input you get from calling code.')
 							]))
 					]),
-				aj: $elm$core$Maybe$Just(
-					{bW: 'Trust no one', aj: '2. Get defensive'})
+				H: $elm$core$Maybe$Just(
+					{am: 'Trust no one', H: '2. Get defensive'})
 			}),
 			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Image(
 						{
-							bh: 'square-wheels',
-							bj: $author$project$Blog$Content$TextAttribute('GIPHY'),
-							bV: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'
+							as: 'square-wheels',
+							au: $author$project$Blog$Content$TextAttribute('GIPHY'),
+							ba: 'https://media.giphy.com/media/UP5CZUXC5dH1K/giphy.gif'
 						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -7104,7 +7381,7 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' to do it for you:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{bo: '\nfunction flattenArray(array) {\n    return array.reduce(\n        (accumulator, current) => (Array.isArray(current)\n            ? accumulator.concat(flattenArray(current))\n            : accumulator.concat(current)),\n        []);\n}\n                ', bD: 'js'}),
+						{C: '\nfunction flattenArray(array) {\n    return array.reduce(\n        (accumulator, current) => (Array.isArray(current)\n            ? accumulator.concat(flattenArray(current))\n            : accumulator.concat(current)),\n        []);\n}\n                ', E: 'js'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -7129,17 +7406,17 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						$author$project$Blog$Content$Collection(
 						_List_fromArray(
 							[
-								{b_: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', aj: 'What\'s the size / complexity of this functionality I want?'},
-								{b_: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', aj: 'What\'s available that\'s already done this?'},
-								{b_: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', aj: 'Will we be able to get out of this?'}
+								{bg: 'You might not know up front. That\'s okay; if you\'ve given it an hour of your time, you\'ll\n            likely already understand whether this is looking like a reasonable function, or whether you\'re starting to\n            write the code that you will labour over for another month.', H: 'What\'s the size / complexity of this functionality I want?'},
+								{bg: 'If the only library you can find hasn\'t been updated (when it likely should have been) for\n            years, has no public support / interest, with unaddressed / ignored issues, or would lock you into some tech\n            stack you don\'t want a part of, I wouldn\'t touch it with a ten-foot pole.', H: 'What\'s available that\'s already done this?'},
+								{bg: 'If someone eagerly imported the whole of lodash because it seemed like you\'d need a lot of\n                its functionality moving forward, then it turned out you only needed a couple of functions (and the\n                needed functionality was spread out across modules so cherry-picking wasn\'t an option), there\'s nothing\n                stopping you from adapting the source code of the few functions you need and killing the import. There\n                would be a simple way to remove that dependency on that library.', H: 'Will we be able to get out of this?'}
 							]))
 					]),
-				aj: $elm$core$Maybe$Just(
-					{bW: 'But why not try square tyres?', aj: '3. Don\'t reinvent the wheel'})
+				H: $elm$core$Maybe$Just(
+					{am: 'But why not try square tyres?', H: '3. Don\'t reinvent the wheel'})
 			}),
 			$author$project$Blog$Content$Section(
 			{
-				bp: _List_fromArray(
+				V: _List_fromArray(
 					[
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
@@ -7157,15 +7434,18 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('Or at the very least, you can feel the rage burn through your veins next week when\n            some other dev rips out your lovingly crafted function that was working just fine to import a library,\n            saying \'Haven\'t they even read about best practices here?\'')
 							]))
 					]),
-				aj: $elm$core$Maybe$Nothing
+				H: $elm$core$Maybe$Nothing
 			})
 		]);
 };
 var $author$project$Article$getContent = function (slug) {
-	if (!slug) {
-		return $author$project$Blog$ThreeBestPractices$getContent(0);
-	} else {
-		return $author$project$Blog$ProgrammingAsASecondLanguage$getContent(0);
+	switch (slug) {
+		case 0:
+			return $author$project$Blog$ThreeBestPractices$getContent(0);
+		case 1:
+			return $author$project$Blog$ProgrammingAsASecondLanguage$getContent(0);
+		default:
+			return $author$project$Blog$AreYouProvidingValue$getContent(0);
 	}
 };
 var $elm$html$Html$main_ = _VirtualDom_node('main');
@@ -7181,7 +7461,7 @@ var $author$project$Page$Article$viewCodeBlock = function (codeBlock) {
 		$elm$html$Html$pre,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('language-' + codeBlock.bD)
+				$elm$html$Html$Attributes$class('language-' + codeBlock.E)
 			]),
 		_List_fromArray(
 			[
@@ -7190,7 +7470,7 @@ var $author$project$Page$Article$viewCodeBlock = function (codeBlock) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(codeBlock.bo)
+						$elm$html$Html$text(codeBlock.C)
 					]))
 			]));
 };
@@ -7209,14 +7489,14 @@ var $author$project$Page$Article$viewCollectionItem = function (collectionItem) 
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(collectionItem.aj)
+						$elm$html$Html$text(collectionItem.H)
 					])),
 				A2(
 				$elm$html$Html$p,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(collectionItem.b_)
+						$elm$html$Html$text(collectionItem.bg)
 					]))
 			]));
 };
@@ -7248,11 +7528,11 @@ var $author$project$Page$Article$viewAttribution = function (attributionInfo) {
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('center-align'),
-					$elm$html$Html$Attributes$href(attribution.bE)
+					$elm$html$Html$Attributes$href(attribution.aR)
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text(attribution.b_)
+					$elm$html$Html$text(attribution.bg)
 				]));
 	}
 };
@@ -7275,12 +7555,12 @@ var $author$project$Page$Article$viewImage = function (imageInfo) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('responsive-img'),
-								$elm$html$Html$Attributes$src(imageInfo.bV),
-								$elm$html$Html$Attributes$alt(imageInfo.bh)
+								$elm$html$Html$Attributes$src(imageInfo.ba),
+								$elm$html$Html$Attributes$alt(imageInfo.as)
 							]),
 						_List_Nil)
 					])),
-				$author$project$Page$Article$viewAttribution(imageInfo.bj)
+				$author$project$Page$Article$viewAttribution(imageInfo.au)
 			]));
 };
 var $elm$html$Html$em = _VirtualDom_node('em');
@@ -7352,14 +7632,14 @@ var $author$project$Page$Article$viewSectionTitle = function (maybeSectionTitle)
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(sectionTitle.aj)
+						$elm$html$Html$text(sectionTitle.H)
 					])),
 				A2(
 				$elm$html$Html$h4,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(sectionTitle.bW)
+						$elm$html$Html$text(sectionTitle.am)
 					]))
 			]);
 	}
@@ -7453,8 +7733,8 @@ var $author$project$Page$Article$viewSection = function (sectionInfo) {
 				$elm$html$Html$Attributes$class('section')
 			]),
 		_Utils_ap(
-			$author$project$Page$Article$viewSectionTitle(sectionInfo.aj),
-			A2($elm$core$List$map, $author$project$Page$Article$viewContent, sectionInfo.bp)));
+			$author$project$Page$Article$viewSectionTitle(sectionInfo.H),
+			A2($elm$core$List$map, $author$project$Page$Article$viewContent, sectionInfo.V)));
 };
 var $author$project$Page$Article$view = function (model) {
 	return A2(
@@ -7470,11 +7750,11 @@ var $author$project$Component$Card$viewAction = function (action) {
 		$elm$html$Html$a,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$href(action.bE)
+				$elm$html$Html$Attributes$href(action.aR)
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text(action.b_)
+				$elm$html$Html$text(action.bg)
 			]));
 };
 var $author$project$Component$Card$view = function (model) {
@@ -7502,14 +7782,14 @@ var $author$project$Component$Card$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text(model.aj)
+								$elm$html$Html$text(model.H)
 							])),
 						A2(
 						$elm$html$Html$p,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text(model.b_)
+								$elm$html$Html$text(model.bg)
 							]))
 					])),
 				A2(
@@ -7518,7 +7798,7 @@ var $author$project$Component$Card$view = function (model) {
 					[
 						$elm$html$Html$Attributes$class('card-action purple darken-3')
 					]),
-				A2($elm$core$List$map, $author$project$Component$Card$viewAction, model.am))
+				A2($elm$core$List$map, $author$project$Component$Card$viewAction, model.aq))
 			]));
 };
 var $author$project$Page$Home$view = function (_v0) {
@@ -7555,12 +7835,12 @@ var $author$project$Page$Home$view = function (_v0) {
 							[
 								$author$project$Component$Card$view(
 								{
-									am: _List_fromArray(
+									aq: _List_fromArray(
 										[
-											{bE: '/blog/no-best-practices', b_: 'Read'}
+											{aR: '/blog/no-best-practices', bg: 'Read'}
 										]),
-									b_: '... and how there are no best practices',
-									aj: '3 Best Practices in programming'
+									bg: '... and how there are no best practices',
+									H: '3 Best Practices in programming'
 								})
 							])),
 						A2(
@@ -7573,12 +7853,39 @@ var $author$project$Page$Home$view = function (_v0) {
 							[
 								$author$project$Component$Card$view(
 								{
-									am: _List_fromArray(
+									aq: _List_fromArray(
 										[
-											{bE: '/blog/programming-as-a-second-language', b_: 'Read'}
+											{aR: '/blog/programming-as-a-second-language', bg: 'Read'}
 										]),
-									b_: '... and why I\'m glad I\'ve learnt / taught a second language',
-									aj: 'Programming as a Second Language'
+									bg: '... and why I\'m glad I\'ve learnt / taught a second language',
+									H: 'Programming as a Second Language'
+								})
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('col s12 m6 l6')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Component$Card$view(
+								{
+									aq: _List_fromArray(
+										[
+											{aR: '/blog/are-you-providing-value', bg: 'Read'}
+										]),
+									bg: '... and how the road to hell is paved with good intentions',
+									H: 'Are you providing value?'
 								})
 							]))
 					]))
@@ -7616,7 +7923,7 @@ var $author$project$Page$NotFound$view = function (_v0) {
 			]));
 };
 var $author$project$Page$view = function (model) {
-	var _v0 = model.ac;
+	var _v0 = model.ag;
 	switch (_v0.$) {
 		case 0:
 			return $author$project$Page$NotFound$view(0);
@@ -7630,18 +7937,18 @@ var $author$project$Page$view = function (model) {
 };
 var $author$project$Main$view = function (model) {
 	var page = $author$project$Page$Model(
-		$author$project$Page$fromRoute(model.ae));
+		$author$project$Page$fromRoute(model.ai));
 	return {
-		bk: _List_fromArray(
+		br: _List_fromArray(
 			[
 				$author$project$Header$view(0),
 				$author$project$Page$view(page),
-				$author$project$Footer$view(model.ak)
+				$author$project$Footer$view(model.ao)
 			]),
-		aj: $author$project$Page$title(page)
+		H: $author$project$Page$title(page)
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(
-	{bB: $author$project$Main$init, bP: $author$project$Main$UrlChanged, bQ: $author$project$Main$LinkClicked, bX: $author$project$Main$subscriptions, b$: $author$project$Main$update, b0: $author$project$Main$view});
+	{bG: $author$project$Main$init, bS: $author$project$Main$UrlChanged, bT: $author$project$Main$LinkClicked, bY: $author$project$Main$subscriptions, b$: $author$project$Main$update, b0: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
