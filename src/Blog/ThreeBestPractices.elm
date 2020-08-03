@@ -272,12 +272,12 @@ public MyService(
             , Paragraph
                 [ Text """There's nothing wrong with this line of thinking, in most cases. It's been some years
             since the """
-                , Link "https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/" """2016 chaos caused by pulling a
+                , ExternalLink "https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/" """2016 chaos caused by pulling a
             commonly-shared dependency"""
                 , Text ", the "
                 , InlineCode "npm"
                 , Text " package "
-                , Link "https://www.npmjs.com/package/left-pad" "left-pad"
+                , ExternalLink "https://www.npmjs.com/package/left-pad" "left-pad"
                 , Text """. While it may be an extreme example, it does point out that sometimes wheels <b>can</b> be
                 reinvented. It's a cost / value ratio between the time it would take you to rewrite this functionality,
                 vs the 'costs' (which may be your JS bundle size, or your coupling to a certain library / framework)

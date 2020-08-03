@@ -4910,7 +4910,53 @@ function _Url_percentDecode(string)
 	{
 		return $elm$core$Maybe$Nothing;
 	}
-}var $author$project$Main$LinkClicked = function (a) {
+}
+
+
+function _Time_now(millisToPosix)
+{
+	return _Scheduler_binding(function(callback)
+	{
+		callback(_Scheduler_succeed(millisToPosix(Date.now())));
+	});
+}
+
+var _Time_setInterval = F2(function(interval, task)
+{
+	return _Scheduler_binding(function(callback)
+	{
+		var id = setInterval(function() { _Scheduler_rawSpawn(task); }, interval);
+		return function() { clearInterval(id); };
+	});
+});
+
+function _Time_here()
+{
+	return _Scheduler_binding(function(callback)
+	{
+		callback(_Scheduler_succeed(
+			A2($elm$time$Time$customZone, -(new Date().getTimezoneOffset()), _List_Nil)
+		));
+	});
+}
+
+
+function _Time_getZoneName()
+{
+	return _Scheduler_binding(function(callback)
+	{
+		try
+		{
+			var name = $elm$time$Time$Name(Intl.DateTimeFormat().resolvedOptions().timeZone);
+		}
+		catch (e)
+		{
+			var name = $elm$time$Time$Offset(new Date().getTimezoneOffset());
+		}
+		callback(_Scheduler_succeed(name));
+	});
+}
+var $author$project$Main$LinkClicked = function (a) {
 	return {$: 'LinkClicked', a: a};
 };
 var $author$project$Main$UrlChanged = function (a) {
@@ -10514,9 +10560,12 @@ var $elm$core$Basics$never = function (_v0) {
 	}
 };
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Main$Model = F2(
-	function (key, route) {
-		return {key: key, route: route};
+var $author$project$Main$DateRetrieved = function (a) {
+	return {$: 'DateRetrieved', a: a};
+};
+var $author$project$Main$Model = F3(
+	function (key, route, today) {
+		return {key: key, route: route, today: today};
 	});
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
@@ -10769,6 +10818,232 @@ var $author$project$Route$parser = $elm$url$Url$Parser$oneOf(
 var $author$project$Route$fromUrl = function (url) {
 	return A2($elm$url$Url$Parser$parse, $author$project$Route$parser, url);
 };
+var $justinmimbs$date$Date$RD = function (a) {
+	return {$: 'RD', a: a};
+};
+var $elm$core$Basics$clamp = F3(
+	function (low, high, number) {
+		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
+	});
+var $elm$core$Basics$modBy = _Basics_modBy;
+var $justinmimbs$date$Date$isLeapYear = function (y) {
+	return ((!A2($elm$core$Basics$modBy, 4, y)) && (!(!A2($elm$core$Basics$modBy, 100, y)))) || (!A2($elm$core$Basics$modBy, 400, y));
+};
+var $justinmimbs$date$Date$daysBeforeMonth = F2(
+	function (y, m) {
+		var leapDays = $justinmimbs$date$Date$isLeapYear(y) ? 1 : 0;
+		switch (m.$) {
+			case 'Jan':
+				return 0;
+			case 'Feb':
+				return 31;
+			case 'Mar':
+				return 59 + leapDays;
+			case 'Apr':
+				return 90 + leapDays;
+			case 'May':
+				return 120 + leapDays;
+			case 'Jun':
+				return 151 + leapDays;
+			case 'Jul':
+				return 181 + leapDays;
+			case 'Aug':
+				return 212 + leapDays;
+			case 'Sep':
+				return 243 + leapDays;
+			case 'Oct':
+				return 273 + leapDays;
+			case 'Nov':
+				return 304 + leapDays;
+			default:
+				return 334 + leapDays;
+		}
+	});
+var $justinmimbs$date$Date$floorDiv = F2(
+	function (a, b) {
+		return $elm$core$Basics$floor(a / b);
+	});
+var $justinmimbs$date$Date$daysBeforeYear = function (y1) {
+	var y = y1 - 1;
+	var leapYears = (A2($justinmimbs$date$Date$floorDiv, y, 4) - A2($justinmimbs$date$Date$floorDiv, y, 100)) + A2($justinmimbs$date$Date$floorDiv, y, 400);
+	return (365 * y) + leapYears;
+};
+var $justinmimbs$date$Date$daysInMonth = F2(
+	function (y, m) {
+		switch (m.$) {
+			case 'Jan':
+				return 31;
+			case 'Feb':
+				return $justinmimbs$date$Date$isLeapYear(y) ? 29 : 28;
+			case 'Mar':
+				return 31;
+			case 'Apr':
+				return 30;
+			case 'May':
+				return 31;
+			case 'Jun':
+				return 30;
+			case 'Jul':
+				return 31;
+			case 'Aug':
+				return 31;
+			case 'Sep':
+				return 30;
+			case 'Oct':
+				return 31;
+			case 'Nov':
+				return 30;
+			default:
+				return 31;
+		}
+	});
+var $justinmimbs$date$Date$fromCalendarDate = F3(
+	function (y, m, d) {
+		return $justinmimbs$date$Date$RD(
+			($justinmimbs$date$Date$daysBeforeYear(y) + A2($justinmimbs$date$Date$daysBeforeMonth, y, m)) + A3(
+				$elm$core$Basics$clamp,
+				1,
+				A2($justinmimbs$date$Date$daysInMonth, y, m),
+				d));
+	});
+var $elm$time$Time$flooredDiv = F2(
+	function (numerator, denominator) {
+		return $elm$core$Basics$floor(numerator / denominator);
+	});
+var $elm$time$Time$posixToMillis = function (_v0) {
+	var millis = _v0.a;
+	return millis;
+};
+var $elm$time$Time$toAdjustedMinutesHelp = F3(
+	function (defaultOffset, posixMinutes, eras) {
+		toAdjustedMinutesHelp:
+		while (true) {
+			if (!eras.b) {
+				return posixMinutes + defaultOffset;
+			} else {
+				var era = eras.a;
+				var olderEras = eras.b;
+				if (_Utils_cmp(era.start, posixMinutes) < 0) {
+					return posixMinutes + era.offset;
+				} else {
+					var $temp$defaultOffset = defaultOffset,
+						$temp$posixMinutes = posixMinutes,
+						$temp$eras = olderEras;
+					defaultOffset = $temp$defaultOffset;
+					posixMinutes = $temp$posixMinutes;
+					eras = $temp$eras;
+					continue toAdjustedMinutesHelp;
+				}
+			}
+		}
+	});
+var $elm$time$Time$toAdjustedMinutes = F2(
+	function (_v0, time) {
+		var defaultOffset = _v0.a;
+		var eras = _v0.b;
+		return A3(
+			$elm$time$Time$toAdjustedMinutesHelp,
+			defaultOffset,
+			A2(
+				$elm$time$Time$flooredDiv,
+				$elm$time$Time$posixToMillis(time),
+				60000),
+			eras);
+	});
+var $elm$time$Time$toCivil = function (minutes) {
+	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
+	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
+	var dayOfEra = rawDay - (era * 146097);
+	var yearOfEra = ((((dayOfEra - ((dayOfEra / 1460) | 0)) + ((dayOfEra / 36524) | 0)) - ((dayOfEra / 146096) | 0)) / 365) | 0;
+	var dayOfYear = dayOfEra - (((365 * yearOfEra) + ((yearOfEra / 4) | 0)) - ((yearOfEra / 100) | 0));
+	var mp = (((5 * dayOfYear) + 2) / 153) | 0;
+	var month = mp + ((mp < 10) ? 3 : (-9));
+	var year = yearOfEra + (era * 400);
+	return {
+		day: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
+		month: month,
+		year: year + ((month <= 2) ? 1 : 0)
+	};
+};
+var $elm$time$Time$toDay = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).day;
+	});
+var $elm$time$Time$Apr = {$: 'Apr'};
+var $elm$time$Time$Aug = {$: 'Aug'};
+var $elm$time$Time$Dec = {$: 'Dec'};
+var $elm$time$Time$Feb = {$: 'Feb'};
+var $elm$time$Time$Jan = {$: 'Jan'};
+var $elm$time$Time$Jul = {$: 'Jul'};
+var $elm$time$Time$Jun = {$: 'Jun'};
+var $elm$time$Time$Mar = {$: 'Mar'};
+var $elm$time$Time$May = {$: 'May'};
+var $elm$time$Time$Nov = {$: 'Nov'};
+var $elm$time$Time$Oct = {$: 'Oct'};
+var $elm$time$Time$Sep = {$: 'Sep'};
+var $elm$time$Time$toMonth = F2(
+	function (zone, time) {
+		var _v0 = $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).month;
+		switch (_v0) {
+			case 1:
+				return $elm$time$Time$Jan;
+			case 2:
+				return $elm$time$Time$Feb;
+			case 3:
+				return $elm$time$Time$Mar;
+			case 4:
+				return $elm$time$Time$Apr;
+			case 5:
+				return $elm$time$Time$May;
+			case 6:
+				return $elm$time$Time$Jun;
+			case 7:
+				return $elm$time$Time$Jul;
+			case 8:
+				return $elm$time$Time$Aug;
+			case 9:
+				return $elm$time$Time$Sep;
+			case 10:
+				return $elm$time$Time$Oct;
+			case 11:
+				return $elm$time$Time$Nov;
+			default:
+				return $elm$time$Time$Dec;
+		}
+	});
+var $elm$time$Time$toYear = F2(
+	function (zone, time) {
+		return $elm$time$Time$toCivil(
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).year;
+	});
+var $justinmimbs$date$Date$fromPosix = F2(
+	function (zone, posix) {
+		return A3(
+			$justinmimbs$date$Date$fromCalendarDate,
+			A2($elm$time$Time$toYear, zone, posix),
+			A2($elm$time$Time$toMonth, zone, posix),
+			A2($elm$time$Time$toDay, zone, posix));
+	});
+var $elm$time$Time$Name = function (a) {
+	return {$: 'Name', a: a};
+};
+var $elm$time$Time$Offset = function (a) {
+	return {$: 'Offset', a: a};
+};
+var $elm$time$Time$Zone = F2(
+	function (a, b) {
+		return {$: 'Zone', a: a, b: b};
+	});
+var $elm$time$Time$customZone = $elm$time$Time$Zone;
+var $elm$time$Time$here = _Time_here(_Utils_Tuple0);
+var $elm$time$Time$Posix = function (a) {
+	return {$: 'Posix', a: a};
+};
+var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
+var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
+var $justinmimbs$date$Date$today = A3($elm$core$Task$map2, $justinmimbs$date$Date$fromPosix, $elm$time$Time$here, $elm$time$Time$now);
 var $elm$json$Json$Encode$null = _Json_encodeNull;
 var $author$project$Main$updatePrism = _Platform_outgoingPort(
 	'updatePrism',
@@ -10778,11 +11053,17 @@ var $author$project$Main$updatePrism = _Platform_outgoingPort(
 var $author$project$Main$init = F3(
 	function (_v0, url, key) {
 		return _Utils_Tuple2(
-			A2(
+			A3(
 				$author$project$Main$Model,
 				key,
-				$author$project$Route$fromUrl(url)),
-			$author$project$Main$updatePrism(_Utils_Tuple0));
+				$author$project$Route$fromUrl(url),
+				$elm$core$Maybe$Nothing),
+			$elm$core$Platform$Cmd$batch(
+				_List_fromArray(
+					[
+						A2($elm$core$Task$perform, $author$project$Main$DateRetrieved, $justinmimbs$date$Date$today),
+						$author$project$Main$updatePrism(_Utils_Tuple0)
+					])));
 	});
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
@@ -10837,31 +11118,41 @@ var $elm$url$Url$toString = function (url) {
 };
 var $author$project$Main$update = F2(
 	function (message, model) {
-		if (message.$ === 'UrlChanged') {
-			var url = message.a;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{
-						route: $author$project$Route$fromUrl(url)
-					}),
-				$author$project$Main$updatePrism(_Utils_Tuple0));
-		} else {
-			var urlRequest = message.a;
-			if (urlRequest.$ === 'Internal') {
-				var url = urlRequest.a;
+		switch (message.$) {
+			case 'UrlChanged':
+				var url = message.a;
 				return _Utils_Tuple2(
-					model,
-					A2(
-						$elm$browser$Browser$Navigation$pushUrl,
-						model.key,
-						$elm$url$Url$toString(url)));
-			} else {
-				var href = urlRequest.a;
+					_Utils_update(
+						model,
+						{
+							route: $author$project$Route$fromUrl(url)
+						}),
+					$author$project$Main$updatePrism(_Utils_Tuple0));
+			case 'LinkClicked':
+				var urlRequest = message.a;
+				if (urlRequest.$ === 'Internal') {
+					var url = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.key,
+							$elm$url$Url$toString(url)));
+				} else {
+					var href = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						$elm$browser$Browser$Navigation$load(href));
+				}
+			default:
+				var date = message.a;
 				return _Utils_Tuple2(
-					model,
-					$elm$browser$Browser$Navigation$load(href));
-			}
+					_Utils_update(
+						model,
+						{
+							today: $elm$core$Maybe$Just(date)
+						}),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $author$project$Page$Model = function (page) {
@@ -10905,23 +11196,84 @@ var $author$project$Page$title = function (model) {
 	}
 };
 var $elm$html$Html$footer = _VirtualDom_node('footer');
+var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
+var $author$project$Widget$externalLink = F2(
+	function (attributes, content) {
+		return A2(
+			$elm$html$Html$a,
+			A2(
+				$elm$core$List$append,
+				attributes,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$target('_blank'),
+						$elm$html$Html$Attributes$rel('noopener')
+					])),
+			content);
+	});
 var $author$project$Footer$footerLink = F2(
 	function (link, content) {
 		return A2(
-			$elm$html$Html$a,
+			$author$project$Widget$externalLink,
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('blue-text text-lighten-3'),
-					$elm$html$Html$Attributes$href(link),
-					$elm$html$Html$Attributes$target('_blank')
+					$elm$html$Html$Attributes$href(link)
 				]),
 			_List_fromArray(
 				[
 					$elm$html$Html$text(content)
 				]));
 	});
-var $author$project$Footer$view = function (_v0) {
+var $elm$core$Maybe$map = F2(
+	function (f, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return $elm$core$Maybe$Just(
+				f(value));
+		} else {
+			return $elm$core$Maybe$Nothing;
+		}
+	});
+var $justinmimbs$date$Date$divWithRemainder = F2(
+	function (a, b) {
+		return _Utils_Tuple2(
+			A2($justinmimbs$date$Date$floorDiv, a, b),
+			A2($elm$core$Basics$modBy, b, a));
+	});
+var $justinmimbs$date$Date$year = function (_v0) {
+	var rd = _v0.a;
+	var _v1 = A2($justinmimbs$date$Date$divWithRemainder, rd, 146097);
+	var n400 = _v1.a;
+	var r400 = _v1.b;
+	var _v2 = A2($justinmimbs$date$Date$divWithRemainder, r400, 36524);
+	var n100 = _v2.a;
+	var r100 = _v2.b;
+	var _v3 = A2($justinmimbs$date$Date$divWithRemainder, r100, 1461);
+	var n4 = _v3.a;
+	var r4 = _v3.b;
+	var _v4 = A2($justinmimbs$date$Date$divWithRemainder, r4, 365);
+	var n1 = _v4.a;
+	var r1 = _v4.b;
+	var n = (!r1) ? 0 : 1;
+	return ((((n400 * 400) + (n100 * 100)) + (n4 * 4)) + n1) + n;
+};
+var $author$project$Footer$showYear = function (date) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		'',
+		A2(
+			$elm$core$Maybe$map,
+			function (y) {
+				return y + ' ';
+			},
+			A2(
+				$elm$core$Maybe$map,
+				$elm$core$String$fromInt,
+				A2($elm$core$Maybe$map, $justinmimbs$date$Date$year, date))));
+};
+var $author$project$Footer$view = function (today) {
 	return A2(
 		$elm$html$Html$footer,
 		_List_fromArray(
@@ -11002,7 +11354,8 @@ var $author$project$Footer$view = function (_v0) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('© 2019 matthew-matvei')
+								$elm$html$Html$text(
+								'© ' + ($author$project$Footer$showYear(today) + 'matthew-matvei '))
 							]))
 					]))
 			]));
@@ -11092,13 +11445,13 @@ var $author$project$Blog$Content$CodeBlock = function (a) {
 var $author$project$Blog$Content$Emphasis = function (a) {
 	return {$: 'Emphasis', a: a};
 };
+var $author$project$Blog$Content$ExternalLink = F2(
+	function (a, b) {
+		return {$: 'ExternalLink', a: a, b: b};
+	});
 var $author$project$Blog$Content$InlineCode = function (a) {
 	return {$: 'InlineCode', a: a};
 };
-var $author$project$Blog$Content$Link = F2(
-	function (a, b) {
-		return {$: 'Link', a: a, b: b};
-	});
 var $author$project$Blog$Content$Paragraph = function (a) {
 	return {$: 'Paragraph', a: a};
 };
@@ -11133,10 +11486,24 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
+								$author$project$Blog$Content$Text('You are not employed to write clean code, you are not paid to write tests;\n                they keep you around in the hope that you will '),
+								$author$project$Blog$Content$Strong('add value'),
+								$author$project$Blog$Content$Text('.')
+							]))
+					]),
+				title: $elm$core$Maybe$Nothing
+			}),
+			$author$project$Blog$Content$Section(
+			{
+				content: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
 								$author$project$Blog$Content$Text('The Either monad is a lovely way to handle success / fail code paths in a \n                concise, logical and (dependening on your language) compile-time knowledge that you \n                are handling possible errors that a method you call can result in. You can follow\n                this pattern in many different ways '),
-								A2($author$project$Blog$Content$Link, 'https://blog.logrocket.com/elegant-error-handling-with-the-javascript-either-monad-76c7ae4924a1/', 'in JavaScript'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://blog.logrocket.com/elegant-error-handling-with-the-javascript-either-monad-76c7ae4924a1/', 'in JavaScript'),
 								$author$project$Blog$Content$Text(' and '),
-								A2($author$project$Blog$Content$Link, 'https://medium.com/@dimpapadim3/either-is-a-common-type-in-functional-languages-94b86eea325c', 'in C#'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://medium.com/@dimpapadim3/either-is-a-common-type-in-functional-languages-94b86eea325c', 'in C#'),
 								$author$project$Blog$Content$Text('.')
 							])),
 						$author$project$Blog$Content$Paragraph(
@@ -11398,7 +11765,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('I have come to the world of programming relatively late, at least compared\n                to some other people I work with. For anyone who has ever suffered with '),
-								A2($author$project$Blog$Content$Link, 'https://www.youtube.com/watch?v=eqhUHyVpAwE', 'Imposter Syndrome'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://www.youtube.com/watch?v=eqhUHyVpAwE', 'Imposter Syndrome'),
 								$author$project$Blog$Content$Text(', you can understand how that might be quite daunting. It can feel like \n            you\'ve been wasting all this time and potential on travel, tangential job paths and other \n            pursuits.')
 							])),
 						$author$project$Blog$Content$Paragraph(
@@ -11427,16 +11794,16 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 								$author$project$Blog$Content$Text(' or the '),
 								$author$project$Blog$Content$Emphasis('correct'),
 								$author$project$Blog$Content$Text(' way to do something. The larger that concept is, e.g. '),
-								A2($author$project$Blog$Content$Link, 'https://www.jinfonet.com/resources/bi-defined/3-tier-architecture-complete-overview/', 'Three Tier Architecture'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://www.jinfonet.com/resources/bi-defined/3-tier-architecture-complete-overview/', 'Three Tier Architecture'),
 								$author$project$Blog$Content$Text(', the dearer they\'d likely hold it to their hearts, even though the larger\n                the concept is the more likely a '),
-								A2($author$project$Blog$Content$Link, 'https://jimmybogard.com/vertical-slice-architecture/', 'viable alternative exists'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://jimmybogard.com/vertical-slice-architecture/', 'viable alternative exists'),
 								$author$project$Blog$Content$Text('. If you\'ve learnt some aspects of a foreign language, however, you can \n                see that there is a multitude of different, equally valid ways of attacking the \n                same problem.')
 							])),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('English places a lot of importance '),
-								A2($author$project$Blog$Content$Link, 'https://www.toeflgoanywhere.org/importance-word-order-english', 'on the order of words within a sentence'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://www.toeflgoanywhere.org/importance-word-order-english', 'on the order of words within a sentence'),
 								$author$project$Blog$Content$Text('. '),
 								$author$project$Blog$Content$Emphasis('\'The boy ate the burger\''),
 								$author$project$Blog$Content$Text(' and '),
@@ -11512,7 +11879,7 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('Additionally, '),
-								A2($author$project$Blog$Content$Link, 'https://danieljscheufler.wordpress.com/2016/12/27/code-is-read-more-often-than-it-is-written/', 'code is read more often that it is written'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://danieljscheufler.wordpress.com/2016/12/27/code-is-read-more-often-than-it-is-written/', 'code is read more often that it is written'),
 								$author$project$Blog$Content$Text('. Especially if what you\'re writing is a \'hot path\' in terms of other\n                developers being required to read and understand it, you should treat it as\n                optimisation to pause, think, and make your code as straight forward and to the\n                point as possible. Some examples might be:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
@@ -11838,11 +12205,11 @@ var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 						_List_fromArray(
 							[
 								$author$project$Blog$Content$Text('There\'s nothing wrong with this line of thinking, in most cases. It\'s been some years\n            since the '),
-								A2($author$project$Blog$Content$Link, 'https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/', '2016 chaos caused by pulling a\n            commonly-shared dependency'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/', '2016 chaos caused by pulling a\n            commonly-shared dependency'),
 								$author$project$Blog$Content$Text(', the '),
 								$author$project$Blog$Content$InlineCode('npm'),
 								$author$project$Blog$Content$Text(' package '),
-								A2($author$project$Blog$Content$Link, 'https://www.npmjs.com/package/left-pad', 'left-pad'),
+								A2($author$project$Blog$Content$ExternalLink, 'https://www.npmjs.com/package/left-pad', 'left-pad'),
 								$author$project$Blog$Content$Text('. While it may be an extreme example, it does point out that sometimes wheels <b>can</b> be\n                reinvented. It\'s a cost / value ratio between the time it would take you to rewrite this functionality,\n                vs the \'costs\' (which may be your JS bundle size, or your coupling to a certain library / framework)\n                involved in importing something pre-rolled. For example, if you\'re in need of a function to recursively\n                flatten an array, consider the following code before importing half of '),
 								$author$project$Blog$Content$InlineCode('lodash.js'),
 								$author$project$Blog$Content$Text(' to do it for you:')
@@ -11989,7 +12356,7 @@ var $author$project$Page$Article$viewAttribution = function (attributionInfo) {
 	} else {
 		var attribution = attributionInfo.a;
 		return A2(
-			$elm$html$Html$a,
+			$author$project$Widget$externalLink,
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('center-align'),
@@ -12069,7 +12436,7 @@ var $author$project$Page$Article$viewParagraphSegment = function (segment) {
 			var link = segment.a;
 			var label = segment.b;
 			return A2(
-				$elm$html$Html$a,
+				$author$project$Widget$externalLink,
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$href(link)
@@ -12261,7 +12628,7 @@ var $author$project$Component$Card$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('card-action purple darken-2')
+						$elm$html$Html$Attributes$class('card-action purple darken-3')
 					]),
 				A2($elm$core$List$map, $author$project$Component$Card$viewAction, model.actions))
 			]));
@@ -12408,7 +12775,7 @@ var $author$project$Main$view = function (model) {
 			[
 				$author$project$Header$view(_Utils_Tuple0),
 				$author$project$Page$view(page),
-				$author$project$Footer$view(_Utils_Tuple0)
+				$author$project$Footer$view(model.today)
 			]),
 		title: $author$project$Page$title(page)
 	};
@@ -12416,4 +12783,4 @@ var $author$project$Main$view = function (model) {
 var $author$project$Main$main = $elm$browser$Browser$application(
 	{init: $author$project$Main$init, onUrlChange: $author$project$Main$UrlChanged, onUrlRequest: $author$project$Main$LinkClicked, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"Main.Message","aliases":{"Url.Url":{"args":[],"type":"{ protocol : Url.Protocol, host : String.String, port_ : Maybe.Maybe Basics.Int, path : String.String, query : Maybe.Maybe String.String, fragment : Maybe.Maybe String.String }"}},"unions":{"Main.Message":{"args":[],"tags":{"LinkClicked":["Browser.UrlRequest"],"UrlChanged":["Url.Url"]}},"Basics.Int":{"args":[],"tags":{"Int":[]}},"Maybe.Maybe":{"args":["a"],"tags":{"Just":["a"],"Nothing":[]}},"Url.Protocol":{"args":[],"tags":{"Http":[],"Https":[]}},"String.String":{"args":[],"tags":{"String":[]}},"Browser.UrlRequest":{"args":[],"tags":{"Internal":["Url.Url"],"External":["String.String"]}}}}})}});}(this));
+	$elm$json$Json$Decode$succeed(_Utils_Tuple0))({"versions":{"elm":"0.19.1"},"types":{"message":"Main.Message","aliases":{"Url.Url":{"args":[],"type":"{ protocol : Url.Protocol, host : String.String, port_ : Maybe.Maybe Basics.Int, path : String.String, query : Maybe.Maybe String.String, fragment : Maybe.Maybe String.String }"},"Date.RataDie":{"args":[],"type":"Basics.Int"}},"unions":{"Main.Message":{"args":[],"tags":{"LinkClicked":["Browser.UrlRequest"],"UrlChanged":["Url.Url"],"DateRetrieved":["Date.Date"]}},"Date.Date":{"args":[],"tags":{"RD":["Date.RataDie"]}},"Basics.Int":{"args":[],"tags":{"Int":[]}},"Maybe.Maybe":{"args":["a"],"tags":{"Just":["a"],"Nothing":[]}},"Url.Protocol":{"args":[],"tags":{"Http":[],"Https":[]}},"String.String":{"args":[],"tags":{"String":[]}},"Browser.UrlRequest":{"args":[],"tags":{"Internal":["Url.Url"],"External":["String.String"]}}}}})}});}(this));

@@ -21,11 +21,11 @@ getContent _ =
                 concise, logical and (dependening on your language) compile-time knowledge that you 
                 are handling possible errors that a method you call can result in. You can follow
                 this pattern in many different ways """
-                , Link
+                , ExternalLink
                     "https://blog.logrocket.com/elegant-error-handling-with-the-javascript-either-monad-76c7ae4924a1/"
                     "in JavaScript"
                 , Text " and "
-                , Link
+                , ExternalLink
                     "https://medium.com/@dimpapadim3/either-is-a-common-type-in-functional-languages-94b86eea325c"
                     "in C#"
                 , Text "."

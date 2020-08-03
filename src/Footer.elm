@@ -1,11 +1,14 @@
 module Footer exposing (view)
 
-import Html exposing (Html, a, div, footer, li, text, ul)
-import Html.Attributes exposing (class, href, target)
+import Date exposing (Date, year)
+import Html exposing (Html, div, footer, li, text, ul)
+import Html.Attributes exposing (class, href)
+import String exposing (fromInt)
+import Widget exposing (externalLink)
 
 
-view : () -> Html msg
-view _ =
+view : Maybe Date -> Html msg
+view today =
     footer [ class "page-footer blue darken-4" ]
         [ div [ class "container row" ]
             [ div [ class "col s6" ]
@@ -28,12 +31,16 @@ view _ =
             ]
         , div [ class "footer-copyright" ]
             [ div [ class "container" ]
-                [ text "© 2019 matthew-matvei"
-                ]
+                [ "© " ++ showYear today ++ "matthew-matvei " |> text ]
             ]
         ]
 
 
 footerLink : String -> String -> Html msg
 footerLink link content =
-    a [ class "blue-text text-lighten-3", href link, target "_blank" ] [ text content ]
+    externalLink [ class "blue-text text-lighten-3", href link ] [ text content ]
+
+
+showYear : Maybe Date -> String
+showYear date =
+    Maybe.map year date |> Maybe.map fromInt |> Maybe.map (\y -> y ++ " ") |> Maybe.withDefault ""

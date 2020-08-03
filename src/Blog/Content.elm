@@ -54,7 +54,7 @@ type ParagraphSegment
     | Emphasis String
     | Strong String
     | InlineCode String
-    | Link String String
+    | ExternalLink String String
 
 
 type Content
