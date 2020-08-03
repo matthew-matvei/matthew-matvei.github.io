@@ -8,7 +8,7 @@ getContent : () -> List Content
 getContent _ =
     [ Title "Are you providing value?"
     , SubTitle "... and how the road to hell is paved with good intentions"
-    , WhenCreated "June 21 2020"
+    , WhenCreated "August 3 2020"
     , Section
         { title = Nothing
         , content =
