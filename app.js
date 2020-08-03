@@ -11442,6 +11442,9 @@ var $author$project$Blog$Content$BlockQuote = function (a) {
 var $author$project$Blog$Content$CodeBlock = function (a) {
 	return {$: 'CodeBlock', a: a};
 };
+var $author$project$Blog$Content$ComplexAttribute = function (a) {
+	return {$: 'ComplexAttribute', a: a};
+};
 var $author$project$Blog$Content$Emphasis = function (a) {
 	return {$: 'Emphasis', a: a};
 };
@@ -11449,6 +11452,9 @@ var $author$project$Blog$Content$ExternalLink = F2(
 	function (a, b) {
 		return {$: 'ExternalLink', a: a, b: b};
 	});
+var $author$project$Blog$Content$Image = function (a) {
+	return {$: 'Image', a: a};
+};
 var $author$project$Blog$Content$InlineCode = function (a) {
 	return {$: 'InlineCode', a: a};
 };
@@ -11517,7 +11523,7 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 								$author$project$Blog$Content$Text('By comparison, catching exceptions is a lawless, risky business. Consider the\n            following method signatures:')
 							])),
 						$author$project$Blog$Content$CodeBlock(
-						{code: '\n// I\'ll return you an int (but I might blow up if I don\'t like \'number\')\nint ParseNumber(string number);\n\n// I\'ll \'Either\' return you success or fail, and you need to handle those possibilities\nEither<int> ParseNumber(string number);\n            ', language: 'cs'}),
+						{code: '\n// I\'ll return you an int (but I might blow up if I don\'t like \'number\')\nint ParseNumber(string number);\n\n// I\'ll \'Either\' return you success or fail, and you need to handle those possibilities\nEither<Error, int> ParseNumber(string number);\n            ', language: 'cs'}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11532,6 +11538,13 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 								$author$project$Blog$Content$Text(' that this may happen, or look at documentation for the method, which can\n                be lacking, stale or misleading. It may not even be clear to the developer who\n                documented the method in the first place, since the exceptions that it potentially\n                throws may just be thrown by its dependencies.')
 							])),
 						$author$project$Blog$Content$BlockQuote('Right then, I hear ya, let\'s replace it all with methods that return \'Either\'s'),
+						$author$project$Blog$Content$Image(
+						{
+							alt: 'Replace all the things',
+							attribution: $author$project$Blog$Content$ComplexAttribute(
+								{link: 'http://www.quickmeme.com/meme/354gb5', text: 'Quick Meme'}),
+							source: '/assets/img/replace-all-the-things.jpg'
+						}),
 						$author$project$Blog$Content$Paragraph(
 						_List_fromArray(
 							[
@@ -11740,13 +11753,7 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 			})
 		]);
 };
-var $author$project$Blog$Content$ComplexAttribute = function (a) {
-	return {$: 'ComplexAttribute', a: a};
-};
 var $author$project$Blog$Content$Divider = {$: 'Divider'};
-var $author$project$Blog$Content$Image = function (a) {
-	return {$: 'Image', a: a};
-};
 var $author$project$Blog$Content$TextAttribute = function (a) {
 	return {$: 'TextAttribute', a: a};
 };

@@ -1,6 +1,6 @@
 module Blog.AreYouProvidingValue exposing (getContent)
 
-import Blog.Content exposing (Content(..), ParagraphSegment(..))
+import Blog.Content exposing (AttributionInfo(..), Content(..), ParagraphSegment(..))
 import Blog.ProgrammingAsASecondLanguage exposing (getContent)
 
 
@@ -79,6 +79,15 @@ Either<Error, int> ParseNumber(string number);
                 throws may just be thrown by its dependencies."""
                 ]
             , BlockQuote "Right then, I hear ya, let's replace it all with methods that return 'Either's"
+            , Image
+                { source = "/assets/img/replace-all-the-things.jpg"
+                , alt = "Replace all the things"
+                , attribution =
+                    ComplexAttribute
+                        { text = "Quick Meme"
+                        , link = "http://www.quickmeme.com/meme/354gb5"
+                        }
+                }
             , Paragraph
                 [ Text """Whoa there Nelly. Do the other developers on your team know what the hell
                 an 'Either' object is? Or how to nicely bind Either instances with successive
