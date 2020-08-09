@@ -1,13 +1,15 @@
 module Blog.ThreeBestPractices exposing (getContent)
 
 import Blog.Content exposing (AttributionInfo(..), Content(..), ParagraphSegment(..))
+import Date
+import Time exposing (Month(..))
 
 
 getContent : () -> List Content
 getContent _ =
     [ Title "3 Best Practices in programming"
     , SubTitle "... and how there are no Best Practices"
-    , WhenCreated "November 15 2019"
+    , WhenCreated <| Date.fromCalendarDate 2019 Nov 15
     , Section
         { title = Nothing
         , content =

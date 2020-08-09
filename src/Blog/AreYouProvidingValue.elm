@@ -2,13 +2,15 @@ module Blog.AreYouProvidingValue exposing (getContent)
 
 import Blog.Content exposing (AttributionInfo(..), Content(..), ParagraphSegment(..))
 import Blog.ProgrammingAsASecondLanguage exposing (getContent)
+import Date
+import Time exposing (Month(..))
 
 
 getContent : () -> List Content
 getContent _ =
     [ Title "Are you providing value?"
     , SubTitle "... and how the road to hell is paved with good intentions"
-    , WhenCreated "August 3 2020"
+    , WhenCreated <| Date.fromCalendarDate 2020 Aug 3
     , Section
         { title = Nothing
         , content =

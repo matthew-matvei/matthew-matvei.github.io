@@ -9,6 +9,8 @@ module Blog.Content exposing
     , SectionTitle
     )
 
+import Date exposing (Date)
+
 
 type alias SectionTitle =
     { title : String
@@ -60,7 +62,7 @@ type ParagraphSegment
 type Content
     = Title String
     | SubTitle String
-    | WhenCreated String
+    | WhenCreated Date
     | Paragraph (List ParagraphSegment)
     | Section SectionInfo
     | BlockQuote String

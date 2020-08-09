@@ -1,13 +1,15 @@
 module Blog.ProgrammingAsASecondLanguage exposing (getContent)
 
 import Blog.Content exposing (AttributionInfo(..), Content(..), ParagraphSegment(..))
+import Date
+import Time exposing (Month(..))
 
 
 getContent : () -> List Content
 getContent _ =
     [ Title "Programming as a Second Language"
     , SubTitle "... and why I'm glad I've learnt / taught a second language"
-    , WhenCreated "January 26 2020"
+    , WhenCreated <| Date.fromCalendarDate 2020 Jan 26
     , Section
         { title = Nothing
         , content =

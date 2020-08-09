@@ -11,6 +11,7 @@ import Blog.Content
         , SectionInfo
         , SectionTitle
         )
+import Date exposing (Date, format)
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, href, src)
 import Widget exposing (externalLink)
@@ -39,7 +40,7 @@ viewContent content =
             h2 [] [ text subTitle ]
 
         WhenCreated when ->
-            span [ class "grey-text text-darken-3" ] [ text when ]
+            span [ class "grey-text text-darken-3" ] [ viewDate when |> text ]
 
         Paragraph paragraph ->
             p [ class "flow-text" ] (List.map viewParagraphSegment paragraph)
@@ -134,3 +135,8 @@ viewCodeBlock : CodeBlockInfo -> Html msg
 viewCodeBlock codeBlock =
     pre [ class ("language-" ++ codeBlock.language) ]
         [ code [] [ text codeBlock.code ] ]
+
+
+viewDate : Date -> String
+viewDate date =
+    format "MMMM d y" date
