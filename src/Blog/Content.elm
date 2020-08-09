@@ -70,3 +70,4 @@ type Content
     | Divider
     | CodeBlock CodeBlockInfo
     | Collection (List CollectionItem)
+    | OrderedList (List (List ParagraphSegment))

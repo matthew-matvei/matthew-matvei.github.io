@@ -15,9 +15,7 @@ view _ =
                     { title = "3 Best Practices in programming"
                     , text = "... and how there are no best practices"
                     , actions =
-                        [ { link = "/blog/no-best-practices"
-                          , text = "Read"
-                          }
+                        [ Card.readAction "/blog/no-best-practices"
                         ]
                     }
                 ]
@@ -26,9 +24,7 @@ view _ =
                     { title = "Programming as a Second Language"
                     , text = "... and why I'm glad I've learnt / taught a second language"
                     , actions =
-                        [ { link = "/blog/programming-as-a-second-language"
-                          , text = "Read"
-                          }
+                        [ Card.readAction "/blog/programming-as-a-second-language"
                         ]
                     }
                 ]
@@ -39,9 +35,16 @@ view _ =
                     { title = "Are you providing value?"
                     , text = "... and how the road to hell is paved with good intentions"
                     , actions =
-                        [ { link = "/blog/are-you-providing-value"
-                          , text = "Read"
-                          }
+                        [ Card.readAction "/blog/are-you-providing-value"
+                        ]
+                    }
+                ]
+            , div [ class "col s12 m6 l6" ]
+                [ Card.view
+                    { title = "The Either / Result pattern"
+                    , text = "... for network calls"
+                    , actions =
+                        [ Card.readAction "/blog/either-pattern-for-network-calls"
                         ]
                     }
                 ]

@@ -1,4 +1,4 @@
-module Component.Card exposing (view)
+module Component.Card exposing (readAction, view)
 
 import Html exposing (Html, a, div, p, span, text)
 import Html.Attributes exposing (class, href)
@@ -37,3 +37,8 @@ view model =
 viewAction : Action -> Html msg
 viewAction action =
     a [ href action.link ] [ text action.text ]
+
+
+readAction : String -> Action
+readAction link =
+    { link = link, text = "Read" }

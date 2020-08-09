@@ -63,6 +63,9 @@ viewContent content =
         CodeBlock codeBlock ->
             viewCodeBlock codeBlock
 
+        OrderedList orderedList ->
+            viewOrderedList orderedList
+
 
 viewParagraphSegment : ParagraphSegment -> Html msg
 viewParagraphSegment segment =
@@ -140,3 +143,13 @@ viewCodeBlock codeBlock =
 viewDate : Date -> String
 viewDate date =
     format "MMMM d y" date
+
+
+viewOrderedList : List (List ParagraphSegment) -> Html msg
+viewOrderedList orderedList =
+    ol [] <| List.map viewListItem orderedList
+
+
+viewListItem : List ParagraphSegment -> Html msg
+viewListItem paragraphSegments =
+    li [ class "flow-text" ] <| List.map viewParagraphSegment paragraphSegments

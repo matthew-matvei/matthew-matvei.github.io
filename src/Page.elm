@@ -51,6 +51,9 @@ title model =
                 AreYouProvidingValue ->
                     "mat-mat | Are you providing value?"
 
+                EitherPatternNetworkCalls ->
+                    "mat-mat | 'Either' pattern for network calls"
+
 
 fromRoute : Maybe Route -> Page
 fromRoute maybeRoute =
