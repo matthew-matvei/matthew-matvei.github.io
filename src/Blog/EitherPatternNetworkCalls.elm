@@ -392,4 +392,43 @@ class Either {
                 }
             ]
         }
+    , Divider
+    , Section
+        { title =
+            Just
+                { title = "When not to use it"
+                , subTitle = "... \"what's an 'Either'?\""
+                }
+        , content =
+            [ Paragraph
+                [ Text """Despite the advantages, there are genuine reasons you may not want to
+                introduce an Either / Result monad into your work's next project:"""
+                ]
+            , Collection
+                [ { title = "Team doesn't understand it"
+                  , text = """While you might believe it's the team's responsibility to learn
+                  whatever you've read someone on the internet tell you to do, there is a genuine
+                  cost incurred in any new technique introduced."""
+                  }
+                , { title = "Team doesn't like it"
+                  , text = """Unfortunately, developers are people too, and if they're not on board
+                  with it, they're likely to skirt around using it, avoid extending it, or worse,
+                  remove it."""
+                  }
+                , { title = "'handleOk' and 'handleFailure' functions can be misunderstood"
+                  , text = """If people forget that these functions are for executing some side
+                  effect using the current success / failure, you'll start to see some interesting
+                  attempts to use these functions to try to modify the current value contained in
+                  the Either instance."""
+                  }
+                , { title = "Others treat it as a 'builder' object"
+                  , text = """Since you're passing function callbacks in a series, other devs might
+                  conclude that this is some sort of 'builder' object, where we can define only
+                  once how we want to handle success or failure. Once it clicks that this is a
+                  pipeline, people start to realise that the placement order of a 'handleFailure'
+                  matters."""
+                  }
+                ]
+            ]
+        }
     ]
