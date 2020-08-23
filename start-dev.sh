@@ -1,0 +1,1 @@
+elm-live src/Main.elm --pushstate --hot --open -- --debug --output=app.js

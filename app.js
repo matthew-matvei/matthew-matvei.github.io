@@ -6035,6 +6035,7 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 	};
 };
 var $author$project$Article$AreYouProvidingValue = 2;
+var $author$project$Article$EitherPatternNetworkCalls = 3;
 var $author$project$Article$ProgrammingAsASecondLanguage = 1;
 var $author$project$Article$ThreeBestPractices = 0;
 var $elm$url$Url$Parser$s = function (str) {
@@ -6076,7 +6077,11 @@ var $author$project$Article$parser = $elm$url$Url$Parser$oneOf(
 			A2(
 			$elm$url$Url$Parser$map,
 			2,
-			$elm$url$Url$Parser$s('are-you-providing-value'))
+			$elm$url$Url$Parser$s('are-you-providing-value')),
+			A2(
+			$elm$url$Url$Parser$map,
+			3,
+			$elm$url$Url$Parser$s('either-pattern-for-network-calls'))
 		]));
 var $elm$url$Url$Parser$slash = F2(
 	function (_v0, _v1) {
@@ -6485,8 +6490,10 @@ var $author$project$Page$title = function (model) {
 					return 'mat-mat | Three best practices';
 				case 1:
 					return 'mat-mat | Programming as a Second Language';
-				default:
+				case 2:
 					return 'mat-mat | Are you providing value?';
+				default:
+					return 'mat-mat | \'Either\' pattern for network calls';
 			}
 	}
 };
@@ -6771,6 +6778,7 @@ var $author$project$Blog$Content$CodeBlock = function (a) {
 var $author$project$Blog$Content$ComplexAttribute = function (a) {
 	return {$: 1, a: a};
 };
+var $author$project$Blog$Content$Divider = {$: 7};
 var $author$project$Blog$Content$Emphasis = function (a) {
 	return {$: 1, a: a};
 };
@@ -6831,6 +6839,7 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 					]),
 				H: $elm$core$Maybe$Nothing
 			}),
+			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
 				V: _List_fromArray(
@@ -6897,6 +6906,7 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 				H: $elm$core$Maybe$Just(
 					{am: '... that don\'t work', H: 'Good ideas'})
 			}),
+			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
 				V: _List_fromArray(
@@ -6998,6 +7008,7 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 				H: $elm$core$Maybe$Just(
 					{am: '... graveyard modules', H: 'Helper libraries'})
 			}),
+			$author$project$Blog$Content$Divider,
 			$author$project$Blog$Content$Section(
 			{
 				V: _List_fromArray(
@@ -7075,7 +7086,242 @@ var $author$project$Blog$AreYouProvidingValue$getContent = function (_v0) {
 			})
 		]);
 };
-var $author$project$Blog$Content$Divider = {$: 7};
+var $author$project$Blog$Content$Collection = function (a) {
+	return {$: 9, a: a};
+};
+var $author$project$Blog$Content$InternalLink = F2(
+	function (a, b) {
+		return {$: 5, a: a, b: b};
+	});
+var $author$project$Blog$Content$OrderedList = function (a) {
+	return {$: 10, a: a};
+};
+var $author$project$Blog$EitherPatternNetworkCalls$getContent = function (_v0) {
+	return _List_fromArray(
+		[
+			$author$project$Blog$Content$Title('The Either / Result pattern'),
+			$author$project$Blog$Content$SubTitle('... for network calls'),
+			$author$project$Blog$Content$WhenCreated(
+			A3($justinmimbs$date$Date$fromCalendarDate, 2020, 7, 23)),
+			$author$project$Blog$Content$Section(
+			{
+				V: _List_fromArray(
+					[
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('In most Single Page Apps that rely on back-end services, you will find\n                yourself making many repetitive calls to these services from your UI components,\n                either directly or via some module that handles network fetches. And you\'ll find\n                that you\'re always dealing with 3 or 4 varying factors:')
+							])),
+						$author$project$Blog$Content$OrderedList(
+						_List_fromArray(
+							[
+								_List_fromArray(
+								[
+									$author$project$Blog$Content$Text('The endpoint uri')
+								]),
+								_List_fromArray(
+								[
+									$author$project$Blog$Content$Text('The body of the request (optional)')
+								]),
+								_List_fromArray(
+								[
+									$author$project$Blog$Content$Text('A '),
+									$author$project$Blog$Content$Strong('successful'),
+									$author$project$Blog$Content$Text(' response and its possible content')
+								]),
+								_List_fromArray(
+								[
+									$author$project$Blog$Content$Text('An '),
+									$author$project$Blog$Content$Strong('unsuccessful'),
+									$author$project$Blog$Content$Text(' response and its error content')
+								])
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('What I often saw was code that within a UI component would invoke the api\n                using the '),
+								$author$project$Blog$Content$InlineCode('fetch'),
+								$author$project$Blog$Content$Text(' API, get a response object, and then branch logic based on whether the\n                result was successful or not. This can become fairly cumbersome, as shown below.')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\nasync componentDidMount() {\n    this.setState({ isFetching: true });\n\n    try {\n        const productsResponse = await fetch("http://our.service/api/products");\n        if (productsResponse.ok) {\n            const products = await productsResponse.json();\n            this.setState({ products });\n        } else {\n            const errorContent = await productsResponse.json();\n            notifyError(errorContent);\n        }\n    } catch (error) {\n        notifyError(error);\n    }\n    \n    this.setState({ isFetching: false });\n}\n                ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('And this is ignoring the cases where we often wanted to handle the\n                returned data in some way. For example, if we wanted to enrich that data with some\n                other content, map it to a different shape, or use the result of one fetch as the\n                input to another. In these cases, we often had early '),
+								$author$project$Blog$Content$InlineCode('return'),
+								$author$project$Blog$Content$Text(' calls in the failure branches in order to avoid further processing, which\n                complicated setting state very quickly.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This seems to be unreasonably complicated, given that in our heads we\'re\n                simply trying to capture '),
+								$author$project$Blog$Content$Emphasis('\'if it\'s successful, do this; if it\'s unsuccessful, do that\''),
+								$author$project$Blog$Content$Text('.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('It just so happens there\'s a perfect abstraction that simplified handling\n                a lot of these network calls\' responses.')
+							]))
+					]),
+				H: $elm$core$Maybe$Nothing
+			}),
+			$author$project$Blog$Content$Divider,
+			$author$project$Blog$Content$Section(
+			{
+				V: _List_fromArray(
+					[
+						$author$project$Blog$Content$Image(
+						{
+							as: 'Fork in the road',
+							au: $author$project$Blog$Content$ComplexAttribute(
+								{aR: 'https://www.pinnacleadvisory.com/analyst/a-fork-in-the-road-market-review/', bg: 'Pinnacle Advisory'}),
+							ba: '/assets/img/fork_in_road.jpg'
+						}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('The \'Either\' or \'Result\' pattern (or '),
+								A2($author$project$Blog$Content$ExternalLink, 'https://adambennett.dev/2020/05/the-result-monad/', 'the Result Monad'),
+								$author$project$Blog$Content$Text(', but that\'s a scary word), is very useful for encapsulating this '),
+								$author$project$Blog$Content$Emphasis('either or'),
+								$author$project$Blog$Content$Text(' behaviour, which I\'ve briefly written about previously '),
+								A2($author$project$Blog$Content$InternalLink, '/blog/are-you-providing-value', 'here'),
+								$author$project$Blog$Content$Text('. Ordinarily, a given function would return a given type of \n                result. A naive view of the above '),
+								$author$project$Blog$Content$InlineCode('fetch'),
+								$author$project$Blog$Content$Text(' request is that it should just return us our products, since that\'s what\n                we\'re interested in, but with the complexity of HTTP requests / responses, it\'s\n                only responsible for the API to first return us an object from which we can then\n                inspect and handle further.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('At the crux of this monad is the ability to describe '),
+								$author$project$Blog$Content$Emphasis('how'),
+								$author$project$Blog$Content$Text(' you would like to handle the success / failure paths of the result of \n                some operation. The above example can be rewritten to take advantage of this\n                pattern, but first it will be useful to have a function that adapts the raw '),
+								$author$project$Blog$Content$InlineCode('fetch'),
+								$author$project$Blog$Content$Text(' API result into '),
+								$author$project$Blog$Content$Emphasis('either'),
+								$author$project$Blog$Content$Text(' a successful result '),
+								$author$project$Blog$Content$Emphasis('or'),
+								$author$project$Blog$Content$Text(' an unsuccessful one.')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\nclass Either {\n    isOk;\n    value;\n\n    constructor(isOk, value) {\n        isOk = isOk;\n        value = value;\n    }\n\n    handleOk(okDelegate) {\n        if (this.isOk) {\n            okDelegate(value);\n        }\n\n        return this;\n    }\n\n    handleFailure(failureDelegate) {\n        if (!this.isOk) {\n            failureDelegate(value);\n        }\n\n        return this;\n    }\n\n    // ... Here you would have some other useful methods we can talk about later\n\n    static Ok(successfulValue) {\n        return new Either(true, successfulValue);\n    }\n\n    static Fail(unsuccessfulValue) {\n        return new Either(false, unsuccessfulValue);\n    }\n}\n\n// Then, in some network-related module, we define a function\n\nconst fetchResult = async (url, init) => {\n    try {\n        const result = await fetch(url, init);\n        if (result.ok) {\n            return Either.Ok(await result.json());\n        } else {\n            return Either.Fail({\n                status: result.status, \n                content: await result.json() \n            });\n        }\n    } catch (error) {\n        return Either.Fail({ content: error });\n    }\n}\n            ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('The \'Either\' type itself can be defined in different ways; if you\'re a fan,\n                you could write it as a '),
+								A2($author$project$Blog$Content$ExternalLink, 'https://coryrylan.com/blog/javascript-module-pattern-basics', 'function-based module'),
+								$author$project$Blog$Content$Text('. I\'ve found it useful to include '),
+								$author$project$Blog$Content$InlineCode('handleOk'),
+								$author$project$Blog$Content$Text(' and '),
+								$author$project$Blog$Content$InlineCode('handleFailure'),
+								$author$project$Blog$Content$Text('methods separately in order to handle performing '),
+								$author$project$Blog$Content$Emphasis('side-effecty'),
+								$author$project$Blog$Content$Text(' actions for either success or failure along the pipeline, but these can\n                be combined in a \'cata\' as described '),
+								A2($author$project$Blog$Content$ExternalLink, 'https://medium.com/@dimpapadim3/either-is-a-common-type-in-functional-languages-94b86eea325c', 'here'),
+								$author$project$Blog$Content$Text('. This may all look rather unimpressive, and it\'s as though we\'ve just \n                created ourselves some extra work without any benefit. But with these beginning\n                pieces, the above example of fetching products becomes:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\nasync componentDidMount() {\n    this.setState({ isFetching: true });\n\n    (await fetchResult("http://our.service/api/products"))\n        .handleFailure(({ content }) => notifyError(content))\n        .handleOk((products) => { this.setState({ products }) };);\n\n    this.setState({ isFetching: false });\n}\n\n// If we don\'t like the use of async / await, this can also be\n\nfetchResult("http://our.service/api/products")\n    .then((result) => result\n        .handleFailure(({ content }) => notifyError(content))\n        .handleOk((products) => { this.setState({ products }) };));\n            ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('This massively distills the essence of what we\'re trying to convey to\n                other developers working on this project. At the call site, we can see that we\'re\n                fetching some data, notifying of failure if that occurs, and setting state if the\n                result is successful. That\'s it. '),
+								$author$project$Blog$Content$Emphasis('Simples'),
+								$author$project$Blog$Content$Text('. The below diff demonstrates how we cut\n                through the otherwise messy success / failure branch handling.')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\n\nasync componentDidMount() {\n    this.setState({ isFetching: true });\n\n-    try {\n-        const productsResponse = await fetch("http://our.service/api/products");\n+    (await fetchResult("http://our.service/api/products"))\n-        if (productsResponse.ok) {\n-            const products = await productsResponse.json();\n-            this.setState({ products });\n-        } else {\n+        .handleOk((products) => this.setState({ products }))\n-            const errorContent = await productsResponse.json();\n-            notifyError(errorContent);\n-        }\n-    } catch (error) {\n-        notifyError(error);\n-    }\n+        .handleFailure(({ content }) => notifyError(content));\n    \n    this.setState({ isFetching: false });\n}\n            ', E: 'diff'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('The benefits become even more apparent when you want to do something\n                further with the successful result. Consider the below example:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\nlet userName;\n\ntry {\n    const userResponse = await fetch("http://our.userservice/api/users/123");\n    if (userResponse.ok) {\n        const user = await userResponse.json();\n        if (!user.name?.first || !user.name?.last) {\n            return;\n        }\n\n        userName = user.name.first + " " + user.name.last;\n    } else {\n        const errorContent = await userResponse.json();\n        notifyError(errorContent);\n    }\n} catch (error) {\n    notifyError(error);\n}\n\nif (!userName) {\n    return;\n}\n\ntry {\n    const filteredProductsResponse = await fetch(`http://our.service/api/products?ownedBy=${userName}`);\n    if (filteredProductsResponse.ok) {\n        const filteredProducts = await filteredProductsResponse.json();\n        this.setState({ products: filteredProducts });\n    }\n} catch (error) {\n    notifyError(error);\n}\n                ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('A large advantage of this monad is simplifying dealing with the happy\n                path whilst not failing to deal with the unhappy one. In the above, we want to\n                fetch the products with a filter, but '),
+								$author$project$Blog$Content$Strong('only'),
+								$author$project$Blog$Content$Text(' if the previous user name fetch was successful. We also need to check\n                whether the returned user object actually has a first and last name defined before\n                continuing, complicating the possible escape hatch '),
+								$author$project$Blog$Content$InlineCode('return'),
+								$author$project$Blog$Content$Text(' calls within the function.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('It would be useful if we could just pass a function that operates on a\n                successful result without interfering with an unsuccessful one. That function could\n                even return another Either, or just a simple result that we can wrap in an Either.\n                This functionality is handled by methods usually described as a '),
+								$author$project$Blog$Content$InlineCode('.bind'),
+								$author$project$Blog$Content$Text(', as described '),
+								A2($author$project$Blog$Content$ExternalLink, 'https://fsharpforfunandprofit.com/posts/elevated-world-2/', 'here'),
+								$author$project$Blog$Content$Text('. Let\'s have a look at some simplified examples of those.')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\nclass Either {\n    // ... As in the above example\n\n    bind(nextDelegate) {\n        if (!this.isOk) return this;  // We only perform this action if Either is successful\n\n        const nextResult = nextDelegate(this.value);\n\n        // Here you can return directly if the \'nextDelegate\' function returns another Either\n        if (nextResult instanceof Either) {\n            return nextResult;\n        } else {\n            // Otherwise, with no errors raised, we can interpret this as successful\n            return Either.Ok(nextResult);\n        }\n    }\n\n    async bindAsync(nextDelegateAsync) {\n        // similar implementation to the above, but this expects \'nextDelegateAsync\' to\n        // return a Promise, which this method can properly \'await\'\n    }\n}\n                ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('You could also wrap the evaluation of '),
+								$author$project$Blog$Content$InlineCode('nextDelegate'),
+								$author$project$Blog$Content$Text(' in a try / catch block, and handle errors by returning '),
+								$author$project$Blog$Content$InlineCode('Either.Fail'),
+								$author$project$Blog$Content$Text(', but that\'s very much a matter for some further thought and decision\n                making. After all, if a '),
+								$author$project$Blog$Content$InlineCode('nextDelegate'),
+								$author$project$Blog$Content$Text(' that doesn\'t attempt to return an Either instance simply fails, it may\n                be desirable to expect the caller to handle this within the '),
+								$author$project$Blog$Content$InlineCode('nextDelegate'),
+								$author$project$Blog$Content$Text(' function that they pass.')
+							])),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('In our above, non-Either example, it looks like we also wanted to define\n                when a result may be a failure. This can be handled by doing something like:')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\nclass Either {\n    // ... We\'ve seen this before folks\n\n    failIf(delegate) {\n        if (!this.isOk) return this;\n\n        return delegate(this.value)\n            ? Either.Fail(null)\n            : this;\n    }\n}\n            ', E: 'js'}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('With these pieces in place, we can now diff the simplifications. To\n                prevent your eyes from bleeding by stitching the two together, I\'ve separated the\n                removed from the added.')
+							])),
+						$author$project$Blog$Content$CodeBlock(
+						{C: '\n-let userName;\n-\n-try {\n-    const userResponse = await fetch("http://our.userservice/api/users/123");\n-    if (userResponse.ok) {\n-        const user = await userResponse.json();\n-        if (!user.name?.first || !user.name?.last) {\n-            return;\n-        }\n-\n-        userName = user.name.first + " " + user.name.last;\n-    } else {\n-        const errorContent = await userResponse.json();\n-        notifyError(errorContent);\n-    }\n-} catch (error) {\n-    notifyError(error);\n-}\n-\n-if (!userName) {\n-    return;\n-}\n-\n-try {\n-    const filteredProductsResponse = await fetch(`http://our.service/api/products?ownedBy=${userName}`);\n-    if (filteredProductsResponse.ok) {\n-        const filteredProducts = await filteredProductsResponse.json();\n-        this.setState({ products: filteredProducts });\n-    }\n-} catch (error) {\n-    notifyError(error);\n-}\n\n+(await fetchResult("http://our.userservice/api/users/123"))\n+   .failIf((user) => !user.name?.first || !user.name?.last)\n+   .bind((user) => user.name.first + " " + user.name.last)\n+   .bindAsync((userName) =>\n+       fetchResult(`http://our.service/api/products?ownedBy=${userName}`))\n+   .then((result) => result\n+       .handleFailure((error) => { \n+           if (error?.content) notifyError(error.content);\n+       })\n+       .handleOk((filteredProducts) => { this.setState({ products: filteredProducts }) };))\n            ', E: 'diff'})
+					]),
+				H: $elm$core$Maybe$Just(
+					{am: '... this or that', H: 'Either or'})
+			}),
+			$author$project$Blog$Content$Divider,
+			$author$project$Blog$Content$Section(
+			{
+				V: _List_fromArray(
+					[
+						$author$project$Blog$Content$Image(
+						{
+							as: 'Confused',
+							au: $author$project$Blog$Content$ComplexAttribute(
+								{aR: 'https://giphy.com/gifs/confused-huh-mark-wahlberg-zjQrmdlR9ZCM', bg: 'giphy.com'}),
+							ba: 'https://media.giphy.com/media/zjQrmdlR9ZCM/giphy.gif'
+						}),
+						$author$project$Blog$Content$Paragraph(
+						_List_fromArray(
+							[
+								$author$project$Blog$Content$Text('Despite the advantages, there are genuine reasons you may not want to\n                introduce an Either / Result monad into your work\'s next project:')
+							])),
+						$author$project$Blog$Content$Collection(
+						_List_fromArray(
+							[
+								{bg: 'While you might believe it\'s the team\'s responsibility to learn\n                  whatever you\'ve read someone on the internet tell you to do, there is a genuine\n                  cost incurred in any new technique introduced.', H: 'Team doesn\'t understand it'},
+								{bg: 'Unfortunately, developers are people too, and if they\'re not on board\n                  with it, they\'re likely to skirt around using it, avoid extending it, or worse,\n                  remove it.', H: 'Team doesn\'t like it'},
+								{bg: 'If people forget that these functions are for executing some side\n                  effect using the current success / failure, you\'ll start to see some interesting\n                  attempts to use these functions to try to modify the current value contained in\n                  the Either instance.', H: '\'handleOk\' and \'handleFailure\' functions can be misunderstood'},
+								{bg: 'Since you\'re passing function callbacks in a series, other devs might\n                  conclude that this is some sort of \'builder\' object, where we can define only\n                  once how we want to handle success or failure. Once it clicks that this is a\n                  pipeline, people start to realise that the placement order of a \'handleFailure\'\n                  matters.', H: 'Others treat it as a \'builder\' object'}
+							]))
+					]),
+				H: $elm$core$Maybe$Just(
+					{am: '... \"what\'s an \'Either\'?\"', H: 'When not to use it'})
+			})
+		]);
+};
 var $author$project$Blog$Content$TextAttribute = function (a) {
 	return {$: 0, a: a};
 };
@@ -7291,9 +7537,6 @@ var $author$project$Blog$ProgrammingAsASecondLanguage$getContent = function (_v0
 				H: $elm$core$Maybe$Nothing
 			})
 		]);
-};
-var $author$project$Blog$Content$Collection = function (a) {
-	return {$: 9, a: a};
 };
 var $author$project$Blog$ThreeBestPractices$getContent = function (_v0) {
 	return _List_fromArray(
@@ -7614,8 +7857,10 @@ var $author$project$Article$getContent = function (slug) {
 			return $author$project$Blog$ThreeBestPractices$getContent(0);
 		case 1:
 			return $author$project$Blog$ProgrammingAsASecondLanguage$getContent(0);
-		default:
+		case 2:
 			return $author$project$Blog$AreYouProvidingValue$getContent(0);
+		default:
+			return $author$project$Blog$EitherPatternNetworkCalls$getContent(0);
 	}
 };
 var $elm$html$Html$main_ = _VirtualDom_node('main');
@@ -8832,6 +9077,7 @@ var $author$project$Page$Article$viewImage = function (imageInfo) {
 				$author$project$Page$Article$viewAttribution(imageInfo.au)
 			]));
 };
+var $elm$html$Html$ol = _VirtualDom_node('ol');
 var $elm$html$Html$em = _VirtualDom_node('em');
 var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Page$Article$viewParagraphSegment = function (segment) {
@@ -8869,7 +9115,7 @@ var $author$project$Page$Article$viewParagraphSegment = function (segment) {
 					[
 						$elm$html$Html$text(t)
 					]));
-		default:
+		case 4:
 			var link = segment.a;
 			var label = segment.b;
 			return A2(
@@ -8882,7 +9128,35 @@ var $author$project$Page$Article$viewParagraphSegment = function (segment) {
 					[
 						$elm$html$Html$text(label)
 					]));
+		default:
+			var link = segment.a;
+			var label = segment.b;
+			return A2(
+				$elm$html$Html$a,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$href(link)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(label)
+					]));
 	}
+};
+var $author$project$Page$Article$viewListItem = function (paragraphSegments) {
+	return A2(
+		$elm$html$Html$li,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('flow-text')
+			]),
+		A2($elm$core$List$map, $author$project$Page$Article$viewParagraphSegment, paragraphSegments));
+};
+var $author$project$Page$Article$viewOrderedList = function (orderedList) {
+	return A2(
+		$elm$html$Html$ol,
+		_List_Nil,
+		A2($elm$core$List$map, $author$project$Page$Article$viewListItem, orderedList));
 };
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$h4 = _VirtualDom_node('h4');
@@ -8990,9 +9264,12 @@ var $author$project$Page$Article$viewContent = function (content) {
 						$elm$html$Html$Attributes$class('collection')
 					]),
 				A2($elm$core$List$map, $author$project$Page$Article$viewCollectionItem, collection));
-		default:
+		case 8:
 			var codeBlock = content.a;
 			return $author$project$Page$Article$viewCodeBlock(codeBlock);
+		default:
+			var orderedList = content.a;
+			return $author$project$Page$Article$viewOrderedList(orderedList);
 	}
 };
 var $author$project$Page$Article$viewSection = function (sectionInfo) {
@@ -9014,6 +9291,9 @@ var $author$project$Page$Article$view = function (model) {
 				$elm$html$Html$Attributes$class('container')
 			]),
 		A2($elm$core$List$map, $author$project$Page$Article$viewContent, model));
+};
+var $author$project$Component$Card$readAction = function (link) {
+	return {aR: link, bg: 'Read'};
 };
 var $author$project$Component$Card$viewAction = function (action) {
 	return A2(
@@ -9085,7 +9365,7 @@ var $author$project$Page$Home$view = function (_v0) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Latest musings')
+						$elm$html$Html$text('Tech musings')
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -9107,7 +9387,7 @@ var $author$project$Page$Home$view = function (_v0) {
 								{
 									aq: _List_fromArray(
 										[
-											{aR: '/blog/no-best-practices', bg: 'Read'}
+											$author$project$Component$Card$readAction('/blog/no-best-practices')
 										]),
 									bg: '... and how there are no best practices',
 									H: '3 Best Practices in programming'
@@ -9125,7 +9405,7 @@ var $author$project$Page$Home$view = function (_v0) {
 								{
 									aq: _List_fromArray(
 										[
-											{aR: '/blog/programming-as-a-second-language', bg: 'Read'}
+											$author$project$Component$Card$readAction('/blog/programming-as-a-second-language')
 										]),
 									bg: '... and why I\'m glad I\'ve learnt / taught a second language',
 									H: 'Programming as a Second Language'
@@ -9152,10 +9432,28 @@ var $author$project$Page$Home$view = function (_v0) {
 								{
 									aq: _List_fromArray(
 										[
-											{aR: '/blog/are-you-providing-value', bg: 'Read'}
+											$author$project$Component$Card$readAction('/blog/are-you-providing-value')
 										]),
 									bg: '... and how the road to hell is paved with good intentions',
 									H: 'Are you providing value?'
+								})
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('col s12 m6 l6')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Component$Card$view(
+								{
+									aq: _List_fromArray(
+										[
+											$author$project$Component$Card$readAction('/blog/either-pattern-for-network-calls')
+										]),
+									bg: '... for network calls',
+									H: 'The Either / Result pattern'
 								})
 							]))
 					]))

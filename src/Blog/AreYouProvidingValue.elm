@@ -30,6 +30,7 @@ getContent _ =
                 below examples.""" ]
             ]
         }
+    , Divider
     , Section
         { title =
             Just
@@ -119,6 +120,7 @@ Either<Error, int> ParseNumber(string number);
                 ]
             ]
         }
+    , Divider
     , Section
         { title =
             Just
@@ -303,6 +305,7 @@ const result = relevantProductNames.reduce((acc, current) => acc + current + ';'
                 ]
             ]
         }
+    , Divider
     , Section
         { title =
             Just
