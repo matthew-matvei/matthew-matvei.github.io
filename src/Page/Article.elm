@@ -85,6 +85,9 @@ viewParagraphSegment segment =
         ExternalLink link label ->
             externalLink [ href link ] [ text label ]
 
+        InternalLink link label ->
+            a [ href link ] [ text label ]
+
 
 viewSection : SectionInfo -> Html msg
 viewSection sectionInfo =

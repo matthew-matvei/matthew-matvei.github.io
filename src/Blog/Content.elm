@@ -57,6 +57,7 @@ type ParagraphSegment
     | Strong String
     | InlineCode String
     | ExternalLink String String
+    | InternalLink String String
 
 
 type Content

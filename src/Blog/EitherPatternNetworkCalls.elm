@@ -1,6 +1,6 @@
 module Blog.EitherPatternNetworkCalls exposing (getContent)
 
-import Blog.Content exposing (Content(..), ParagraphSegment(..))
+import Blog.Content exposing (AttributionInfo(..), Content(..), ParagraphSegment(..))
 import Date
 import Time exposing (Month(..))
 
@@ -9,12 +9,12 @@ getContent : () -> List Content
 getContent _ =
     [ Title "The Either / Result pattern"
     , SubTitle "... for network calls"
-    , WhenCreated <| Date.fromCalendarDate 2020 Aug 9
+    , WhenCreated <| Date.fromCalendarDate 2020 Aug 23
     , Section
         { title = Nothing
         , content =
             [ Paragraph
-                [ Text """In most Single Page Apps that rely on back end services, you will find
+                [ Text """In most Single Page Apps that rely on back-end services, you will find
                 yourself making many repetitive calls to these services from your UI components,
                 either directly or via some module that handles network fetches. And you'll find
                 that you're always dealing with 3 or 4 varying factors:"""
@@ -22,8 +22,14 @@ getContent _ =
             , OrderedList
                 [ [ Text "The endpoint uri" ]
                 , [ Text "The body of the request (optional)" ]
-                , [ Text "A successful response and its possible content" ]
-                , [ Text "An unsuccessful response and its error content" ]
+                , [ Text "A "
+                  , Strong "successful"
+                  , Text " response and its possible content"
+                  ]
+                , [ Text "An "
+                  , Strong "unsuccessful"
+                  , Text " response and its error content"
+                  ]
                 ]
             , Paragraph
                 [ Text """What I often saw was code that within a UI component would invoke the api
@@ -57,22 +63,22 @@ async componentDidMount() {
                 }
             , Paragraph
                 [ Text """And this is ignoring the cases where we often wanted to handle the
-                returned data in some way. For example if we wanted to enrich that data with some
+                returned data in some way. For example, if we wanted to enrich that data with some
                 other content, map it to a different shape, or use the result of one fetch as the
                 input to another. In these cases, we often had early """
                 , InlineCode "return"
                 , Text """ calls in the failure branches in order to avoid further processing, which
-                complicated setting state appropriately."""
+                complicated setting state very quickly."""
                 ]
             , Paragraph
-                [ Text """This is unfortunately complicated, given that in our heads we're simply
-                wanting to capture """
-                , Emphasis "if it's successful, to this; if it's unsuccessful, do that"
+                [ Text """This seems to be unreasonably complicated, given that in our heads we're
+                simply trying to capture """
+                , Emphasis "'if it's successful, do this; if it's unsuccessful, do that'"
                 , Text "."
                 ]
             , Paragraph
-                [ Text """It just so happens there's a perfect abstraction that simplified a lot of 
-                these network calls' responses.""" ]
+                [ Text """It just so happens there's a perfect abstraction that simplified handling
+                a lot of these network calls' responses.""" ]
             ]
         }
     , Divider
@@ -83,13 +89,24 @@ async componentDidMount() {
                 , subTitle = "... this or that"
                 }
         , content =
-            [ Paragraph
+            [ Image
+                { source = "/assets/img/fork_in_road.jpg"
+                , alt = "Fork in the road"
+                , attribution =
+                    ComplexAttribute
+                        { text = "Pinnacle Advisory"
+                        , link = "https://www.pinnacleadvisory.com/analyst/a-fork-in-the-road-market-review/"
+                        }
+                }
+            , Paragraph
                 [ Text "The 'Either' or 'Result' pattern (or "
                 , ExternalLink "https://adambennett.dev/2020/05/the-result-monad/" "the Result Monad"
                 , Text """, but that's a scary word), is very useful for encapsulating this """
                 , Emphasis "either or"
-                , Text """ behaviour. Ordinarily, a given function would return a given type of 
-                result. Given a naive view of the above """
+                , Text " behaviour, which I've briefly written about previously "
+                , InternalLink "/blog/are-you-providing-value" "here"
+                , Text """. Ordinarily, a given function would return a given type of 
+                result. A naive view of the above """
                 , InlineCode "fetch"
                 , Text """ request is that it should just return us our products, since that's what
                 we're interested in, but with the complexity of HTTP requests / responses, it's
@@ -137,7 +154,7 @@ class Either {
         return this;
     }
 
-    // ... Some other useful methods we can talk about later
+    // ... Here you would have some other useful methods we can talk about later
 
     static Ok(successfulValue) {
         return new Either(true, successfulValue);
@@ -173,6 +190,17 @@ const fetchResult = async (url, init) => {
                 , ExternalLink
                     "https://coryrylan.com/blog/javascript-module-pattern-basics"
                     "function-based module"
+                , Text ". I've found it useful to include "
+                , InlineCode "handleOk"
+                , Text " and "
+                , InlineCode "handleFailure"
+                , Text "methods separately in order to handle performing "
+                , Emphasis "side-effecty"
+                , Text """ actions for either success or failure along the pipeline, but these can
+                be combined in a 'cata' as described """
+                , ExternalLink
+                    "https://medium.com/@dimpapadim3/either-is-a-common-type-in-functional-languages-94b86eea325c"
+                    "here"
                 , Text """. This may all look rather unimpressive, and it's as though we've just 
                 created ourselves some extra work without any benefit. But with these beginning
                 pieces, the above example of fetching products becomes:"""
@@ -202,7 +230,9 @@ fetchResult("http://our.service/api/products")
                 [ Text """This massively distills the essence of what we're trying to convey to
                 other developers working on this project. At the call site, we can see that we're
                 fetching some data, notifying of failure if that occurs, and setting state if the
-                result is successful. That's it. Simples. The below diff demonstrates how we cut
+                result is successful. That's it. """
+                , Emphasis "Simples"
+                , Text """. The below diff demonstrates how we cut
                 through the otherwise messy success / failure branch handling."""
                 ]
             , CodeBlock
@@ -214,19 +244,19 @@ async componentDidMount() {
 
 -    try {
 -        const productsResponse = await fetch("http://our.service/api/products");
-+   (await fetchResult("http://our.service/api/products"))
++    (await fetchResult("http://our.service/api/products"))
 -        if (productsResponse.ok) {
 -            const products = await productsResponse.json();
 -            this.setState({ products });
 -        } else {
-+       .handleOk((products) => this.setState({ products }))
++        .handleOk((products) => this.setState({ products }))
 -            const errorContent = await productsResponse.json();
 -            notifyError(errorContent);
 -        }
 -    } catch (error) {
 -        notifyError(error);
 -    }
-+       .handleFailure(({ content }) => notifyError(content));
++        .handleFailure(({ content }) => notifyError(content));
     
     this.setState({ isFetching: false });
 }
@@ -289,8 +319,10 @@ try {
                 even return another Either, or just a simple result that we can wrap in an Either.
                 This functionality is handled by methods usually described as a """
                 , InlineCode ".bind"
-                , Text " or "
-                , InlineCode ".map"
+                , Text ", as described "
+                , ExternalLink
+                    "https://fsharpforfunandprofit.com/posts/elevated-world-2/"
+                    "here"
                 , Text ". Let's have a look at some simplified examples of those."
                 ]
             , CodeBlock
@@ -321,6 +353,19 @@ class Either {
                 """
                 }
             , Paragraph
+                [ Text "You could also wrap the evaluation of "
+                , InlineCode "nextDelegate"
+                , Text " in a try / catch block, and handle errors by returning "
+                , InlineCode "Either.Fail"
+                , Text """, but that's very much a matter for some further thought and decision
+                making. After all, if a """
+                , InlineCode "nextDelegate"
+                , Text """ that doesn't attempt to return an Either instance simply fails, it may
+                be desirable to expect the caller to handle this within the """
+                , InlineCode "nextDelegate"
+                , Text " function that they pass."
+                ]
+            , Paragraph
                 [ Text """In our above, non-Either example, it looks like we also wanted to define
                 when a result may be a failure. This can be handled by doing something like:"""
                 ]
@@ -328,7 +373,7 @@ class Either {
                 { language = "js"
                 , code = """
 class Either {
-    // We've seen this before folks
+    // ... We've seen this before folks
 
     failIf(delegate) {
         if (!this.isOk) return this;
@@ -341,7 +386,9 @@ class Either {
             """
                 }
             , Paragraph
-                [ Text "With these pieces in place, we can now diff the simplifications." ]
+                [ Text """With these pieces in place, we can now diff the simplifications. To
+                prevent your eyes from bleeding by stitching the two together, I've separated the
+                removed from the added.""" ]
             , CodeBlock
                 { language = "diff"
                 , code = """
@@ -386,7 +433,7 @@ class Either {
 +   .then((result) => result
 +       .handleFailure((error) => { 
 +           if (error?.content) notifyError(error.content);
-+           })
++       })
 +       .handleOk((filteredProducts) => { this.setState({ products: filteredProducts }) };))
             """
                 }
@@ -400,7 +447,16 @@ class Either {
                 , subTitle = "... \"what's an 'Either'?\""
                 }
         , content =
-            [ Paragraph
+            [ Image
+                { source = "https://media.giphy.com/media/zjQrmdlR9ZCM/giphy.gif"
+                , alt = "Confused"
+                , attribution =
+                    ComplexAttribute
+                        { text = "giphy.com"
+                        , link = "https://giphy.com/gifs/confused-huh-mark-wahlberg-zjQrmdlR9ZCM"
+                        }
+                }
+            , Paragraph
                 [ Text """Despite the advantages, there are genuine reasons you may not want to
                 introduce an Either / Result monad into your work's next project:"""
                 ]
