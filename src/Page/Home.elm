@@ -8,7 +8,7 @@ import Html.Attributes exposing (class)
 view : () -> Html msg
 view _ =
     main_ [ class "container" ]
-        [ h2 [] [ text "Latest musings" ]
+        [ h2 [] [ text "Tech musings" ]
         , div [ class "row" ]
             [ div [ class "col s12 m6 l6" ]
                 [ Card.view
