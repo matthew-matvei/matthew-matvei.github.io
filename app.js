@@ -6692,9 +6692,72 @@ var $author$project$Footer$view = function (today) {
 					]))
 			]));
 };
+var $author$project$Header$LargeScreen = 1;
+var $author$project$Header$SmallScreen = 0;
 var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$nav = _VirtualDom_node('nav');
-var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$html$Html$img = _VirtualDom_node('img');
+var $author$project$Header$logoText = function (size) {
+	if (!size) {
+		return 'mat‑mat';
+	} else {
+		return 'matthew‑matvei';
+	}
+};
+var $author$project$Header$sizeAsClass = function (size) {
+	if (!size) {
+		return $elm$html$Html$Attributes$class('hide-on-med-and-up');
+	} else {
+		return $elm$html$Html$Attributes$class('hide-on-small-only');
+	}
+};
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $author$project$Header$viewLogoFor = function (size) {
+	return A2(
+		$elm$html$Html$a,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$href('/'),
+				$elm$html$Html$Attributes$class('brand-logo')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('d-flex align-items-centre'),
+						$author$project$Header$sizeAsClass(size)
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('pr-1')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								$author$project$Header$logoText(size))
+							])),
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('pl-1 profile-icon round'),
+								$elm$html$Html$Attributes$src('/assets/img/matthew-matvei-250x250.jpg')
+							]),
+						_List_Nil)
+					]))
+			]));
+};
 var $author$project$Header$view = function (_v0) {
 	return A2(
 		$elm$html$Html$header,
@@ -6733,36 +6796,8 @@ var $author$project$Header$view = function (_v0) {
 											]),
 										_List_fromArray(
 											[
-												A2(
-												$elm$html$Html$a,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$href('/'),
-														$elm$html$Html$Attributes$class('brand-logo')
-													]),
-												_List_fromArray(
-													[
-														A2(
-														$elm$html$Html$span,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$class('hide-on-small-only')
-															]),
-														_List_fromArray(
-															[
-																$elm$html$Html$text('matthew-matvei')
-															])),
-														A2(
-														$elm$html$Html$span,
-														_List_fromArray(
-															[
-																$elm$html$Html$Attributes$class('hide-on-med-and-up')
-															]),
-														_List_fromArray(
-															[
-																$elm$html$Html$text('mat-mat')
-															]))
-													]))
+												$author$project$Header$viewLogoFor(1),
+												$author$project$Header$viewLogoFor(0)
 											]))
 									]))
 							]))
@@ -7869,6 +7904,7 @@ var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$html$Html$section = _VirtualDom_node('section');
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$code = _VirtualDom_node('code');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
 var $author$project$Page$Article$viewCodeBlock = function (codeBlock) {
@@ -9015,13 +9051,6 @@ var $author$project$Page$Article$viewDate = function (date) {
 	return A2($justinmimbs$date$Date$format, 'MMMM d y', date);
 };
 var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
-var $elm$html$Html$img = _VirtualDom_node('img');
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
 var $author$project$Page$Article$viewAttribution = function (attributionInfo) {
 	if (!attributionInfo.$) {
 		var attribution = attributionInfo.a;

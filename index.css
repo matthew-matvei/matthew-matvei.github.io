@@ -23,3 +23,20 @@ main {
 .flex-col {
     flex-direction: column;
 }
+
+.round {
+    border-radius: 50%;
+}
+
+.profile-icon {
+    max-height: 50px;
+    max-width: 50px;
+}
+
+.pl-1 {
+    padding-left: .5rem;
+}
+
+.pr-1 {
+    padding-right: .5rem;
+}
