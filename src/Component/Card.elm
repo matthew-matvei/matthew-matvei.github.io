@@ -1,11 +1,13 @@
-module Component.Card exposing (readAction, view)
+module Component.Card exposing (readArticleAction, view)
 
 import Html exposing (Html, a, div, p, span, text)
 import Html.Attributes exposing (class, href)
+import Widget exposing (externalLink)
 
 
 type alias Action =
     { link : String
+    , linkIsExternal : Bool
     , text : String
     }
 
@@ -36,9 +38,11 @@ view model =
 
 viewAction : Action -> Html msg
 viewAction action =
-    a [ href action.link ] [ text action.text ]
+    if action.linkIsExternal
+    then externalLink [ href action.link ] [ text action.text ]
+    else a [ href action.link ] [ text action.text ]
 
 
-readAction : String -> Action
-readAction link =
-    { link = link, text = "Read" }
+readArticleAction : String -> Action
+readArticleAction link =
+    { link = link, linkIsExternal = False, text = "Read" }
