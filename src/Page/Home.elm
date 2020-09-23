@@ -8,7 +8,23 @@ import Html.Attributes exposing (class)
 view : () -> Html msg
 view _ =
     main_ [ class "container" ]
-        [ h2 [] [ text "Tech musings" ]
+        (viewApps () ++ viewBlogArticles ())
+
+viewApps : () -> List (Html msg)
+viewApps _ =
+    [ h2 [] [ text "Apps" ]
+    , div [ class "row" ]
+    [ div [ class "col s12 m6 l6" ][
+        Card.view {
+            title = "Terminal Tetris"
+            , text = "Blah di blah"
+            , actions = []
+        }
+    ]]]
+
+viewBlogArticles : () -> List (Html msg)
+viewBlogArticles _ =
+    [ h2 [] [ text "Tech musings" ]
         , div [ class "row" ]
             [ div [ class "col s12 m6 l6" ]
                 [ Card.view
