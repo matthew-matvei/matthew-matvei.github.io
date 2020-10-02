@@ -6768,7 +6768,7 @@ var $author$project$Header$view = function (_v0) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('navbar-fixed')
+						$elm$html$Html$Attributes$class('navbar-fixed z-depth-3')
 					]),
 				_List_fromArray(
 					[
@@ -9420,6 +9420,24 @@ var $author$project$Page$Home$viewApps = function (_v0) {
 									]),
 								bh: '... a simple game of Tetris in the terminal',
 								H: 'Terminal Tetris'
+							})
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('col s12 m6 l6')
+						]),
+					_List_fromArray(
+						[
+							$author$project$Component$Card$view(
+							{
+								ar: _List_fromArray(
+									[
+										{aS: 'https://github.com/matthew-matvei/wikiscape', ab: true, bh: 'Explore'}
+									]),
+								bh: '... see articles for nearby places of interest; perfect for exploring\n                home or abroad',
+								H: 'Wikiscape'
 							})
 						]))
 				]))
