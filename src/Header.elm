@@ -7,7 +7,7 @@ import Html.Attributes exposing (class, href, src)
 view : () -> Html msg
 view _ =
     header []
-        [ div [ class "navbar-fixed" ]
+        [ div [ class "navbar-fixed z-depth-3" ]
             [ nav [ class "blue darken-2" ]
                 [ div [ class "nav-wrapper" ]
                     [ div [ class "container" ]
