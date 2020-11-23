@@ -54,6 +54,9 @@ title model =
                 EitherPatternNetworkCalls ->
                     "mat-mat | 'Either' pattern for network calls"
 
+                LinqPerformanceLessons ->
+                    "mat-mat | Performance lessons with LINQ"
+
 
 fromRoute : Maybe Route -> Page
 fromRoute maybeRoute =

@@ -9,6 +9,7 @@ module Blog.Content exposing
     , SectionTitle
     )
 
+import Component.Table as Table
 import Date exposing (Date)
 
 
@@ -64,6 +65,7 @@ type Content
     = Title String
     | SubTitle String
     | WhenCreated Date
+    | Heading String
     | Paragraph (List ParagraphSegment)
     | Section SectionInfo
     | BlockQuote String
@@ -72,3 +74,4 @@ type Content
     | CodeBlock CodeBlockInfo
     | Collection (List CollectionItem)
     | OrderedList (List (List ParagraphSegment))
+    | Table Table.Model
