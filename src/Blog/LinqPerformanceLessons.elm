@@ -14,11 +14,16 @@ getContent _ =
         { title = Nothing
         , content =
             [ Paragraph
-                [ Text """I initially started writing benchmarks for LINQ methods during regular pull requests, reviewing
-                others' code. I would often see certain method calls that seemed unnecessary or less than optimally
-                efficient, but I wanted to verify my intuitions. Having done so, I can see that there can sometimes be
-                some mental gymnastics that goes into concluding whether a query can be optimised. However, there are
-                some key takeaways that I'd like to go through."""
+                [ Text """I initially started writing benchmarks for LINQ methods during regular pull requests, when
+                reviewing others' code. I would often see certain method calls that seemed unnecessary or less than
+                optimally efficient, but I wanted to verify my intuitions. Having done so, I can see that there can
+                sometimes be some mental gymnastics that goes into concluding whether a query can be optimised. However,
+                there are some key takeaways that I'd like to go through. All code involved in the benchmarks referred
+                to below can be found in my """
+                , ExternalLink
+                    "https://github.com/matthew-matvei/ComparableLinqMethodsBenchmark"
+                    "ComparableLinqMethodsBenchmark"
+                , Text " repository."
                 ]
             , Image
                 { source = "/assets/img/gotta-go-fast.gif"
