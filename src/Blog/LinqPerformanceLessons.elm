@@ -9,7 +9,7 @@ import Time exposing (Month(..))
 
 getContent : () -> List Content
 getContent _ =
-    [ Title "Lessons on performance with Linq"
+    [ Title "Lessons on performance with LINQ"
     , SubTitle "... when comparing logically equivalent methods"
     , WhenCreated <| Date.fromCalendarDate 2020 Nov 23
     , Section
