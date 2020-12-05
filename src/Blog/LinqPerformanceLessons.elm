@@ -107,7 +107,16 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 , subTitle = "... the not-so-surprising"
                 }
         , content =
-            [ Heading "The Baseline"
+            [ Image
+                { source = "https://media.giphy.com/media/Jrq94lNNcguM8/giphy.gif"
+                , alt = "O RLY? Let me write that down GIF"
+                , attribution =
+                    ComplexAttribute
+                        { text = "Giphy.com"
+                        , link = "https://giphy.com/"
+                        }
+                }
+            , Heading "The Baseline"
             , Paragraph
                 [ Text """Initially, I simply wanted to understand the differences in the same general, simple mapping
                 operation. This would give me an idea of how the underlying enumerable data structure can be iterated
