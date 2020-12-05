@@ -90,7 +90,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
             , Paragraph
                 [ Text """Overall, though, this isn't about raw, absolute metrics, but rather about seeing relative
                 differences within the same operating environment and making decisions based on that. I'm hoping you
-                can steer away certain LINQ practices and towards others at the end of it. I should also point out that
+                can steer away from certain LINQ practices and towards others at the end of it. I should also point out that
                 generally the worst-case scenario is used: for example, when searching for an element in a list, to
                 show the full weight of a """
                 , InlineCode "O(n)"
