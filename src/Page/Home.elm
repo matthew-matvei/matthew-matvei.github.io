@@ -50,6 +50,14 @@ viewBlogArticles _ =
     , div [ class "row" ]
         [ div [ class "col s12 m6 l6" ]
             [ Card.view
+                { title = "Lessons on performance with LINQ"
+                , text = "... when comparing logically equivalent methods"
+                , actions =
+                    [ Card.readArticleAction "/blog/linq-performance-lessons" ]
+                }
+            ]
+        , div [ class "col s12 m6 l6" ]
+            [ Card.view
                 { title = "3 Best Practices in programming"
                 , text = "... and how there are no best practices"
                 , actions =
@@ -57,7 +65,9 @@ viewBlogArticles _ =
                     ]
                 }
             ]
-        , div [ class "col s12 m6 l6" ]
+        ]
+    , div [ class "row" ]
+        [ div [ class "col s12 m6 l6" ]
             [ Card.view
                 { title = "Programming as a Second Language"
                 , text = "... and why I'm glad I've learnt / taught a second language"
@@ -66,9 +76,7 @@ viewBlogArticles _ =
                     ]
                 }
             ]
-        ]
-    , div [ class "row" ]
-        [ div [ class "col s12 m6 l6" ]
+        , div [ class "col s12 m6 l6" ]
             [ Card.view
                 { title = "Are you providing value?"
                 , text = "... and how the road to hell is paved with good intentions"
@@ -77,7 +85,9 @@ viewBlogArticles _ =
                     ]
                 }
             ]
-        , div [ class "col s12 m6 l6" ]
+        ]
+    , div [ class "row" ]
+        [ div [ class "col s12 m6 l6" ]
             [ Card.view
                 { title = "The Either / Result pattern"
                 , text = "... for network calls"
