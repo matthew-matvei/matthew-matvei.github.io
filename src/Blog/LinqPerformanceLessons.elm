@@ -77,14 +77,14 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
             hazard a guess that .NET 5 running on Windows will be a fairly common combination of factors once
             adoption of .NET 5 becomes more prevalent. If you found some interesting results, particularly those that
             contradict mine, using a different setup, reach out at """
-                , Emphasis "matthew"
-                , Strong "(dot)"
-                , Emphasis "d"
-                , Strong "(dot)"
-                , Emphasis "james"
-                , Strong "87"
+                , [ Text "matthew" ] |> Emphasised
+                , [ Text "(dot)" ] |> Strong
+                , [ Text "d" ] |> Emphasised
+                , [ Text "(dot)" ] |> Strong
+                , [ Text "james" ] |> Emphasised
+                , [ Text "87" ] |> Strong
                 , Text " at "
-                , Emphasis "gmail.com"
+                , [ Text "gmail.com" ] |> Emphasised
                 , Text "."
                 ]
             , Paragraph
@@ -242,7 +242,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 [ Text """If you were hoping that you could enjoy the same query optimisation techniques you can get
                 with SQL, it's important to confirm that order does indeed matter. The delegates that you pass LINQ
                 methods """
-                , Emphasis "can"
+                , [ Text "can" ] |> Emphasised
                 , Text """ have side effects, so they need to be executed in the order they're defined. I've used a
                 simple filter -> map to compare the results."""
                 ]
@@ -336,7 +336,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 filters that should happen in series like """
                 , InlineCode "myNumbers.Where(IsEven).Where(IsNegative)"
                 , Text ". It would be nice if the provided delegates could be composed when combining "
-                , Emphasis "where"
+                , [ Text "where" ] |> Emphasised
                 , Text " iterators, so that "
                 , InlineCode "myNumbers"
                 , Text """ in the example above would only need to be iterated over once. Without this black magic, you
@@ -543,9 +543,9 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 It can, however, be a great tool in writing concise, declarative code, particularly if you're leaning
                 towards Functional Programming. This alone can lower the cost in maintaining current code and delivering
                 additional functionality. When it comes to choosing not """
-                , Emphasis "whether"
+                , [ Text "whether" ] |> Emphasised
                 , Text ", but "
-                , Emphasis "how"
+                , [ Text "how" ] |> Emphasised
                 , Text " you use LINQ, some key takeaways are:"
                 ]
             , Collection

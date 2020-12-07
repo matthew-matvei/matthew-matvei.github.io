@@ -23,11 +23,11 @@ getContent _ =
                 [ [ Text "The endpoint uri" ]
                 , [ Text "The body of the request (optional)" ]
                 , [ Text "A "
-                  , Strong "successful"
+                  , [ Text "successful" ] |> Strong
                   , Text " response and its possible content"
                   ]
                 , [ Text "An "
-                  , Strong "unsuccessful"
+                  , [ Text "unsuccessful" ] |> Strong
                   , Text " response and its error content"
                   ]
                 ]
@@ -73,7 +73,7 @@ async componentDidMount() {
             , Paragraph
                 [ Text """This seems to be unreasonably complicated, given that in our heads we're
                 simply trying to capture """
-                , Emphasis "'if it's successful, do this; if it's unsuccessful, do that'"
+                , [ Text "'if it's successful, do this; if it's unsuccessful, do that'" ] |> Emphasised
                 , Text "."
                 ]
             , Paragraph
@@ -102,7 +102,7 @@ async componentDidMount() {
                 [ Text "The 'Either' or 'Result' pattern (or "
                 , ExternalLink "https://adambennett.dev/2020/05/the-result-monad/" "the Result Monad"
                 , Text """, but that's a scary word), is very useful for encapsulating this """
-                , Emphasis "either or"
+                , [ Text "either or" ] |> Emphasised
                 , Text " behaviour, which I've briefly written about previously "
                 , InternalLink "/blog/are-you-providing-value" "here"
                 , Text """. Ordinarily, a given function would return a given type of 
@@ -115,15 +115,15 @@ async componentDidMount() {
                 ]
             , Paragraph
                 [ Text "At the crux of this monad is the ability to describe "
-                , Emphasis "how"
+                , [ Text "how" ] |> Emphasised
                 , Text """ you would like to handle the success / failure paths of the result of 
                 some operation. The above example can be rewritten to take advantage of this
                 pattern, but first it will be useful to have a function that adapts the raw """
                 , InlineCode "fetch"
                 , Text " API result into "
-                , Emphasis "either"
+                , [ Text "either" ] |> Emphasised
                 , Text " a successful result "
-                , Emphasis "or"
+                , [ Text "or" ] |> Emphasised
                 , Text " an unsuccessful one."
                 ]
             , CodeBlock
@@ -195,7 +195,7 @@ const fetchResult = async (url, init) => {
                 , Text " and "
                 , InlineCode "handleFailure"
                 , Text "methods separately in order to handle performing "
-                , Emphasis "side-effecty"
+                , [ Text "side-effecty" ] |> Emphasised
                 , Text """ actions for either success or failure along the pipeline, but these can
                 be combined in a 'cata' as described """
                 , ExternalLink
@@ -231,7 +231,7 @@ fetchResult("http://our.service/api/products")
                 other developers working on this project. At the call site, we can see that we're
                 fetching some data, notifying of failure if that occurs, and setting state if the
                 result is successful. That's it. """
-                , Emphasis "Simples"
+                , [ Text "Simples" ] |> Emphasised
                 , Text """. The below diff demonstrates how we cut
                 through the otherwise messy success / failure branch handling."""
                 ]
@@ -306,7 +306,7 @@ try {
                 [ Text """A large advantage of this monad is simplifying dealing with the happy
                 path whilst not failing to deal with the unhappy one. In the above, we want to
                 fetch the products with a filter, but """
-                , Strong "only"
+                , [ Text "only" ] |> Strong
                 , Text """ if the previous user name fetch was successful. We also need to check
                 whether the returned user object actually has a first and last name defined before
                 continuing, complicating the possible escape hatch """

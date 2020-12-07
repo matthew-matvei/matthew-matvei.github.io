@@ -29,7 +29,7 @@ getContent _ =
             , Paragraph
                 [ Text """For me, however, experience in this conversation brings me to my first 😓 blargh post. I want
             to show you that there are no strictly """
-                , Emphasis "best"
+                , [ Text "best" ] |> Emphasised
                 , Text """ practices and remind you that everything really does
             depend on the situation."""
                 ]
@@ -70,7 +70,7 @@ public int GetValue() =>
                 }
             , Paragraph
                 [ Text "at which point, the comments don't even mention the most surprising "
-                , Emphasis "feature"
+                , [ Text "feature" ] |> Emphasised
                 , Text " about this method, which is that if it's called when "
                 , InlineCode "this.Value"
                 , Text " is "
@@ -122,7 +122,7 @@ Task<bool> ItemExistsAsync(string itemId);
                 , Text " a "
                 , InlineCode "boolean"
                 , Text " answer. Or even better, if you dabble a little more with "
-                , Emphasis "functional"
+                , [ Text "functional" ] |> Emphasised
                 , Text " patterns..."
                 ]
             , CodeBlock
@@ -213,7 +213,7 @@ public MyService(
                 ]
             , Paragraph
                 [ Text "So you "
-                , Emphasis "could"
+                , [ Text "could" ] |> Emphasised
                 , Text """ see these checks as redundant. And whilst C# (above) let's you tidy this up with the null
                 coalescing ("""
                 , InlineCode "??"
@@ -222,7 +222,7 @@ public MyService(
                 ]
             , Paragraph
                 [ Text "You could say "
-                , Strong "I trust no one"
+                , [ Text "I trust no one" ] |> Strong
                 , Text """, and I can't guarantee that this class will always be resolved through Dependency Injection.
                 Even then, we may switch DI frameworks, the standard behaviour may be different and we might end up
                 trying to construct this class with """
@@ -231,7 +231,7 @@ public MyService(
                 ]
             , Paragraph
                 [ Text "You could also say "
-                , Strong "Take responsibility when calling me"
+                , [ Text "Take responsibility when calling me" ] |> Strong
                 , Text ", and decide that if a caller has attempted to manually construct this class with a "
                 , InlineCode "null"
                 , Text """ dependency, then they've violated the class' type contract (which asks in this example case
@@ -239,7 +239,7 @@ public MyService(
                 , InlineCode "object"
                 , Text ", not an "
                 , InlineCode "object"
-                , Emphasis " or "
+                , [ Text " or " ] |> Emphasised
                 , InlineCode "null"
                 , Text ") and can no longer have any expectations about its behaviour."
                 ]
@@ -314,9 +314,9 @@ function flattenArray(array) {
                 unexpected yet possible input. Even if you're not sure about your own abilities, you might find it a lot
         simpler rolling your own in some cases, since you can keep your solution scoped to the needs of
         your own project. Having actually written the functionality yourself, you'll also have """
-                , Strong "a)"
+                , [ Text "a)" ] |> Strong
                 , Text " learnt how it works in detail (making it easier to debug / reason about) and "
-                , Strong "b)"
+                , [ Text "b)" ] |> Strong
                 , Text " improved your abilities."
                 ]
             , Paragraph [ Text """I have been both on projects that import everything, usually landing us in some form

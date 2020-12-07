@@ -54,8 +54,8 @@ type alias CollectionItem =
 
 type ParagraphSegment
     = Text String
-    | Emphasis String
-    | Strong String
+    | Emphasised (List ParagraphSegment)
+    | Strong (List ParagraphSegment)
     | InlineCode String
     | ExternalLink String String
     | InternalLink String String

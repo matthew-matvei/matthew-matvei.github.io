@@ -17,7 +17,7 @@ getContent _ =
             [ Paragraph
                 [ Text """You are not employed to write clean code, you are not paid to write tests;
                 they keep you around in the hope that you will """
-                , Strong "add value"
+                , [ Text "add value" ] |> Strong
                 , Text "."
                 ]
             , Paragraph
@@ -68,14 +68,14 @@ Either<Error, int> ParseNumber(string number);
             , Paragraph
                 [ Text """As you can see, the issue with exceptions can be that they hide the fact
                 that they have possible """
-                , Emphasis "alternative return values"
+                , [ Text "alternative return values" ] |> Emphasised
                 , Text ". It's possible that the method will result in an "
                 , InlineCode "int"
                 , Text """, but it's also possible that it may result in one of many exceptions
                 raised due to the nature of the """
                 , InlineCode "number"
                 , Text " parameter. Often, it's left up to a caller simply to "
-                , Emphasis "know"
+                , [ Text "know" ] |> Emphasised
                 , Text """ that this may happen, or look at documentation for the method, which can
                 be lacking, stale or misleading. It may not even be clear to the developer who
                 documented the method in the first place, since the exceptions that it potentially
@@ -97,13 +97,13 @@ Either<Error, int> ParseNumber(string number);
                 functions to chain multiple actions into one ultimate result?""" ]
             , Paragraph
                 [ Text "Unfortunately, if they don't "
-                , Emphasis "get it"
+                , [ Text "get it" ] |> Emphasised
                 , Text """, they won't use it properly, and all the benefits of it will be in vain.
                 You can try to make the argument that they should just suck it up and learn it, and
                 learning new things is lovely and all, but we all work to real constraints. Perhaps
                 they have enough on their plate keeping up with new practices of system monitoring
                 and persisting data. If they are used to catching exceptions, and let's face it, """
-                , Emphasis "they probably are"
+                , [ Text "they probably are" ] |> Emphasised
                 , Text """, then they're more likely to do this correctly. It fits more naturally in
                 with the talents of the team and therefore lets them actually contribute more value
                 to the business."""
@@ -114,7 +114,7 @@ Either<Error, int> ParseNumber(string number);
                 the person who suggested everyone adopt a new pattern), then that's positive. But
                 consider whether this other feature, no matter how fantastic it may seem in isolation,
                 is """
-                , Strong "actually"
+                , [ Text "actually" ] |> Strong
                 , Text """ the right tool for the job. Or rather, it's a screw that other developers
                 have the right screwdrivers for..."""
                 ]
@@ -142,7 +142,7 @@ Either<Error, int> ParseNumber(string number);
                 ]
             , Paragraph
                 [ Text "Since there's no overarching "
-                , Emphasis "reason"
+                , [ Text "reason" ] |> Emphasised
                 , Text """ for this module, other than just to house this function that you're going
                 to import the function from (which, you reason, will make the code more reusable
                 and testable), you decide to put it in a new file called """
@@ -353,7 +353,7 @@ public class Point
                 they can improve the """
                 , InlineCode "GetHashCode"
                 , Text " method "
-                , Emphasis "(hint: it can be)"
+                , [ Text "(hint: it can be)" ] |> Emphasised
                 , Text "."
                 ]
             , Paragraph
@@ -420,7 +420,7 @@ public class Point
                 [ Text "When writing the "
                 , InlineCode "Point"
                 , Text " class, don't try to write and implement the future; but "
-                , Emphasis "consider"
+                , [ Text "consider" ] |> Emphasised
                 , Text """ the future. Think about how the type could be extended to support aspects
                 such as modifying, either mutably or immutably, points and whether it could be
                 easily modified to handle non-integer values (particularly about whether this could
