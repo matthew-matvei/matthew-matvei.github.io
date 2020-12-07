@@ -37,8 +37,8 @@ getContent _ =
                         }
                 }
             , Paragraph
-                [ Text """LINQ wasn't built for blistering-fast performance, so why worry about benchmarking various
-                LINQ methods? True, LINQ's strength lies in declaratively describing how a lazily-evaluated query over
+                [ Text """LINQ may not have been built for blistering-fast performance, so why worry about benchmarking various
+                LINQ methods? True, its strength lies in declaratively describing how a lazily-evaluated query over
                 some data should be performed, not necessarily in dealing with that data with the fewest allocations or
                 iterations. That said, if we're sticking within the confines of LINQ and just comparing
                 logically-equivalent methods (i.e., different methods that produce the same results) in a fairly
@@ -55,7 +55,7 @@ getContent _ =
                 }
         , content =
             [ Paragraph
-                [ Text "Below are the relevant specs outputted by "
+                [ Text "Below are the relevant specs for my machine outputted by "
                 , ExternalLink "https://benchmarkdotnet.org/articles/overview.html" "Benchmark Dotnet"
                 , Text ", which I used to measure and compare performance by defining benchmarks."
                 ]
@@ -118,7 +118,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
             , Heading "The Baseline"
             , Paragraph
                 [ Text """Initially, I simply wanted to understand the differences in the same general, simple mapping
-                operation. This would give me an idea of how the underlying enumerable data structure can be iterated
+                operation. This would give me an idea of how the underlying enumerable data structures can be iterated
                 through. In most benchmarks each enumerable data source has a size of """
                 , InlineCode "200"
                 , Text " or "
@@ -127,11 +127,11 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 , InlineCode "200,000"
                 , Text ". In the class "
                 , InlineCode "BaselineSelect"
-                , Text " all that is done is a simple mapping using "
-                , InlineCode ".Select"
+                , Text ", all that is done is a simple mapping using "
+                , InlineCode "Select"
                 , Text " and the enumerable that's produced is consumed using a "
                 , InlineCode "Consumer"
-                , Text " from Benchmark Dotnet"
+                , Text " from Benchmark Dotnet."
                 ]
             , Table
                 { header = [ "Method", "Mean", "Error", "Std Dev" ]
@@ -172,7 +172,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 , InlineCode "Dictionary<TKey, TValue>"
                 , Text """) comes with such high penalties for iterating through it, that I wanted to see whether
                 iterating instead through a dictionary's """
-                , InlineCode ".Values"
+                , InlineCode "Values"
                 , Text ", which is a "
                 , InlineCode "ValueCollection"
                 , Text ", would yield better results. When iterating this, only "
@@ -180,10 +180,10 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 , Text "s are yielded. This removes the overhead of needing to construct "
                 , InlineCode "KeyValuePair<TKey, TValue>"
                 , Text "s. Below, I compare mapping through the dictionary itself vs mapping its "
-                , InlineCode ".Values"
-                , Text ". Again, this is using a higher than usual count of data to heighten the differences, "
+                , InlineCode "Values"
+                , Text ". Again, this is using a higher than usual count of data, "
                 , InlineCode "200,000"
-                , Text "."
+                , Text ", to heighten the differences."
                 ]
             , Table
                 { header = [ "Method", "Mean", "Error", "Std Dev" ]
@@ -200,11 +200,11 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 }
             , Paragraph
                 [ Text "Likewise, "
-                , InlineCode ".First"
+                , InlineCode "First"
                 , Text ", which again incurs translation when iterating through the dictionary to "
                 , InlineCode "KeyValuePair<TKey, TValue>"
                 , Text "s, can benefit from grabbing the "
-                , InlineCode ".Values"
+                , InlineCode "Values"
                 , Text ". Note the below values are from querying over data with a count of just "
                 , InlineCode "201"
                 , Text "."
@@ -224,7 +224,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 }
             , Paragraph
                 [ Text "Working with a dictionary, "
-                , InlineCode ".First(pred)"
+                , InlineCode "First(pred)"
                 , Text """ won't be the most efficient way to grab an element. Generally you should be able to access
                 that element by some hashable index that you've chosen (might be a """
                 , InlineCode "Guid"
@@ -233,7 +233,7 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 , Text """ constant complexity performance. If, however, for whatever reason you need to get the first
                 element in a dictionary where you can't get the element by its hashed index, then it may be worth
                 grabbing the """
-                , InlineCode ".Values"
+                , InlineCode "Values"
                 , Text " collection."
                 ]
             , Heading "Order Matters"
