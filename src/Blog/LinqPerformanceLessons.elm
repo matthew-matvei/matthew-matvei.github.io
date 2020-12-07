@@ -264,8 +264,8 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                     , [ "Where -> Select (Collection<T>)", "4.069 μs", "0.0048 μs", "0.0040 μs" ]
                     , [ "Select -> Where (HashSet<T>)", "9.646 μs", "0.0095 μs", "0.0084 μs" ]
                     , [ "Where -> Select (HashSet<T>)", "3.985 μs", "0.0047 μs", "0.0042 μs" ]
-                    , [ "Select -> Where (Dictionary<T>)", "11.338 μs", "0.0103 μs", "0.0086 μs" ]
-                    , [ "Where -> Select (Dictionary<T>)", "4.917 μs", "0.0111 μs", "0.0104 μs" ]
+                    , [ "Select -> Where (Dictionary<T1, T2>)", "11.338 μs", "0.0103 μs", "0.0086 μs" ]
+                    , [ "Where -> Select (Dictionary<T1, T2>)", "4.917 μs", "0.0111 μs", "0.0104 μs" ]
                     ]
                 , caption =
                     Just
@@ -291,8 +291,8 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                     , [ "Distinct -> Where (Collection<T>)", "8.725 μs", "0.0144 μs", "0.0127 μs" ]
                     , [ "Where -> Distinct (HashSet<T>)", "3.886 μs", "0.0043 μs", "0.0041 μs" ]
                     , [ "Distinct -> Where (HashSet<T>)", "8.828 μs", "0.0070 μs", "0.0058 μs" ]
-                    , [ "Where -> Distinct (Dictionary<T>)", "5.829 μs", "0.0070 μs", "0.0066 μs" ]
-                    , [ "Distinct -> Where (Dictionary<T>)", "11.460 μs", "0.0145 μs", "0.0129 μs" ]
+                    , [ "Where -> Distinct (Dictionary<T1, T2>)", "5.829 μs", "0.0070 μs", "0.0066 μs" ]
+                    , [ "Distinct -> Where (Dictionary<T1, T2>)", "11.460 μs", "0.0145 μs", "0.0129 μs" ]
                     ]
                 , caption =
                     Just
@@ -397,8 +397,8 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                     , [ "Select (Collection<T>)", "21.49 ms", "0.215 ms", "0.201 ms" ]
                     , [ "Select -> Select (HashSet<T>)", "21.65 ms", "0.156 ms", "0.146 ms" ]
                     , [ "Select (HashSet<T>)", "21.46 ms", "0.145 ms", "0.135 ms" ]
-                    , [ "Select -> Select (Dictionary<T>)", "23.52 ms", "0.271 ms", "0.253 ms" ]
-                    , [ "Select (Dictionary<T>)", "23.75 ms", "0.184 ms", "0.163 ms" ]
+                    , [ "Select -> Select (Dictionary<T1, T2>)", "23.52 ms", "0.271 ms", "0.253 ms" ]
+                    , [ "Select (Dictionary<T1, T2>)", "23.75 ms", "0.184 ms", "0.163 ms" ]
                     ]
                 , caption =
                     Just
