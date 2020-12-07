@@ -44,7 +44,7 @@ viewContent content =
             span [ class "grey-text text-darken-3" ] [ viewDate when |> text ]
 
         Heading heading ->
-            h5 [] [ text heading ]
+            h5 [] [ b [] [ i [] [ text heading ] ] ]
 
         Paragraph paragraph ->
             p [ class "flow-text" ] (List.map viewParagraphSegment paragraph)
