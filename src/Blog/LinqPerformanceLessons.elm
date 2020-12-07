@@ -93,7 +93,13 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 generally the worst-case scenario is used: for example, when searching for an element in a list, to
                 show the full weight of a """
                 , InlineCode "O(n)"
-                , Text """ operation, the element is appended when defining the source data structure (this order may
+                , Text " operation "
+                , [ Text "(see more about Big O Notation "
+                  , ExternalLink "https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/" "here"
+                  , Text ")"
+                  ]
+                    |> Emphasised
+                , Text """, the element is appended when defining the source data structure (this order may
                 not be preserved when creating a dictionary from the elements)."""
                 ]
             ]
@@ -174,8 +180,10 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 iterating instead through a dictionary's """
                 , InlineCode "Values"
                 , Text ", which is a "
-                , InlineCode "ValueCollection"
-                , Text ", would yield better results. When iterating this, only "
+                , ExternalLink
+                    "https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.valuecollection?view=net-5.0"
+                    "ValueCollection"
+                , Text ", would yield better results. When iterating this, only the dictionary's "
                 , InlineCode "TValue"
                 , Text "s are yielded. This removes the overhead of needing to construct "
                 , InlineCode "KeyValuePair<TKey, TValue>"
@@ -297,9 +305,15 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                 [ Text "You can see that "
                 , InlineCode "Distinct"
                 , Text """ is a pretty expensive operation. I was interested to see how expensive it was based on how
-                many unique elements (i.e., unique according to whatever implementation of """
-                , InlineCode "IEqualityComparer<T>"
-                , Text " you gave it) there are in the enumerable. To simplify the comparison, I stuck just to "
+                many unique elements """
+                , [ Text "(i.e., unique according to whatever implementation of "
+                  , ExternalLink
+                        "https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iequalitycomparer-1?view=net-5.0"
+                        "IEqualityComparer<T>"
+                  , Text " you gave it)"
+                  ]
+                    |> Emphasised
+                , Text " there are in the enumerable. To simplify the comparison, I stuck just to "
                 , InlineCode "T[]"
                 , Text " and modified how many unique elements there are in a collection of "
                 , InlineCode "200"
@@ -393,6 +407,15 @@ Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical c
                         , TableCaption.Emphasis " (200,000 items)"
                         ]
                 }
+            , Paragraph
+                [ Text "It would seem then that some optimisations are being performed on "
+                , InlineCode "Select"
+                , Text " that aren't "
+                , [ Text "(or aren't yet)" ] |> Emphasised
+                , Text " being performed on "
+                , InlineCode "Where"
+                , Text "."
+                ]
             ]
         }
     , Section
