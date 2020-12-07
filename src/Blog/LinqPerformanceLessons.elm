@@ -44,8 +44,7 @@ getContent _ =
                 logically-equivalent methods (i.e., different methods that produce the same results) in a fairly
                 declarative way, are there any lessons to be learnt about how to best wield it?"""
                 ]
-            , Paragraph
-                [ Text "Short answer: there are both lessons to learn and some hidden surprises to puzzle over" ]
+            , BlockQuote "Short answer: there are both lessons to learn and some hidden surprises to puzzle over"
             ]
         }
     , Section
