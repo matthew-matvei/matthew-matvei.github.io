@@ -3,6 +3,7 @@ module Article exposing (Slug(..), getContent, parser)
 import Blog.AreYouProvidingValue
 import Blog.Content exposing (Content)
 import Blog.EitherPatternNetworkCalls
+import Blog.LinqPerformanceLessons
 import Blog.ProgrammingAsASecondLanguage
 import Blog.ThreeBestPractices
 import Url.Parser as Parser exposing (Parser)
@@ -13,6 +14,7 @@ type Slug
     | ProgrammingAsASecondLanguage
     | AreYouProvidingValue
     | EitherPatternNetworkCalls
+    | LinqPerformanceLessons
 
 
 parser : Parser (Slug -> a) a
@@ -22,6 +24,7 @@ parser =
         , "programming-as-a-second-language" |> Parser.s |> Parser.map ProgrammingAsASecondLanguage
         , "are-you-providing-value" |> Parser.s |> Parser.map AreYouProvidingValue
         , "either-pattern-for-network-calls" |> Parser.s |> Parser.map EitherPatternNetworkCalls
+        , "linq-performance-lessons" |> Parser.s |> Parser.map LinqPerformanceLessons
         ]
 
 
@@ -39,3 +42,6 @@ getContent slug =
 
         EitherPatternNetworkCalls ->
             Blog.EitherPatternNetworkCalls.getContent ()
+
+        LinqPerformanceLessons ->
+            Blog.LinqPerformanceLessons.getContent ()

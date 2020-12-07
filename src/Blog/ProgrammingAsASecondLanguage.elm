@@ -52,9 +52,9 @@ getContent _ =
         , content =
             [ Paragraph
                 [ Text "You'll often here someone try to argue that their idea, pattern etc. is the "
-                , Emphasis "best"
+                , [ Text "best" ] |> Emphasised
                 , Text " or the "
-                , Emphasis "correct"
+                , [ Text "correct" ] |> Emphasised
                 , Text " way to do something. The larger that concept is, e.g. "
                 , ExternalLink
                     "https://www.jinfonet.com/resources/bi-defined/3-tier-architecture-complete-overview/"
@@ -74,23 +74,23 @@ getContent _ =
                     "https://www.toeflgoanywhere.org/importance-word-order-english"
                     "on the order of words within a sentence"
                 , Text ". "
-                , Emphasis "'The boy ate the burger'"
+                , [ Text "'The boy ate the burger'" ] |> Emphasised
                 , Text " and "
-                , Emphasis "'the burger ate the boy'"
+                , [ Text "'the burger ate the boy'" ] |> Emphasised
                 , Text """ are two very different news stories. This is because the language places
                 meaning into the order by codifying a 'Subject' 'Verb' 'Object' pattern. Basically,
                 due to the burger coming first in the second sentence, """
-                , Emphasis "it"
+                , [ Text "it" ] |> Emphasised
                 , Text " is the thing doing the eating. In Russian, however, "
-                , Emphasis "'мальчик ест гамбургер'"
+                , [ Text "'мальчик ест гамбургер'" ] |> Emphasised
                 , Text " would mean 'the boy is eating a hamburger', whereas "
-                , Emphasis "'мальчика ест гамбургер'"
+                , [ Text "'мальчика ест гамбургер'" ] |> Emphasised
                 , Text """ is a viable way of saying 'the hamburger is eating a boy'. It would be
                 unusual to present the information in this way, since there are still patterns and
                 conventions in word order in Russian to keep things predictable (in a good way), 
                 but the 'source of truth' in the sentence's meaning would be the declension of the
                 adjectives / nouns and the conjugation of the verbs. In """
-                , Emphasis "'мальчика ест гамбургер'"
+                , [ Text "'мальчика ест гамбургер'" ] |> Emphasised
                 , Text """, we know that the boy is the object of the sentence only due to the extra
                 'а' appearing at the end of the word 'мальчик'. Pretty sneaky..."""
                 ]
@@ -188,7 +188,7 @@ processValues({
             , Paragraph
                 [ Text """When writing code, the audience isn't really the computer. Your compiler
                 doesn't care how sensible your variable names are, but other developers who """
-                , Strong "will"
+                , [ Text "will" ] |> Strong
                 , Text """ have to understand your code some day will care, and they are your
                 audience. In this sense, then, you are writing a foreign language that will be read
                 and (ideally) understood by someone else for whom this is also a foreign language.
@@ -227,7 +227,7 @@ Console.WriteLine(result);
                 }
             , Paragraph
                 [ Text """This will get the job done. And for some, this is very readable, """
-                , Emphasis "concise"
+                , [ Text "concise" ] |> Emphasised
                 , Text """ code. For me, though, the intention (signal) is lost in a sea of words
                 (noise). I don't want another developer to have to explore the bowels of my code to
                 understand it. Ideally, they could understand this more from the surface. So I might
@@ -245,7 +245,7 @@ var result = numbers
                 }
             , Paragraph
                 [ Text """Not only is there the immediately noticeable advantage of """
-                , Emphasis "'Oh hey, there are fewer words to read'"
+                , [ Text "'Oh hey, there are fewer words to read'" ] |> Emphasised
                 , Text ", but those words are also more declarative. We could read this simply as"
                 ]
             , BlockQuote """The result is the numbers where they're greater than 1, mapping each one
@@ -320,7 +320,7 @@ var result = numbers
                 particularly when you have students at varying levels - learn how to communicate
                 complex ideas at varying levels of complexity. This isn't just applicable when
                 trying to explain to a child that 'I do, you do, but he / she / it """
-                , Strong "does"
+                , [ Text "does" ] |> Strong
                 , Text """', but also useful when giving an overview to your non-technical manager
                 how you're going to implement your new system's architecture. If you can't boil
                 down some pretty complicated ideas into a form that's palatable to them, you might

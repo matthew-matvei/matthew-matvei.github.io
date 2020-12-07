@@ -11,6 +11,7 @@ import Blog.Content
         , SectionInfo
         , SectionTitle
         )
+import Component.Table as Table
 import Date exposing (Date, format)
 import Html exposing (..)
 import Html.Attributes exposing (alt, class, href, src)
@@ -42,6 +43,9 @@ viewContent content =
         WhenCreated when ->
             span [ class "grey-text text-darken-3" ] [ viewDate when |> text ]
 
+        Heading heading ->
+            h5 [] [ b [] [ i [] [ text heading ] ] ]
+
         Paragraph paragraph ->
             p [ class "flow-text" ] (List.map viewParagraphSegment paragraph)
 
@@ -66,6 +70,9 @@ viewContent content =
         OrderedList orderedList ->
             viewOrderedList orderedList
 
+        Table table ->
+            Table.view table
+
 
 viewParagraphSegment : ParagraphSegment -> Html msg
 viewParagraphSegment segment =
@@ -76,11 +83,11 @@ viewParagraphSegment segment =
         InlineCode t ->
             code [ class "language-markup" ] [ text t ]
 
-        Emphasis t ->
-            em [] [ text t ]
+        Emphasised emphasisedTs ->
+            em [] (List.map viewParagraphSegment emphasisedTs)
 
-        Strong t ->
-            strong [] [ text t ]
+        Strong strongTs ->
+            strong [] (List.map viewParagraphSegment strongTs)
 
         ExternalLink link label ->
             externalLink [ href link ] [ text label ]
