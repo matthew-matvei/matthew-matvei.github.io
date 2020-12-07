@@ -15,7 +15,7 @@ type alias Model =
 
 view : Model -> Html msg
 view model =
-    table []
+    table [ class "striped" ]
         ((Maybe.withDefault [] model.caption |> viewCaption)
             :: [ thead []
                     [ tr [] (List.map (\h -> th [] [ text h ]) model.header)
