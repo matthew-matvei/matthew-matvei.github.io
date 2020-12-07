@@ -83,11 +83,11 @@ viewParagraphSegment segment =
         InlineCode t ->
             code [ class "language-markup" ] [ text t ]
 
-        Emphasis t ->
-            em [] [ text t ]
+        Emphasised emphasisedTs ->
+            em [] (List.map viewParagraphSegment emphasisedTs)
 
-        Strong t ->
-            strong [] [ text t ]
+        Strong strongTs ->
+            strong [] (List.map viewParagraphSegment strongTs)
 
         ExternalLink link label ->
             externalLink [ href link ] [ text label ]
