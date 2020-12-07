@@ -18,11 +18,15 @@ view model =
     table [ class "striped" ]
         ((Maybe.withDefault [] model.caption |> viewCaption)
             :: [ thead []
-                    [ tr [] (List.map (\h -> th [] [ text h ]) model.header)
-                    ]
+                    [ tr [] (List.map viewHeaderCell model.header) ]
                , tbody [] (List.map viewRow model.rows)
                ]
         )
+
+
+viewHeaderCell : String -> Html msg
+viewHeaderCell h =
+    th [] [ text h ]
 
 
 viewRow : List String -> Html msg
